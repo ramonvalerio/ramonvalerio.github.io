@@ -34,18 +34,9 @@ export default function Footer() {
           </a>
         </div>
 
-        <div className="flex items-center gap-4">
-          <a
-            href="#portfolio"
-            className="rounded-full bg-white px-5 py-2.5 text-xs font-semibold text-black transition hover:scale-[1.03] hover:bg-white/90 sm:text-sm"
-          >
-            {t.ctaProjects}
-          </a>
-
-          <p className="hidden text-[11px] text-white/30 sm:block">
-            © {new Date().getFullYear()} Ramon Valerio. {t.footerRights}
-          </p>
-        </div>
+        <p className="text-right text-[10px] text-white/30 sm:text-left sm:text-[11px]">
+          © {new Date().getFullYear()} Ramon Valerio. {t.footerRights}
+        </p>
       </div>
     </footer>
   );
