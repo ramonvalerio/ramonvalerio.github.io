@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import MediaCarousel from "./MediaCarousel";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function ProjectModal({ project, onClose }) {
+  const { t } = useLanguage();
   useEffect(() => {
     const onKeyDown = (e) => {
       if (e.key === "Escape") onClose();
@@ -31,7 +33,7 @@ export default function ProjectModal({ project, onClose }) {
         <button
           type="button"
           onClick={onClose}
-          aria-label="Fechar"
+          aria-label={t.close}
           className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10"
         >
           ✕
@@ -42,7 +44,7 @@ export default function ProjectModal({ project, onClose }) {
         <div className="mt-7">
           <h2
             id="project-modal-title"
-            className="text-2xl font-semibold text-white sm:text-3xl"
+            className="text-2xl font-normal text-white sm:text-3xl"
           >
             {project.title}
           </h2>
@@ -56,7 +58,7 @@ export default function ProjectModal({ project, onClose }) {
 
           <div className="mt-6">
             <p className="mb-2 text-xs font-medium tracking-wide text-white/40 uppercase">
-              Tecnologias
+              {t.technologies}
             </p>
             <div className="flex flex-wrap gap-2">
               {project.tech.map((t) => (
@@ -75,13 +77,13 @@ export default function ProjectModal({ project, onClose }) {
               href={project.links.live}
               className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90"
             >
-              Ver projeto
+              {t.viewProject}
             </a>
             <a
               href={project.links.repo}
               className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-semibold text-white/90 transition hover:border-white/40 hover:bg-white/5"
             >
-              Código-fonte
+              {t.sourceCode}
             </a>
           </div>
         </div>

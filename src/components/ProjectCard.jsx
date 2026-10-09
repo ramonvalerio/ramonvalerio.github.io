@@ -1,4 +1,7 @@
+import { useLanguage } from "../i18n/LanguageContext";
+
 export default function ProjectCard({ project, onOpen }) {
+  const { t } = useLanguage();
   return (
     <button
       type="button"
@@ -9,7 +12,7 @@ export default function ProjectCard({ project, onOpen }) {
         <span className="text-3xl opacity-50">🖼️</span>
       </div>
 
-      <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+      <h3 className="text-xl font-medium text-white">{project.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-white/60">
         {project.tagline}
       </p>
@@ -31,7 +34,7 @@ export default function ProjectCard({ project, onOpen }) {
       </div>
 
       <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-accent)] opacity-0 transition-opacity group-hover:opacity-100">
-        Ver detalhes →
+        {t.viewDetails}
       </span>
     </button>
   );
