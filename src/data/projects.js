@@ -1,140 +1,58 @@
 const base = [
   {
-    id: "nimbus-orchestrator",
-    tech: ["React", "TypeScript", "Node.js", "Kubernetes", "gRPC", "Redis"],
+    id: "shmupx",
+    image: "/images/projects/logo.png",
+    background: "/images/projects/bg_top.jpg",
+    logoBackground: "/images/projects/bg_emu.jpg",
+    tech: ["Rust", "Tauri v2", "ONNX Runtime", "PostgreSQL", "pgvector", "Claude Code"],
     links: { live: "#", repo: "#" },
+    status: "in_progress",
+    startDate: "2024-12",
     text: {
       pt: {
-        title: "Nimbus Orchestrator",
-        tagline: "Plataforma de orquestração de microsserviços em tempo real",
+        title: "ShmupX",
+        role: "Engenheiro de Software Sênior & Fundador na ShmupX | C#/.NET, Sistemas Distribuídos e IA Aplicada",
+        startDateLabel: "Dezembro de 2024",
+        statusLabel: "Em andamento",
+        tagline:
+          "Plataforma internacional de esports e ecossistema desktop para o gênero shoot 'em up",
         description:
-          "Painel de controle para orquestrar e monitorar microsserviços distribuídos em múltiplos clusters Kubernetes. Inclui deploy canário automatizado, rollback com um clique e visualização de topologia de serviços em tempo real, reduzindo o tempo médio de recuperação de incidentes em 68%.",
-        media: [
-          { type: "banner", label: "Visão geral do dashboard" },
-          { type: "screenshot", label: "Topologia de serviços" },
-          { type: "screenshot", label: "Deploy canário em andamento" },
-          { type: "video", label: "Demo: rollback em um clique" },
-        ],
+          "Fundador da ShmupX, uma plataforma internacional de esports e ecossistema desktop dedicado ao gênero shoot 'em up (shmup), responsável pela estratégia de produto, arquitetura de software e desenvolvimento ponta a ponta. Apliquei Spec-Driven Development e Architecture Decision Records (ADRs) para guiar o desenvolvimento assistido por IA com Claude Code, apoiado por avaliações automatizadas e revisão de código. Liderei a reescrita do desktop de WinUI 3 para Rust e Tauri v2, reduzindo o uso de memória em repouso em 70% e o tamanho da aplicação para menos de 25 MB. Construí integrações nativas para Windows e Linux de processamento de áudio, entrada de controle em segundo plano e gravação contínua de gameplay para suportar a integridade competitiva. Desenvolvi um pipeline local de visão computacional com ONNX Runtime em Rust para processamento de frames do jogo e reconhecimento de pontuação, viabilizando a verificação automatizada de recordes. Projetei modelos de dados em PostgreSQL com salvaguardas transacionais para rankings e saldos de tokens, e implementei RAG específico do jogo com pgvector para tutores de voz com IA.",
       },
       en: {
-        title: "Nimbus Orchestrator",
-        tagline: "Real-time microservices orchestration platform",
+        title: "ShmupX",
+        role: "Senior Software Engineer & Founder at ShmupX | C#/.NET, Distributed Systems & Applied AI",
+        startDateLabel: "December 2024",
+        statusLabel: "In progress",
+        tagline:
+          "International esports platform and desktop ecosystem for the shoot 'em up genre",
         description:
-          "Control panel to orchestrate and monitor distributed microservices across multiple Kubernetes clusters. Includes automated canary deployments, one-click rollback, and real-time service topology visualization, cutting average incident recovery time by 68%.",
-        media: [
-          { type: "banner", label: "Dashboard overview" },
-          { type: "screenshot", label: "Service topology" },
-          { type: "screenshot", label: "Canary deployment in progress" },
-          { type: "video", label: "Demo: one-click rollback" },
-        ],
+          "Founder of ShmupX, an international esports platform and desktop ecosystem dedicated to the shoot 'em up (shmup) genre, responsible for product strategy, software architecture, and end-to-end development. Applied Spec-Driven Development and Architecture Decision Records (ADRs) to guide AI-assisted implementation with Claude Code, supported by automated evaluations and code review. Led the desktop rewrite from WinUI 3 to Rust and Tauri v2, reducing idle memory usage by 70% and application size to under 25 MB. Built native Windows and Linux integrations for audio processing, background controller input, and continuous gameplay recording to support competitive integrity. Developed a local ONNX Runtime computer-vision pipeline in Rust for game-frame processing and score recognition, enabling automated high-score verification. Designed PostgreSQL data models with transactional safeguards for rankings and token balances, and implemented game-specific RAG with pgvector to power AI voice tutors.",
       },
       ja: {
-        title: "Nimbus Orchestrator",
-        tagline: "リアルタイムマイクロサービスオーケストレーションプラットフォーム",
+        title: "ShmupX",
+        role: "シニアソフトウェアエンジニア 兼 ShmupX創業者 | C#/.NET、分散システム、応用AI",
+        startDateLabel: "2024年12月",
+        statusLabel: "進行中",
+        tagline:
+          "シューティングゲーム（shmup）ジャンルに特化した国際eスポーツプラットフォーム兼デスクトップエコシステム",
         description:
-          "複数のKubernetesクラスター上に分散されたマイクロサービスをオーケストレーション・監視するコントロールパネル。自動カナリアデプロイ、ワンクリックロールバック、リアルタイムのサービストポロジー可視化を備え、平均インシデント復旧時間を68%削減しました。",
-        media: [
-          { type: "banner", label: "ダッシュボード概要" },
-          { type: "screenshot", label: "サービストポロジー" },
-          { type: "screenshot", label: "カナリアデプロイ実行中" },
-          { type: "video", label: "デモ：ワンクリックロールバック" },
-        ],
-      },
-    },
-  },
-  {
-    id: "pulse-analytics",
-    tech: ["Next.js", "ClickHouse", "Kafka", "Go", "D3.js"],
-    links: { live: "#", repo: "#" },
-    text: {
-      pt: {
-        title: "Pulse Analytics",
-        tagline: "Motor de analytics de produto com insights em tempo real",
-        description:
-          "SDK e dashboard de product analytics construídos para alta cardinalidade de eventos. Processa milhões de eventos por dia com pipelines de streaming, oferecendo funis, coortes e alertas de anomalia configuráveis sem necessidade de SQL.",
-        media: [
-          { type: "banner", label: "Dashboard de funis" },
-          { type: "screenshot", label: "Análise de coortes" },
-          { type: "screenshot", label: "Alertas de anomalia" },
-          { type: "video", label: "Demo: construção de funil ao vivo" },
-        ],
-      },
-      en: {
-        title: "Pulse Analytics",
-        tagline: "Product analytics engine with real-time insights",
-        description:
-          "Product analytics SDK and dashboard built for high event cardinality. Processes millions of events per day through streaming pipelines, offering funnels, cohorts, and configurable anomaly alerts with no SQL required.",
-        media: [
-          { type: "banner", label: "Funnel dashboard" },
-          { type: "screenshot", label: "Cohort analysis" },
-          { type: "screenshot", label: "Anomaly alerts" },
-          { type: "video", label: "Demo: building a funnel live" },
-        ],
-      },
-      ja: {
-        title: "Pulse Analytics",
-        tagline: "リアルタイムインサイトを備えたプロダクト分析エンジン",
-        description:
-          "高カーディナリティのイベントに対応したプロダクト分析SDK・ダッシュボード。ストリーミングパイプラインで日々数百万件のイベントを処理し、SQL不要でファネル、コホート、異常検知アラートを設定可能にします。",
-        media: [
-          { type: "banner", label: "ファネルダッシュボード" },
-          { type: "screenshot", label: "コホート分析" },
-          { type: "screenshot", label: "異常検知アラート" },
-          { type: "video", label: "デモ：ライブでのファネル作成" },
-        ],
-      },
-    },
-  },
-  {
-    id: "aurora-commerce",
-    tech: ["Remix", "GraphQL", "Python", "PostgreSQL", "Stripe", "Docker"],
-    links: { live: "#", repo: "#" },
-    text: {
-      pt: {
-        title: "Aurora Commerce",
-        tagline: "Headless commerce com personalização por IA",
-        description:
-          "Plataforma de e-commerce headless com motor de recomendação próprio, checkout otimizado para conversão e suporte a múltiplas vitrines (web, app, totens). A personalização via modelo de recomendação elevou o ticket médio em 23%.",
-        media: [
-          { type: "banner", label: "Vitrine personalizada" },
-          { type: "screenshot", label: "Fluxo de checkout" },
-          { type: "screenshot", label: "Painel de recomendações" },
-          { type: "video", label: "Demo: jornada de compra completa" },
-        ],
-      },
-      en: {
-        title: "Aurora Commerce",
-        tagline: "Headless commerce with AI-powered personalization",
-        description:
-          "Headless e-commerce platform with an in-house recommendation engine, conversion-optimized checkout, and support for multiple storefronts (web, app, kiosks). Recommendation-driven personalization boosted average order value by 23%.",
-        media: [
-          { type: "banner", label: "Personalized storefront" },
-          { type: "screenshot", label: "Checkout flow" },
-          { type: "screenshot", label: "Recommendations panel" },
-          { type: "video", label: "Demo: full purchase journey" },
-        ],
-      },
-      ja: {
-        title: "Aurora Commerce",
-        tagline: "AIによるパーソナライズを備えたヘッドレスコマース",
-        description:
-          "独自のレコメンデーションエンジン、コンバージョンに最適化されたチェックアウト、複数の店舗フォーマット（Web、アプリ、キオスク）に対応したヘッドレスEコマースプラットフォーム。レコメンデーションモデルによるパーソナライズで平均注文額が23%向上しました。",
-        media: [
-          { type: "banner", label: "パーソナライズされた店舗" },
-          { type: "screenshot", label: "チェックアウトフロー" },
-          { type: "screenshot", label: "レコメンデーションパネル" },
-          { type: "video", label: "デモ：購入体験の全体フロー" },
-        ],
+          "ShmupXの創業者として、シューティングゲーム（shmup）ジャンルに特化した国際eスポーツプラットフォーム兼デスクトップエコシステムのプロダクト戦略、ソフトウェアアーキテクチャ、エンドツーエンド開発を担当。Spec-Driven DevelopmentとArchitecture Decision Records（ADR）を活用し、Claude CodeによるAI支援開発を自動評価とコードレビューで支えながら推進。デスクトップアプリをWinUI 3からRustとTauri v2へ全面的に書き換え、アイドル時のメモリ使用量を70%削減、アプリケーションサイズを25MB未満に縮小。音声処理、バックグラウンドでのコントローラー入力、競技の公正性を支える継続的なゲームプレイ録画など、WindowsおよびLinux向けのネイティブ統合を構築。RustによるローカルONNX Runtimeのコンピュータービジョンパイプラインを開発し、ゲーム画面処理とスコア認識によりハイスコアの自動検証を実現。ランキングとトークン残高のためのPostgreSQLデータモデルとトランザクション保護を設計し、AIボイスチューターを支えるゲーム特化型RAGをpgvectorで実装。",
       },
     },
   },
 ];
 
 export function getProjects(lang = "pt") {
-  return base.map(({ id, tech, links, text }) => ({
-    id,
-    tech,
-    links,
-    ...(text[lang] ?? text.pt),
-  }));
+  return base.map(
+    ({ id, image, background, logoBackground, tech, links, text }) => ({
+      id,
+      image,
+      background,
+      logoBackground,
+      tech,
+      links,
+      ...(text[lang] ?? text.pt),
+    }),
+  );
 }

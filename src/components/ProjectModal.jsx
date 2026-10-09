@@ -27,30 +27,74 @@ export default function ProjectModal({ project, onClose }) {
       aria-labelledby="project-modal-title"
     >
       <div
-        className="glass relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl bg-[var(--color-surface)]/95 p-6 sm:p-8"
+        className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto bg-cover bg-center"
+        style={
+          project.logoBackground
+            ? { backgroundImage: `url(${project.logoBackground})` }
+            : undefined
+        }
         onClick={(e) => e.stopPropagation()}
       >
+        {project.logoBackground && (
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[var(--color-surface)]/90"
+          />
+        )}
+
         <button
           type="button"
           onClick={onClose}
           aria-label={t.close}
-          className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10"
+          className="absolute top-5 right-5 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10"
         >
           ✕
         </button>
 
-        <MediaCarousel media={project.media} />
+        <div className="relative p-6 sm:p-8">
+          {project.image ? (
+            <div className="flex h-20 w-full items-center justify-center">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="h-full max-w-[70%] object-contain"
+              />
+            </div>
+          ) : (
+            project.media && <MediaCarousel media={project.media} />
+          )}
 
-        <div className="mt-7">
+          <div className="mt-7">
           <h2
             id="project-modal-title"
             className="text-2xl font-normal text-white sm:text-3xl"
           >
             {project.title}
           </h2>
-          <p className="mt-1 text-sm font-medium text-[var(--color-accent)]">
-            {project.tagline}
-          </p>
+          {project.role && (
+            <p className="mt-1 text-sm font-medium text-[var(--color-accent)]">
+              {project.role}
+            </p>
+          )}
+          <p className="mt-2 text-sm text-white/60">{project.tagline}</p>
+
+          <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-white/50">
+            {project.startDateLabel && (
+              <span>
+                <span className="text-white/30">{t.projectStart}:</span>{" "}
+                {project.startDateLabel}
+              </span>
+            )}
+            {project.statusLabel && (
+              <span className="inline-flex items-center gap-1.5">
+                <span className="text-white/30">{t.projectStatus}:</span>
+                <span className="inline-flex items-center gap-1">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+                  {project.statusLabel}
+                </span>
+              </span>
+            )}
+          </div>
 
           <p className="mt-5 leading-relaxed text-white/70">
             {project.description}
@@ -85,6 +129,7 @@ export default function ProjectModal({ project, onClose }) {
             >
               {t.sourceCode}
             </a>
+          </div>
           </div>
         </div>
       </div>

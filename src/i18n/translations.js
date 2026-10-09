@@ -26,6 +26,8 @@ export const translations = {
     viewProject: "Ver projeto",
     sourceCode: "Código-fonte",
     close: "Fechar",
+    projectStart: "Início",
+    projectStatus: "Status",
 
     footerTitlePre: "Vamos construir algo ",
     footerTitleStrong: "excelente",
@@ -59,6 +61,8 @@ export const translations = {
     viewProject: "View project",
     sourceCode: "Source code",
     close: "Close",
+    projectStart: "Start",
+    projectStatus: "Status",
 
     footerTitlePre: "Let's build something ",
     footerTitleStrong: "excellent",
@@ -92,6 +96,8 @@ export const translations = {
     viewProject: "プロジェクトを見る",
     sourceCode: "ソースコード",
     close: "閉じる",
+    projectStart: "開始",
+    projectStatus: "ステータス",
 
     footerTitlePre: "一緒に ",
     footerTitleStrong: "素晴らしいもの",

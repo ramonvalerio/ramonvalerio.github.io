@@ -7,10 +7,7 @@ import { LanguageProvider } from "./i18n/LanguageContext";
 export default function App() {
   return (
     <LanguageProvider>
-      <div
-        id="top"
-        className="min-h-screen bg-[var(--color-ink)] pb-20 sm:pb-24"
-      >
+      <div className="h-[100svh] snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-[var(--color-ink)]">
         <Header />
         <Hero />
         <PortfolioGrid />

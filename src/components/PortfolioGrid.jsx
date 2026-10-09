@@ -1,45 +1,161 @@
 import { useState } from "react";
 import { getProjects } from "../data/projects";
 import { useLanguage } from "../i18n/LanguageContext";
-import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 
 export default function PortfolioGrid() {
-  const [activeProject, setActiveProject] = useState(null);
+  const [index, setIndex] = useState(0);
+  const [showModal, setShowModal] = useState(false);
   const { lang, t } = useLanguage();
   const projects = getProjects(lang);
+  const project = projects[index];
+
+  const go = (dir) =>
+    setIndex((i) => (i + dir + projects.length) % projects.length);
 
   return (
     <section
       id="portfolio"
-      className="scroll-mt-20 px-6 py-24 sm:px-10 lg:px-16"
+      className="relative flex min-h-[100svh] snap-start items-center overflow-hidden px-6 pt-24 pb-24 sm:px-10 sm:pt-28 lg:px-16"
     >
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-14 max-w-2xl">
-          <p className="mb-3 text-xs font-medium tracking-wide text-[var(--color-accent)] uppercase">
-            {t.portfolioLabel}
-          </p>
-          <h2 className="text-3xl font-normal text-white sm:text-4xl">
-            {t.portfolioTitle}
-          </h2>
-          <p className="mt-4 text-white/60">{t.portfolioSubtitle}</p>
+      {project.background && (
+        <div
+          key={project.id}
+          aria-hidden
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${project.background})` }}
+        />
+      )}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-[var(--color-ink)]"
+      />
+      <div aria-hidden className="noise-grid absolute inset-0" />
+
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center text-center">
+        <p className="mb-3 text-xs font-medium tracking-wide text-[var(--color-accent)] uppercase">
+          {t.portfolioLabel}
+        </p>
+
+        <div
+          className="relative w-full max-w-xl bg-cover bg-center p-8 sm:p-10"
+          style={
+            project.logoBackground
+              ? { backgroundImage: `url(${project.logoBackground})` }
+              : undefined
+          }
+        >
+          {project.logoBackground && (
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[var(--color-surface)]/90"
+            />
+          )}
+
+          <div className="relative">
+            {project.image && (
+              <div className="mb-6 flex h-20 w-full items-center justify-center">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="h-full max-w-[70%] object-contain"
+                />
+              </div>
+            )}
+
+            <h3 className="text-left text-xl font-medium text-white">
+              {project.title}
+            </h3>
+            {project.role && (
+              <p className="mt-1 text-left text-xs font-medium tracking-wide text-[var(--color-accent)]">
+                {project.role}
+              </p>
+            )}
+            <p className="mt-3 text-left text-sm leading-relaxed text-white/70">
+              {project.tagline}
+            </p>
+
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-left text-xs text-white/50">
+              {project.startDateLabel && (
+                <span>
+                  <span className="text-white/30">{t.projectStart}:</span>{" "}
+                  {project.startDateLabel}
+                </span>
+              )}
+              {project.statusLabel && (
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="text-white/30">{t.projectStatus}:</span>
+                  <span className="inline-flex items-center gap-1">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+                    {project.statusLabel}
+                  </span>
+                </span>
+              )}
+            </div>
+
+            <div className="mt-5 flex flex-wrap justify-start gap-2">
+              {project.tech.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/60"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-7 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setShowModal(true)}
+                className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black transition hover:scale-[1.03] hover:bg-white/90"
+              >
+                {t.viewDetails}
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              onOpen={setActiveProject}
-            />
-          ))}
-        </div>
+        {projects.length > 1 && (
+          <div className="mt-8 flex items-center gap-5">
+            <button
+              type="button"
+              aria-label="Previous project"
+              onClick={() => go(-1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:bg-white/10"
+            >
+              ‹
+            </button>
+
+            <div className="flex items-center gap-2">
+              {projects.map((p, i) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  aria-label={p.title}
+                  onClick={() => setIndex(i)}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === index
+                      ? "w-6 bg-[var(--color-accent)]"
+                      : "w-1.5 bg-white/20 hover:bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              aria-label="Next project"
+              onClick={() => go(1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:bg-white/10"
+            >
+              ›
+            </button>
+          </div>
+        )}
       </div>
 
-      <ProjectModal
-        project={activeProject}
-        onClose={() => setActiveProject(null)}
-      />
+      <ProjectModal project={showModal ? project : null} onClose={() => setShowModal(false)} />
     </section>
   );
 }

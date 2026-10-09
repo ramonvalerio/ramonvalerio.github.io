@@ -14,7 +14,10 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden border-b border-white/5 px-6 pt-20 pb-16 sm:min-h-[92vh] sm:px-10 sm:pt-24 lg:px-16">
+    <section
+      id="top"
+      className="relative flex h-[100svh] snap-start items-center overflow-hidden border-b border-white/5 px-6 pt-20 pb-16 sm:px-10 sm:pt-24 lg:px-16"
+    >
       <video
         ref={videoRef}
         onTimeUpdate={handleTimeUpdate}
