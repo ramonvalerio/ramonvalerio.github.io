@@ -1,9 +1,9 @@
 const base = [
   {
     id: "shmupx",
-    image: "/images/projects/logo.png",
-    background: "/images/projects/bg_top.jpg",
-    logoBackground: "/images/projects/bg_emu.jpg",
+    image: "/images/projects/shmupx/logo.png",
+    background: "/images/projects/shmupx/background.jpg",
+    logoBackground: "/images/projects/shmupx/modal-background.jpg",
     tech: ["Rust", "Tauri v2", "ONNX Runtime", "PostgreSQL", "pgvector", "Claude Code"],
     links: { live: "#", repo: "#" },
     status: "in_progress",
@@ -41,15 +41,62 @@ const base = [
       },
     },
   },
+  {
+    id: "veeceo",
+    image: "/images/projects/veeceo/logo.png",
+    background: "/images/projects/veeceo/background.png",
+    logoSurface: "light",
+    pageTheme: "light",
+    tech: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "React Flow",
+      "ELK.js",
+      "Octokit",
+    ],
+    links: { live: "#", repo: "#" },
+    text: {
+      pt: {
+        title: "Veeceo",
+        role:
+          "Engenharia de Software & Arquitetura de Produto | DDD, GitHub App e Visualização de Grafos",
+        tagline:
+          "Domain Map que transforma repositórios do GitHub em uma visão viva da arquitetura de domínio",
+        description:
+          "Veeceo é uma ferramenta de Domain Map orientada a Domain-Driven Design que conecta os repositórios do GitHub do usuário e gera automaticamente um mapa visual da arquitetura de domínio. A integração separa autenticação por OAuth da autorização de repositórios por GitHub App, sem depender de tokens pessoais. O scanner transforma repositórios em domínios e pastas de alto nível em subdomínios, classificados como core, supporting ou generic com dados reais de commits obtidos pelo Octokit. O modelo registra relacionamentos upstream, downstream, dependências, integrações e eventos, além de uma linguagem ubíqua. A interface usa React Flow e ELK.js para oferecer um grafo interativo com layout automático, agrupamento por projetos e geração de documentação viva. A aplicação foi construída com Next.js 16, React 19, TypeScript, Zustand, React Query, Tailwind CSS v4, shadcn/ui, Radix UI e testes de serviço com Vitest.",
+      },
+      en: {
+        title: "Veeceo",
+        role:
+          "Software Engineering & Product Architecture | DDD, GitHub App, and Graph Visualization",
+        tagline:
+          "A Domain Map that turns GitHub repositories into a living view of domain architecture",
+        description:
+          "Veeceo is a Domain-Driven Design mapping tool that connects a user's GitHub repositories and automatically generates a visual map of their domain architecture. The integration separates OAuth authentication from repository authorization through a GitHub App, without relying on personal access tokens. Its scanner turns repositories into domains and top-level folders into subdomains, classifying them as core, supporting, or generic with real commit data retrieved through Octokit. The model captures upstream and downstream relationships, dependencies, integrations, events, and ubiquitous language. React Flow and ELK.js power an interactive graph with automatic layout, project grouping, and living documentation generation. The application uses Next.js 16, React 19, TypeScript, Zustand, React Query, Tailwind CSS v4, shadcn/ui, Radix UI, and Vitest service tests.",
+      },
+      ja: {
+        title: "Veeceo",
+        role:
+          "ソフトウェアエンジニアリング & プロダクトアーキテクチャ | DDD、GitHub App、グラフ可視化",
+        tagline:
+          "GitHubリポジトリをドメインアーキテクチャの生きたマップへ変換するDomain Map",
+        description:
+          "Veeceoは、ユーザーのGitHubリポジトリを接続し、ドメインアーキテクチャのビジュアルマップを自動生成するDomain-Driven Design指向のツールです。OAuthによる認証とGitHub Appによるリポジトリ認可を分離し、個人アクセストークンに依存しません。スキャナーは各リポジトリをドメイン、トップレベルのフォルダをサブドメインとして扱い、Octokitで取得した実際のコミットデータを基にcore、supporting、genericへ分類します。モデルはupstream、downstream、依存、統合、イベントの関係とユビキタス言語を記録します。React FlowとELK.jsによる自動レイアウト付きのインタラクティブグラフ、プロジェクト単位のグループ化、マップからの生きたドキュメント生成を備えています。Next.js 16、React 19、TypeScript、Zustand、React Query、Tailwind CSS v4、shadcn/ui、Radix UI、Vitestで構築されています。",
+      },
+    },
+  },
 ];
 
 export function getProjects(lang = "pt") {
   return base.map(
-    ({ id, image, background, logoBackground, tech, links, text }) => ({
+    ({ id, image, background, logoBackground, logoSurface, pageTheme, tech, links, text }) => ({
       id,
       image,
       background,
       logoBackground,
+      logoSurface,
+      pageTheme,
       tech,
       links,
       ...(text[lang] ?? text.pt),

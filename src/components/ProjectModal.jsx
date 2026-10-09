@@ -23,6 +23,7 @@ export default function ProjectModal({ project, onClose }) {
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm sm:p-6"
       onClick={onClose}
+      data-scrollable
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-modal-title"
@@ -54,11 +55,19 @@ export default function ProjectModal({ project, onClose }) {
 
         <div className="relative p-6 sm:p-8">
           {project.image ? (
-            <div className="flex h-20 w-full items-center justify-center">
+            <div
+              className={`flex h-24 w-full items-center justify-center rounded-xl px-5 py-3 ${
+                project.logoSurface === "light"
+                  ? "border border-white/80 bg-white shadow-[0_12px_35px_rgba(0,0,0,0.28)]"
+                  : ""
+              }`}
+            >
               <img
                 src={project.image}
                 alt={project.title}
-                className="h-full max-w-[70%] object-contain"
+                className={`h-full object-contain ${
+                  project.logoSurface === "light" ? "max-w-[85%]" : "max-w-[70%]"
+                }`}
               />
             </div>
           ) : (

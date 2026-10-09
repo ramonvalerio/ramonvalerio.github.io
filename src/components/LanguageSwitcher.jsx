@@ -5,8 +5,8 @@ export default function LanguageSwitcher() {
   const { lang, setLang } = useLanguage();
 
   return (
-    <div className="flex items-center gap-0.5 rounded-full border border-white/8 bg-white/[0.03] p-0.5 backdrop-blur-md">
-      {languages.map(({ code, label, countryCode }) => {
+    <div className="flex items-center gap-0.5 rounded-xl border border-white/10 bg-[var(--color-surface)] p-1">
+      {languages.map(({ code, label }) => {
         const isActive = lang === code;
         return (
           <button
@@ -16,19 +16,13 @@ export default function LanguageSwitcher() {
             aria-pressed={isActive}
             aria-label={label}
             title={label}
-            className={`group flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)] ${
-              isActive ? "ring-1 ring-cyan-400/50" : ""
+            className={`flex h-9 min-w-9 flex-shrink-0 items-center justify-center rounded-lg px-2 text-[11px] font-semibold uppercase transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)] ${
+              isActive
+                ? "bg-[var(--color-surface-3)] text-[var(--color-accent)]"
+                : "text-white/40 hover:text-white"
             }`}
           >
-            <img
-              src={`https://cdn.jsdelivr.net/gh/HatScripts/circle-flags@gh-pages/flags/${countryCode}.svg`}
-              alt={label}
-              className={`h-6 w-6 rounded-full object-cover transition-all duration-150 sm:h-[26px] sm:w-[26px] ${
-                isActive
-                  ? "opacity-100 saturate-100"
-                  : "opacity-60 saturate-50 group-hover:opacity-100 group-hover:saturate-100 group-focus-visible:opacity-100 group-focus-visible:saturate-100"
-              }`}
-            />
+            {code}
           </button>
         );
       })}

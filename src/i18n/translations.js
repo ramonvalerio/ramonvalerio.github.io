@@ -2,9 +2,21 @@ export const translations = {
   pt: {
     navProfile: "Perfil",
     navProjects: "Portfólio",
+    navWork: "Trabalho",
+    navExpertise: "Expertise",
+    navContact: "Contato",
+    mainNavigation: "Navegação principal",
 
     badge: "Disponível para novos projetos",
     heroName: "Ramon Valerio",
+    headerRole: "Engenheiro de Software Sênior & Fundador",
+    heroTitleLead: "Engenharia de software para",
+    heroTitleAccent: "produtos complexos",
+    heroTitleTail: "que precisam evoluir.",
+    heroIntro:
+      "Engenheiro de software sênior e fundador com mais de 16 anos de experiência em plataformas web, backends, sistemas distribuídos, modernização e IA aplicada. Alinho estratégia de produto, arquitetura e implementação ponta a ponta.",
+    heroVideoLabel: "Vídeo profissional de Ramon Valerio",
+    heroMediaExpertise: "Engenharia · Arquitetura · Produto",
     heroP1Pre: "Sou engenheiro de software com mais de ",
     heroP1Strong1: "16 anos de experiência",
     heroP1Mid: " em aplicações web, backends e sistemas distribuídos. Atuo na ",
@@ -30,6 +42,15 @@ export const translations = {
     projectStart: "Início",
     projectStatus: "Status",
 
+    expertiseTitle:
+      "Decisões técnicas conectadas ao contexto e aos objetivos do produto.",
+    expertiseItems: [
+      { title: "Sistemas distribuídos", description: "Backends, integrações e plataformas preparadas para evolução." },
+      { title: "Modernização", description: "Migração de legados com decisões graduais e riscos controlados." },
+      { title: "IA aplicada", description: "Visão computacional, RAG e desenvolvimento assistido com avaliação." },
+      { title: "DDD · ADR · SDD", description: "Negócio, arquitetura e implementação alinhados por decisões rastreáveis." },
+    ],
+
     footerTitlePre: "Vamos construir algo ",
     footerTitleStrong: "excelente",
     footerSubtitle: "Aberto a oportunidades, colaborações e novos desafios.",
@@ -38,9 +59,21 @@ export const translations = {
   en: {
     navProfile: "Profile",
     navProjects: "Portfolio",
+    navWork: "Work",
+    navExpertise: "Expertise",
+    navContact: "Contact",
+    mainNavigation: "Main navigation",
 
     badge: "Available for new projects",
     heroName: "Ramon Valerio",
+    headerRole: "Senior Software Engineer & Founder",
+    heroTitleLead: "Software engineering for",
+    heroTitleAccent: "complex products",
+    heroTitleTail: "that need to evolve.",
+    heroIntro:
+      "Senior software engineer and founder with over 16 years of experience across web platforms, backends, distributed systems, modernization, and applied AI. I align product strategy, architecture, and end-to-end implementation.",
+    heroVideoLabel: "Professional video of Ramon Valerio",
+    heroMediaExpertise: "Engineering · Architecture · Product",
     heroP1Pre: "I'm a software engineer with over ",
     heroP1Strong1: "16 years of experience",
     heroP1Mid: " in web applications, backends, and distributed systems. I work on ",
@@ -67,6 +100,15 @@ export const translations = {
     projectStart: "Start",
     projectStatus: "Status",
 
+    expertiseTitle:
+      "Technical decisions connected to product context and outcomes.",
+    expertiseItems: [
+      { title: "Distributed systems", description: "Backends, integrations, and platforms designed to evolve." },
+      { title: "Modernization", description: "Legacy migration through incremental decisions and controlled risk." },
+      { title: "Applied AI", description: "Computer vision, RAG, and evaluated AI-assisted development." },
+      { title: "DDD · ADR · SDD", description: "Business, architecture, and implementation aligned by traceable decisions." },
+    ],
+
     footerTitlePre: "Let's build something ",
     footerTitleStrong: "excellent",
     footerSubtitle: "Open to opportunities, collaborations, and new challenges.",
@@ -75,9 +117,21 @@ export const translations = {
   ja: {
     navProfile: "プロフィール",
     navProjects: "ポートフォリオ",
+    navWork: "実績",
+    navExpertise: "専門領域",
+    navContact: "お問い合わせ",
+    mainNavigation: "メインナビゲーション",
 
     badge: "新規プロジェクト受付中",
     heroName: "Ramon Valerio",
+    headerRole: "シニアソフトウェアエンジニア & 創業者",
+    heroTitleLead: "進化が求められる",
+    heroTitleAccent: "複雑なプロダクト",
+    heroTitleTail: "のためのソフトウェアエンジニアリング。",
+    heroIntro:
+      "Webプラットフォーム、バックエンド、分散システム、モダナイゼーション、応用AIに16年以上携わるシニアソフトウェアエンジニア兼創業者です。プロダクト戦略、アーキテクチャ、実装を一貫して結び付けます。",
+    heroVideoLabel: "Ramon Valerioのプロフェッショナル動画",
+    heroMediaExpertise: "エンジニアリング · アーキテクチャ · プロダクト",
     heroP1Pre: "",
     heroP1Strong1: "16年以上の経験",
     heroP1Mid:
@@ -104,6 +158,15 @@ export const translations = {
     close: "閉じる",
     projectStart: "開始",
     projectStatus: "ステータス",
+
+    expertiseTitle:
+      "プロダクトの文脈と成果につながる技術的意思決定。",
+    expertiseItems: [
+      { title: "分散システム", description: "進化を前提としたバックエンド、統合、プラットフォーム。" },
+      { title: "モダナイゼーション", description: "段階的な意思決定とリスク管理によるレガシー移行。" },
+      { title: "応用AI", description: "コンピュータービジョン、RAG、評価を伴うAI支援開発。" },
+      { title: "DDD · ADR · SDD", description: "追跡可能な意思決定でビジネス、設計、実装を整合。" },
+    ],
 
     footerTitlePre: "一緒に ",
     footerTitleStrong: "素晴らしいもの",
