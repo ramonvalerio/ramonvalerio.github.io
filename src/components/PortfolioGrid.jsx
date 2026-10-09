@@ -49,7 +49,7 @@ export default function PortfolioGrid() {
           {project.logoBackground && (
             <div
               aria-hidden
-              className="absolute inset-0 bg-[var(--color-surface)]/90"
+              className="absolute inset-0 bg-[var(--color-surface)]/50 backdrop-blur-sm"
             />
           )}
 

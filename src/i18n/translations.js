@@ -5,14 +5,14 @@ export const translations = {
 
     badge: "Disponível para novos projetos",
     heroName: "Ramon Valerio",
-    heroP1Pre: "Engenheiro de software com mais de ",
+    heroP1Pre: "Sou engenheiro de software com mais de ",
     heroP1Strong: "16 anos de experiência",
     heroP1Post:
-      " construindo serviços de backend, aplicações web e sistemas distribuídos, principalmente com C#/.NET, APIs REST, mensageria, Azure e AWS.",
-    heroP2Pre: "Atualmente focado em aplicar ",
+      " no desenvolvimento de backends, aplicações web e sistemas distribuídos. Trabalho principalmente com C#/.NET, APIs REST, mensageria, Azure e AWS.",
+    heroP2Pre: "Atualmente, meu foco é aplicar ",
     heroP2Strong: "IA ao desenvolvimento de software",
     heroP2Post:
-      " — uso Claude Code, Gemini e ChatGPT no meu fluxo de trabalho e aplico RAG para fundamentar respostas de IA em conhecimento específico do negócio.",
+      ". Integro assistentes de IA ao meu fluxo de trabalho e aplico RAG para gerar respostas apoiadas em informações específicas do negócio.",
     ctaProjects: "Ver projetos",
     ctaContact: "Entrar em contato",
 
@@ -40,14 +40,14 @@ export const translations = {
 
     badge: "Available for new projects",
     heroName: "Ramon Valerio",
-    heroP1Pre: "Software engineer with over ",
+    heroP1Pre: "I'm a software engineer with over ",
     heroP1Strong: "16 years of experience",
     heroP1Post:
-      " building backend services, web applications, and distributed systems, primarily using C#/.NET, REST APIs, messaging, Azure, and AWS.",
-    heroP2Pre: "Currently focused on applying ",
+      " developing backends, web applications, and distributed systems. I work primarily with C#/.NET, REST APIs, messaging, Azure, and AWS.",
+    heroP2Pre: "Currently, my focus is applying ",
     heroP2Strong: "AI to software development",
     heroP2Post:
-      " — I use Claude Code, Gemini, and ChatGPT in my development workflow and apply RAG to ground AI responses in business-specific knowledge.",
+      ". I integrate AI assistants into my workflow and apply RAG to generate responses grounded in business-specific information.",
     ctaProjects: "View projects",
     ctaContact: "Get in touch",
 
@@ -75,14 +75,14 @@ export const translations = {
 
     badge: "新規プロジェクト受付中",
     heroName: "Ramon Valerio",
-    heroP1Pre: "16年以上の経験を持つソフトウェアエンジニア。主に ",
+    heroP1Pre: "16年以上の経験を持つソフトウェアエンジニアです。バックエンド、Webアプリケーション、分散システムの開発に携わっています。主に ",
     heroP1Strong: "C#/.NET、REST API",
     heroP1Post:
-      "、メッセージング、Azure、AWSを用いて、バックエンドサービス、Webアプリケーション、分散システムを構築しています。",
+      "、メッセージング、Azure、AWSを用いて開発を行っています。",
     heroP2Pre: "現在は ",
     heroP2Strong: "ソフトウェア開発へのAI活用",
     heroP2Post:
-      " に注力しています。Claude Code、Gemini、ChatGPTを開発ワークフローに取り入れ、RAGを活用してビジネス固有の知識に基づいたAI回答を実現しています。",
+      " に注力しています。AIアシスタントを開発ワークフローに取り入れ、RAGを活用してビジネス固有の情報に基づいた回答を生成しています。",
     ctaProjects: "プロジェクトを見る",
     ctaContact: "お問い合わせ",
 

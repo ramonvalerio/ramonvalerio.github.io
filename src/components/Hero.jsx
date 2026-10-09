@@ -44,7 +44,7 @@ export default function Hero() {
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-7">
           <div className="relative h-16 w-16 flex-shrink-0 xs:h-20 xs:w-20 sm:h-28 sm:w-28 lg:h-32 lg:w-32">
             <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-[var(--color-accent)]/40 via-[var(--color-accent-2)]/30 to-[var(--color-accent-3)]/30 blur-md" />
-            <div className="glass relative h-full w-full overflow-hidden rounded-full border border-white/15">
+            <div className="glass relative h-full w-full overflow-hidden rounded-full border-2! border-cyan-400/80!">
               <img
                 src="/images/profile/ramon_linkedin4.png"
                 alt={t.heroName}
