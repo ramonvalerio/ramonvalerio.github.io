@@ -3,6 +3,8 @@ import { translations } from "./translations";
 
 const LanguageContext = createContext(null);
 
+const HTML_LANG = { pt: "pt-BR", en: "en", ja: "ja" };
+
 const BRAZIL_TIMEZONES = new Set([
   "America/Sao_Paulo",
   "America/Fortaleza",
@@ -55,6 +57,7 @@ export function LanguageProvider({ children }) {
     } catch {
       // ignore
     }
+    document.documentElement.lang = HTML_LANG[lang] ?? lang;
   }, [lang]);
 
   const t = translations[lang];

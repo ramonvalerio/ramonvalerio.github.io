@@ -33,9 +33,9 @@ export default function Header() {
   ];
 
   return (
-    <header className="glass fixed inset-x-0 top-0 z-40 border-b border-white/10 px-6 py-3 sm:px-10 lg:px-16">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-        <nav className="flex items-center gap-6 sm:gap-8">
+    <header className="glass fixed inset-x-0 top-0 z-40 border-b border-white/10 px-4 py-2 sm:px-10 sm:py-3 lg:px-16">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 sm:gap-4">
+        <nav className="flex items-center gap-4 sm:gap-8">
           {links.map((link) => {
             const isActive = active === link.id;
             return (
@@ -43,7 +43,7 @@ export default function Header() {
                 key={link.id}
                 href={link.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`group relative flex items-center gap-1.5 py-1 font-mono text-xs tracking-[0.15em] uppercase transition-colors sm:text-sm ${
+                className={`group relative flex items-center gap-1.5 py-1 text-sm font-medium tracking-wide uppercase transition-colors sm:text-base ${
                   isActive
                     ? "text-[var(--color-accent)]"
                     : "text-white/50 hover:text-white/80"

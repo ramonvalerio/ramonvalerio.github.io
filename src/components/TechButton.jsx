@@ -6,7 +6,7 @@ export default function TechButton({
 }) {
   return (
     <Component
-      className={`group relative overflow-hidden border border-red-500/60 bg-red-500/10 px-6 py-2.5 text-center font-mono text-xs tracking-[0.2em] text-red-400 uppercase shadow-[0_0_15px_-3px_rgba(239,68,68,0.6)] transition-all hover:bg-red-500 hover:text-black hover:shadow-[0_0_25px_-2px_rgba(239,68,68,0.9)] ${className}`}
+      className={`group relative overflow-hidden border border-red-500/60 bg-red-500/10 px-6 py-2.5 text-center text-sm font-medium tracking-wide text-red-400 uppercase shadow-[0_0_15px_-3px_rgba(239,68,68,0.6)] transition-all hover:bg-red-500 hover:text-black hover:shadow-[0_0_25px_-2px_rgba(239,68,68,0.9)] sm:text-base ${className}`}
       {...props}
     >
       <span className="absolute top-0 left-0 h-2 w-2 border-t border-l border-red-400" />

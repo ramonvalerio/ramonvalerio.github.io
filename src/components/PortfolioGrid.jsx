@@ -17,7 +17,7 @@ export default function PortfolioGrid() {
   return (
     <section
       id="portfolio"
-      className="relative flex min-h-[100svh] snap-start items-center overflow-hidden px-6 pt-24 pb-24 sm:px-10 sm:pt-28 lg:px-16"
+      className="relative flex min-h-[100dvh] snap-start items-center overflow-hidden px-6 pt-24 pb-24 sm:px-10 sm:pt-28 lg:px-16"
     >
       {project.background && (
         <div
@@ -64,7 +64,7 @@ export default function PortfolioGrid() {
               </div>
             )}
 
-            <h3 className="text-left text-xl font-medium text-white">
+            <h3 className="text-left text-xl font-semibold text-white">
               {project.title}
             </h3>
             {project.role && (

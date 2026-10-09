@@ -6,17 +6,14 @@ export const translations = {
     badge: "Disponível para novos projetos",
     heroName: "Ramon Valerio",
     heroP1Pre: "Sou engenheiro de software com mais de ",
-    heroP1Strong: "16 anos de experiência",
-    heroP1Post:
-      " no desenvolvimento de aplicações web, backends e sistemas distribuídos. Tenho ampla experiência na modernização de sistemas legados e em sua integração com soluções modernas.",
-    heroP2Pre: "Minha atuação combina ",
-    heroP2Strong1: "Domain-Driven Design (DDD)",
-    heroP2Mid1: ", ",
-    heroP2Strong2: "Spec-Driven Development (SDD)",
-    heroP2Mid2: " e ",
-    heroP2Strong3: "IA aplicada ao desenvolvimento de software",
+    heroP1Strong1: "16 anos de experiência",
+    heroP1Mid: " em aplicações web, backends e sistemas distribuídos. Atuo na ",
+    heroP1Strong2: "modernização e integração de sistemas legados",
+    heroP1Post: ".",
+    heroP2Pre: "Combino DDD, ADR e SDD para alinhar negócio, arquitetura e implementação. Integro ",
+    heroP2Strong: "IA ao desenvolvimento de software",
     heroP2Post:
-      " para transformar necessidades do negócio em soluções bem estruturadas. Escolho tecnologias e ferramentas conforme o contexto de cada problema.",
+      ", escolhendo tecnologias e ferramentas conforme o contexto de cada problema.",
     ctaProjects: "Ver projetos",
     ctaContact: "Entrar em contato",
 
@@ -45,17 +42,15 @@ export const translations = {
     badge: "Available for new projects",
     heroName: "Ramon Valerio",
     heroP1Pre: "I'm a software engineer with over ",
-    heroP1Strong: "16 years of experience",
-    heroP1Post:
-      " developing web applications, backends, and distributed systems. I have extensive experience modernizing legacy systems and integrating them with modern solutions.",
-    heroP2Pre: "My work combines ",
-    heroP2Strong1: "Domain-Driven Design (DDD)",
-    heroP2Mid1: ", ",
-    heroP2Strong2: "Spec-Driven Development (SDD)",
-    heroP2Mid2: ", and ",
-    heroP2Strong3: "AI applied to software development",
+    heroP1Strong1: "16 years of experience",
+    heroP1Mid: " in web applications, backends, and distributed systems. I work on ",
+    heroP1Strong2: "modernizing and integrating legacy systems",
+    heroP1Post: ".",
+    heroP2Pre:
+      "I combine DDD, ADR, and SDD to align business, architecture, and implementation. I integrate ",
+    heroP2Strong: "AI into software development",
     heroP2Post:
-      " to turn business needs into well-structured solutions. I choose technologies and tools based on the context of each problem.",
+      ", choosing technologies and tools based on the context of each problem.",
     ctaProjects: "View projects",
     ctaContact: "Get in touch",
 
@@ -84,17 +79,16 @@ export const translations = {
     badge: "新規プロジェクト受付中",
     heroName: "Ramon Valerio",
     heroP1Pre: "",
-    heroP1Strong: "16年以上の経験",
-    heroP1Post:
-      "を持つソフトウェアエンジニアです。Webアプリケーション、バックエンド、分散システムの開発に携わっています。レガシーシステムのモダナイズや、最新のソリューションとの統合にも豊富な経験があります。",
-    heroP2Pre: "",
-    heroP2Strong1: "ドメイン駆動設計（DDD）",
-    heroP2Mid1: "、",
-    heroP2Strong2: "仕様駆動開発（SDD）",
-    heroP2Mid2: "、そして",
-    heroP2Strong3: "ソフトウェア開発へのAI活用",
+    heroP1Strong1: "16年以上の経験",
+    heroP1Mid:
+      "を持つソフトウェアエンジニアです。Webアプリケーション、バックエンド、分散システムを専門とし、",
+    heroP1Strong2: "レガシーシステムのモダナイズと統合",
+    heroP1Post: "に取り組んでいます。",
+    heroP2Pre:
+      "DDD、ADR、SDDを組み合わせ、ビジネス、アーキテクチャ、実装を一貫させています。",
+    heroP2Strong: "ソフトウェア開発へのAI活用",
     heroP2Post:
-      "を組み合わせ、ビジネスニーズを構造化されたソリューションへと落とし込んでいます。各課題の文脈に応じて技術やツールを選定しています。",
+      "を取り入れ、各課題の文脈に応じて技術やツールを選定しています。",
     ctaProjects: "プロジェクトを見る",
     ctaContact: "お問い合わせ",
 

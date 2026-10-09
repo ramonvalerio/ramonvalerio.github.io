@@ -6,18 +6,18 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="glass fixed inset-x-0 bottom-0 z-40 border-t border-white/10 px-6 py-4 sm:px-10 sm:py-5 lg:px-16"
+      className="glass fixed right-0 bottom-0 left-0 z-40 border-t border-white/10 px-6 pt-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] sm:px-10 sm:pt-5 sm:pb-[calc(env(safe-area-inset-bottom,0px)+1.25rem)] lg:px-16"
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <a
             href="https://www.linkedin.com/in/ramonvalerio"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-[0_0_24px_-4px_var(--color-accent)] transition hover:scale-110 hover:bg-[var(--color-accent)] sm:h-14 sm:w-14"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/5 text-white/70 backdrop-blur transition-all duration-150 hover:border-cyan-300/50 hover:text-cyan-300 focus-visible:border-cyan-300/50 focus-visible:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)] focus-visible:outline-none"
           >
-            <svg className="h-6 w-6 sm:h-7 sm:w-7">
+            <svg className="h-[22px] w-[22px] sm:h-6 sm:w-6">
               <use href="/icons.svg#linkedin-icon" />
             </svg>
           </a>
@@ -26,9 +26,9 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-[0_0_24px_-4px_var(--color-accent-2)] transition hover:scale-110 hover:bg-[var(--color-accent-2)] sm:h-14 sm:w-14"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/5 text-white/70 backdrop-blur transition-all duration-150 hover:border-cyan-300/50 hover:text-cyan-300 focus-visible:border-cyan-300/50 focus-visible:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)] focus-visible:outline-none"
           >
-            <svg className="h-6 w-6 sm:h-7 sm:w-7">
+            <svg className="h-[22px] w-[22px] sm:h-6 sm:w-6">
               <use href="/icons.svg#github-icon" />
             </svg>
           </a>

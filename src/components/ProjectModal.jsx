@@ -68,7 +68,7 @@ export default function ProjectModal({ project, onClose }) {
           <div className="mt-7">
           <h2
             id="project-modal-title"
-            className="text-2xl font-normal text-white sm:text-3xl"
+            className="text-[1.75rem] font-semibold text-white sm:text-3xl"
           >
             {project.title}
           </h2>
@@ -97,7 +97,7 @@ export default function ProjectModal({ project, onClose }) {
             )}
           </div>
 
-          <p className="mt-5 leading-relaxed text-white/70">
+          <p className="mt-5 text-base leading-[1.6] text-white/70 sm:text-lg">
             {project.description}
           </p>
 

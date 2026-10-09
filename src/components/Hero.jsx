@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex h-[100svh] snap-start items-center overflow-hidden border-b border-white/5 px-6 pt-20 pb-16 sm:px-10 sm:pt-24 lg:px-16"
+      className="relative flex h-[100dvh] snap-start items-center overflow-hidden border-b border-white/5 px-6 pt-20 pb-16 sm:px-10 sm:pt-24 lg:px-16"
     >
       <video
         ref={videoRef}
@@ -53,26 +53,35 @@ export default function Hero() {
             </div>
           </div>
 
-          <h1 className="text-3xl leading-[1.05] font-normal tracking-tight text-white xs:text-4xl sm:text-6xl lg:text-7xl">
+          <h1 className="text-4xl leading-[1.1] font-semibold tracking-tight text-white xs:text-[2.5rem] sm:text-5xl lg:text-6xl">
             {t.heroName}
           </h1>
         </div>
 
-        <p className="mt-6 max-w-2xl text-base leading-snug text-white/70 sm:text-xl lg:text-2xl">
-          {t.heroP1Pre}
-          <span className="text-gradient font-medium">{t.heroP1Strong}</span>
-          {t.heroP1Post}
-        </p>
+        <div className="relative mt-8 max-w-3xl">
+          <div
+            aria-hidden
+            className="absolute -inset-x-6 -inset-y-6 -z-10 rounded-[2rem] bg-black/45 blur-2xl sm:-inset-x-10"
+          />
 
-        <p className="mt-4 max-w-2xl text-base leading-snug text-white/70 sm:text-xl lg:text-2xl">
-          {t.heroP2Pre}
-          <span className="text-gradient font-medium">{t.heroP2Strong1}</span>
-          {t.heroP2Mid1}
-          <span className="text-gradient font-medium">{t.heroP2Strong2}</span>
-          {t.heroP2Mid2}
-          <span className="text-gradient font-medium">{t.heroP2Strong3}</span>
-          {t.heroP2Post}
-        </p>
+          <p className="text-[1.0625rem] leading-[1.6] font-normal text-white/80 sm:text-lg lg:text-xl">
+            {t.heroP1Pre}
+            <span className="text-gradient font-medium">
+              {t.heroP1Strong1}
+            </span>
+            {t.heroP1Mid}
+            <span className="text-gradient font-medium">
+              {t.heroP1Strong2}
+            </span>
+            {t.heroP1Post}
+          </p>
+
+          <p className="mt-5 text-[1.0625rem] leading-[1.6] font-normal text-white/80 sm:text-lg lg:text-xl">
+            {t.heroP2Pre}
+            <span className="text-gradient font-medium">{t.heroP2Strong}</span>
+            {t.heroP2Post}
+          </p>
+        </div>
       </div>
     </section>
   );
