@@ -1,0 +1,91 @@
+import { useEffect } from "react";
+import MediaCarousel from "./MediaCarousel";
+
+export default function ProjectModal({ project, onClose }) {
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  if (!project) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm sm:p-6"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+    >
+      <div
+        className="glass relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl bg-[var(--color-surface)]/95 p-6 sm:p-8"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fechar"
+          className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10"
+        >
+          ✕
+        </button>
+
+        <MediaCarousel media={project.media} />
+
+        <div className="mt-7">
+          <h2
+            id="project-modal-title"
+            className="text-2xl font-semibold text-white sm:text-3xl"
+          >
+            {project.title}
+          </h2>
+          <p className="mt-1 text-sm font-medium text-[var(--color-accent)]">
+            {project.tagline}
+          </p>
+
+          <p className="mt-5 leading-relaxed text-white/70">
+            {project.description}
+          </p>
+
+          <div className="mt-6">
+            <p className="mb-2 text-xs font-medium tracking-wide text-white/40 uppercase">
+              Tecnologias
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href={project.links.live}
+              className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90"
+            >
+              Ver projeto
+            </a>
+            <a
+              href={project.links.repo}
+              className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-semibold text-white/90 transition hover:border-white/40 hover:bg-white/5"
+            >
+              Código-fonte
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
