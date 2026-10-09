@@ -1,10 +1,27 @@
+import { useEffect, useRef } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Footer() {
   const { t } = useLanguage();
+  const footerRef = useRef(null);
+
+  useEffect(() => {
+    const el = footerRef.current;
+    if (!el) return;
+    const setHeight = () =>
+      document.documentElement.style.setProperty(
+        "--footer-h",
+        `${el.offsetHeight}px`,
+      );
+    setHeight();
+    const observer = new ResizeObserver(setHeight);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <footer
+      ref={footerRef}
       id="contact"
       className="glass fixed right-0 bottom-0 left-0 z-40 border-t border-white/10 px-6 pt-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] sm:px-10 sm:pt-5 sm:pb-[calc(env(safe-area-inset-bottom,0px)+1.25rem)] lg:px-16"
     >

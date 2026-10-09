@@ -17,7 +17,11 @@ export default function PortfolioGrid() {
   return (
     <section
       id="portfolio"
-      className="relative flex min-h-[100dvh] snap-start items-center overflow-hidden px-6 pt-24 pb-24 sm:px-10 sm:pt-28 lg:px-16"
+      className="relative z-10 flex min-h-[100dvh] items-center overflow-hidden bg-[var(--color-ink)] px-6 pb-24 sm:px-10 lg:px-16"
+      style={{
+        paddingTop:
+          "calc(var(--header-h, 0px) + var(--subheader-h, 0px) + 1.5rem)",
+      }}
     >
       {project.background && (
         <div
@@ -34,25 +38,8 @@ export default function PortfolioGrid() {
       <div aria-hidden className="noise-grid absolute inset-0" />
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center text-center">
-        <p className="mb-3 text-xs font-medium tracking-wide text-[var(--color-accent)] uppercase">
-          {t.portfolioLabel}
-        </p>
 
-        <div
-          className="relative w-full max-w-xl bg-cover bg-center p-8 sm:p-10"
-          style={
-            project.logoBackground
-              ? { backgroundImage: `url(${project.logoBackground})` }
-              : undefined
-          }
-        >
-          {project.logoBackground && (
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-[var(--color-surface)]/50 backdrop-blur-sm"
-            />
-          )}
-
+        <div className="relative w-full max-w-xl rounded-2xl border border-white/10 bg-[var(--color-surface)]/50 p-8 backdrop-blur-sm sm:p-10">
           <div className="relative">
             {project.image && (
               <div className="mb-6 flex h-20 w-full items-center justify-center">

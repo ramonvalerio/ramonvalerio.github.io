@@ -1,7 +1,7 @@
 export const translations = {
   pt: {
     navProfile: "Perfil",
-    navProjects: "Projetos",
+    navProjects: "Portfólio",
 
     badge: "Disponível para novos projetos",
     heroName: "Ramon Valerio",
@@ -37,7 +37,7 @@ export const translations = {
   },
   en: {
     navProfile: "Profile",
-    navProjects: "Projects",
+    navProjects: "Portfolio",
 
     badge: "Available for new projects",
     heroName: "Ramon Valerio",
@@ -74,7 +74,7 @@ export const translations = {
   },
   ja: {
     navProfile: "プロフィール",
-    navProjects: "プロジェクト",
+    navProjects: "ポートフォリオ",
 
     badge: "新規プロジェクト受付中",
     heroName: "Ramon Valerio",

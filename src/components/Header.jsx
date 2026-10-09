@@ -1,71 +1,52 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-const SECTIONS = ["top", "portfolio"];
-
 export default function Header() {
   const { t } = useLanguage();
-  const [active, setActive] = useState("top");
+  const headerRef = useRef(null);
 
-  useEffect(() => {
-    const elements = SECTIONS.map((id) => document.getElementById(id)).filter(
-      Boolean,
-    );
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      { threshold: 0.6 },
-    );
-
-    elements.forEach((el) => observer.observe(el));
+  useLayoutEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const setHeight = () =>
+      document.documentElement.style.setProperty(
+        "--header-h",
+        `${el.offsetHeight}px`,
+      );
+    setHeight();
+    const observer = new ResizeObserver(setHeight);
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  const links = [
-    { id: "top", href: "#top", index: "01", label: t.navProfile },
-    { id: "portfolio", href: "#portfolio", index: "02", label: t.navProjects },
-  ];
-
   return (
-    <header className="glass fixed inset-x-0 top-0 z-40 border-b border-white/10 px-4 py-2 sm:px-10 sm:py-3 lg:px-16">
+    <header
+      ref={headerRef}
+      className="glass fixed inset-x-0 top-0 z-40 border-b border-white/10 px-4 py-3 sm:px-10 sm:py-4 lg:px-16"
+    >
       <div className="mx-auto flex max-w-[min(100dvh,100vw)] items-center justify-between gap-3 sm:gap-4">
-        <nav className="flex items-center gap-4 sm:gap-8">
-          {links.map((link) => {
-            const isActive = active === link.id;
-            return (
-              <a
-                key={link.id}
-                href={link.href}
-                aria-current={isActive ? "page" : undefined}
-                className={`group relative flex items-center gap-1.5 py-1 text-sm font-medium tracking-wide uppercase transition-colors sm:text-base ${
-                  isActive
-                    ? "text-[var(--color-accent)]"
-                    : "text-white/50 hover:text-white/80"
-                }`}
-              >
-                <span
-                  className={`text-[10px] transition-colors ${
-                    isActive ? "text-[var(--color-accent)]/60" : "text-white/25"
-                  }`}
-                >
-                  {link.index}
-                </span>
-                {link.label}
-                <span
-                  className={`absolute -bottom-0.5 left-0 h-px bg-[var(--color-accent)] transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full group-hover:bg-white/40"
-                  }`}
-                />
-              </a>
-            );
-          })}
-        </nav>
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="relative h-14 w-14 flex-shrink-0 xs:h-16 xs:w-16 sm:h-20 sm:w-20">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-[var(--color-accent)]/40 via-[var(--color-accent-2)]/30 to-[var(--color-accent-3)]/30 blur-md" />
+            <div className="glass relative h-full w-full overflow-hidden rounded-full border-2! border-cyan-400/80!">
+              <img
+                src="/images/profile/ramon_linkedin4.png"
+                alt={t.heroName}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col">
+            <span className="text-xl font-semibold tracking-tight text-white sm:text-2xl lg:text-3xl">
+              {t.heroName}
+            </span>
+            <span className="text-xs font-medium tracking-wide text-white/50 sm:text-sm">
+              AI Engineer
+            </span>
+          </div>
+        </div>
 
         <LanguageSwitcher />
       </div>
