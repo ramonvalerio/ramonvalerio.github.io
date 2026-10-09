@@ -37,18 +37,12 @@ export default function Hero() {
         <div className="flex justify-center lg:justify-end">
           <div className="relative aspect-square w-full max-w-[320px]">
             <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-[var(--color-accent)]/30 via-[var(--color-accent-2)]/20 to-[var(--color-accent-3)]/20 blur-2xl" />
-            <div className="glass relative flex h-full w-full items-center justify-center rounded-[2rem] text-center">
-              <div className="px-6">
-                <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full border border-white/15 text-2xl">
-                  📷
-                </div>
-                <p className="text-sm font-medium text-white/60">
-                  Foto de perfil
-                </p>
-                <p className="mt-1 text-xs text-white/35">
-                  substituir por imagem final
-                </p>
-              </div>
+            <div className="glass relative h-full w-full overflow-hidden rounded-[2rem]">
+              <img
+                src="/images/profile/ramon_linkedin4.png"
+                alt="Ramon Valerio"
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
