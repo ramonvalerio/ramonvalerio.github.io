@@ -9,7 +9,8 @@ export default function Hero() {
       className="relative flex h-[100dvh] snap-start items-center overflow-hidden border-b border-white/5 px-6 pt-20 pb-16 sm:px-10 sm:pt-24 lg:px-16"
     >
       <video
-        className="absolute inset-0 h-full w-full object-cover object-center"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center 20%" }}
         src="/videos/ramonvalerio_video.mp4"
         autoPlay
         muted
