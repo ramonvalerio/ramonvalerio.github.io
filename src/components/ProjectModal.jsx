@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import MediaCarousel from "./MediaCarousel";
+import TechButton from "./TechButton";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function ProjectModal({ project, onClose }) {
@@ -117,18 +118,12 @@ export default function ProjectModal({ project, onClose }) {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={project.links.live}
-              className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90"
-            >
+            <TechButton as="a" href={project.links.live}>
               {t.viewProject}
-            </a>
-            <a
-              href={project.links.repo}
-              className="rounded-full border border-white/15 px-6 py-2.5 text-sm font-semibold text-white/90 transition hover:border-white/40 hover:bg-white/5"
-            >
+            </TechButton>
+            <TechButton as="a" href={project.links.repo}>
               {t.sourceCode}
-            </a>
+            </TechButton>
           </div>
           </div>
         </div>

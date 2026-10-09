@@ -2,6 +2,7 @@ import { useState } from "react";
 import { getProjects } from "../data/projects";
 import { useLanguage } from "../i18n/LanguageContext";
 import ProjectModal from "./ProjectModal";
+import TechButton from "./TechButton";
 
 export default function PortfolioGrid() {
   const [index, setIndex] = useState(0);
@@ -105,13 +106,9 @@ export default function PortfolioGrid() {
             </div>
 
             <div className="mt-7 flex justify-end">
-              <button
-                type="button"
-                onClick={() => setShowModal(true)}
-                className="rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black transition hover:scale-[1.03] hover:bg-white/90"
-              >
+              <TechButton type="button" onClick={() => setShowModal(true)}>
                 {t.viewDetails}
-              </button>
+              </TechButton>
             </div>
           </div>
         </div>
