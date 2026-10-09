@@ -34,7 +34,7 @@ export default function Header() {
 
   return (
     <header className="glass fixed inset-x-0 top-0 z-40 border-b border-white/10 px-4 py-2 sm:px-10 sm:py-3 lg:px-16">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 sm:gap-4">
+      <div className="mx-auto flex max-w-[min(100dvh,100vw)] items-center justify-between gap-3 sm:gap-4">
         <nav className="flex items-center gap-4 sm:gap-8">
           {links.map((link) => {
             const isActive = active === link.id;

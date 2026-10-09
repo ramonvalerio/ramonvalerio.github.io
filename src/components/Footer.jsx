@@ -8,7 +8,7 @@ export default function Footer() {
       id="contact"
       className="glass fixed right-0 bottom-0 left-0 z-40 border-t border-white/10 px-6 pt-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] sm:px-10 sm:pt-5 sm:pb-[calc(env(safe-area-inset-bottom,0px)+1.25rem)] lg:px-16"
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
+      <div className="mx-auto flex max-w-[min(100dvh,100vw)] items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <a
             href="https://www.linkedin.com/in/ramonvalerio"
