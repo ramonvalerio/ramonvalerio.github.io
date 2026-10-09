@@ -66,7 +66,11 @@ export default function Hero() {
 
         <p className="mt-4 max-w-2xl text-base leading-snug text-white/70 sm:text-xl lg:text-2xl">
           {t.heroP2Pre}
-          <span className="text-gradient font-medium">{t.heroP2Strong}</span>
+          <span className="text-gradient font-medium">{t.heroP2Strong1}</span>
+          {t.heroP2Mid1}
+          <span className="text-gradient font-medium">{t.heroP2Strong2}</span>
+          {t.heroP2Mid2}
+          <span className="text-gradient font-medium">{t.heroP2Strong3}</span>
           {t.heroP2Post}
         </p>
       </div>

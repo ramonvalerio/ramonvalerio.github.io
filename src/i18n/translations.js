@@ -8,11 +8,15 @@ export const translations = {
     heroP1Pre: "Sou engenheiro de software com mais de ",
     heroP1Strong: "16 anos de experiência",
     heroP1Post:
-      " no desenvolvimento de backends, aplicações web e sistemas distribuídos. Trabalho principalmente com C#/.NET, APIs REST, mensageria, Azure e AWS.",
-    heroP2Pre: "Atualmente, meu foco é aplicar ",
-    heroP2Strong: "IA ao desenvolvimento de software",
+      " no desenvolvimento de aplicações web, backends e sistemas distribuídos. Tenho ampla experiência na modernização de sistemas legados e em sua integração com soluções modernas.",
+    heroP2Pre: "Minha atuação combina ",
+    heroP2Strong1: "Domain-Driven Design (DDD)",
+    heroP2Mid1: ", ",
+    heroP2Strong2: "Spec-Driven Development (SDD)",
+    heroP2Mid2: " e ",
+    heroP2Strong3: "IA aplicada ao desenvolvimento de software",
     heroP2Post:
-      ". Integro assistentes de IA ao meu fluxo de trabalho e aplico RAG para gerar respostas apoiadas em informações específicas do negócio.",
+      " para transformar necessidades do negócio em soluções bem estruturadas. Escolho tecnologias e ferramentas conforme o contexto de cada problema.",
     ctaProjects: "Ver projetos",
     ctaContact: "Entrar em contato",
 
@@ -43,11 +47,15 @@ export const translations = {
     heroP1Pre: "I'm a software engineer with over ",
     heroP1Strong: "16 years of experience",
     heroP1Post:
-      " developing backends, web applications, and distributed systems. I work primarily with C#/.NET, REST APIs, messaging, Azure, and AWS.",
-    heroP2Pre: "Currently, my focus is applying ",
-    heroP2Strong: "AI to software development",
+      " developing web applications, backends, and distributed systems. I have extensive experience modernizing legacy systems and integrating them with modern solutions.",
+    heroP2Pre: "My work combines ",
+    heroP2Strong1: "Domain-Driven Design (DDD)",
+    heroP2Mid1: ", ",
+    heroP2Strong2: "Spec-Driven Development (SDD)",
+    heroP2Mid2: ", and ",
+    heroP2Strong3: "AI applied to software development",
     heroP2Post:
-      ". I integrate AI assistants into my workflow and apply RAG to generate responses grounded in business-specific information.",
+      " to turn business needs into well-structured solutions. I choose technologies and tools based on the context of each problem.",
     ctaProjects: "View projects",
     ctaContact: "Get in touch",
 
@@ -75,14 +83,18 @@ export const translations = {
 
     badge: "新規プロジェクト受付中",
     heroName: "Ramon Valerio",
-    heroP1Pre: "16年以上の経験を持つソフトウェアエンジニアです。バックエンド、Webアプリケーション、分散システムの開発に携わっています。主に ",
-    heroP1Strong: "C#/.NET、REST API",
+    heroP1Pre: "",
+    heroP1Strong: "16年以上の経験",
     heroP1Post:
-      "、メッセージング、Azure、AWSを用いて開発を行っています。",
-    heroP2Pre: "現在は ",
-    heroP2Strong: "ソフトウェア開発へのAI活用",
+      "を持つソフトウェアエンジニアです。Webアプリケーション、バックエンド、分散システムの開発に携わっています。レガシーシステムのモダナイズや、最新のソリューションとの統合にも豊富な経験があります。",
+    heroP2Pre: "",
+    heroP2Strong1: "ドメイン駆動設計（DDD）",
+    heroP2Mid1: "、",
+    heroP2Strong2: "仕様駆動開発（SDD）",
+    heroP2Mid2: "、そして",
+    heroP2Strong3: "ソフトウェア開発へのAI活用",
     heroP2Post:
-      " に注力しています。AIアシスタントを開発ワークフローに取り入れ、RAGを活用してビジネス固有の情報に基づいた回答を生成しています。",
+      "を組み合わせ、ビジネスニーズを構造化されたソリューションへと落とし込んでいます。各課題の文脈に応じて技術やツールを選定しています。",
     ctaProjects: "プロジェクトを見る",
     ctaContact: "お問い合わせ",
 
