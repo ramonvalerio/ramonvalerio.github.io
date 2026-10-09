@@ -9,7 +9,7 @@ export default function App() {
     <LanguageProvider>
       <div
         id="top"
-        className="min-h-screen bg-[var(--color-ink)] pb-48 sm:pb-36 lg:pb-32"
+        className="min-h-screen bg-[var(--color-ink)] pb-20 sm:pb-24"
       >
         <Header />
         <Hero />
