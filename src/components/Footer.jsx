@@ -15,7 +15,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/5 text-white/70 backdrop-blur transition-all duration-150 hover:border-cyan-300/50 hover:text-cyan-300 focus-visible:border-cyan-300/50 focus-visible:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)] focus-visible:outline-none"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/5 text-[#D1D5DB] backdrop-blur transition-all duration-150 hover:border-cyan-300/50 hover:text-cyan-300 focus-visible:border-cyan-300/50 focus-visible:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)] focus-visible:outline-none"
           >
             <svg className="h-[22px] w-[22px] sm:h-6 sm:w-6">
               <use href="/icons.svg#linkedin-icon" />
@@ -26,7 +26,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/5 text-white/70 backdrop-blur transition-all duration-150 hover:border-cyan-300/50 hover:text-cyan-300 focus-visible:border-cyan-300/50 focus-visible:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)] focus-visible:outline-none"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/5 text-[#D1D5DB] backdrop-blur transition-all duration-150 hover:border-cyan-300/50 hover:text-cyan-300 focus-visible:border-cyan-300/50 focus-visible:text-cyan-300 focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-ink)] focus-visible:outline-none"
           >
             <svg className="h-[22px] w-[22px] sm:h-6 sm:w-6">
               <use href="/icons.svg#github-icon" />

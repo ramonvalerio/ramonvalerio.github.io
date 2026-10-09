@@ -1,17 +1,7 @@
-import { useRef, useState } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Hero() {
   const { t } = useLanguage();
-  const videoRef = useRef(null);
-  const [objectPosition, setObjectPosition] = useState("object-top");
-
-  const handleTimeUpdate = () => {
-    const video = videoRef.current;
-    if (!video || !video.duration) return;
-    const isLastThird = video.currentTime >= (video.duration * 2) / 3;
-    setObjectPosition(isLastThird ? "object-bottom" : "object-top");
-  };
 
   return (
     <section
@@ -19,9 +9,7 @@ export default function Hero() {
       className="relative flex h-[100dvh] snap-start items-center overflow-hidden border-b border-white/5 px-6 pt-20 pb-16 sm:px-10 sm:pt-24 lg:px-16"
     >
       <video
-        ref={videoRef}
-        onTimeUpdate={handleTimeUpdate}
-        className={`absolute inset-0 h-full w-full object-cover transition-[object-position] duration-700 ${objectPosition}`}
+        className="absolute inset-0 h-full w-full object-cover object-center"
         src="/videos/ramonvalerio_video.mp4"
         autoPlay
         muted
@@ -61,7 +49,11 @@ export default function Hero() {
         <div className="relative mt-8 max-w-3xl">
           <div
             aria-hidden
-            className="absolute -inset-x-6 -inset-y-6 -z-10 rounded-[2rem] bg-black/45 blur-2xl sm:-inset-x-10"
+            className="pointer-events-none absolute -inset-x-10 -inset-y-10 -z-10 sm:-inset-x-20 sm:-inset-y-14"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.32) 40%, rgba(0,0,0,0.12) 65%, transparent 85%)",
+            }}
           />
 
           <p className="text-[1.0625rem] leading-[1.6] font-normal text-white/80 sm:text-lg lg:text-xl">
