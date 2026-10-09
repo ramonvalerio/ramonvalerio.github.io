@@ -107,7 +107,7 @@ export const translations = {
 };
 
 export const languages = [
-  { code: "pt", label: "Português" },
-  { code: "en", label: "English" },
-  { code: "ja", label: "日本語" },
+  { code: "pt", label: "Português", countryCode: "br" },
+  { code: "en", label: "English", countryCode: "us" },
+  { code: "ja", label: "日本語", countryCode: "jp" },
 ];
