@@ -16,7 +16,7 @@ export default function LanguageSwitcher() {
           title={label}
           className={`h-7 w-7 flex-shrink-0 overflow-hidden rounded-full transition sm:h-8 sm:w-8 ${
             lang === code
-              ? "ring-2 ring-white"
+              ? "ring-2 ring-cyan-400"
               : "opacity-50 hover:opacity-90"
           }`}
         >
