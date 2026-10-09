@@ -77,7 +77,7 @@ export default function ProjectModal({ project, onClose }) {
               {project.role}
             </p>
           )}
-          <p className="mt-2 text-sm text-white/60">{project.tagline}</p>
+          <p className="mt-2 text-sm font-medium text-white/60">{project.tagline}</p>
 
           <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-white/50">
             {project.startDateLabel && (
@@ -97,7 +97,7 @@ export default function ProjectModal({ project, onClose }) {
             )}
           </div>
 
-          <p className="mt-5 text-base leading-[1.6] text-white/70 sm:text-lg">
+          <p className="mt-5 text-base leading-[1.6] font-medium text-white/70 sm:text-lg">
             {project.description}
           </p>
 

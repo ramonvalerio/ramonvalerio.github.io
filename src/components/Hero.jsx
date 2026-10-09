@@ -35,7 +35,7 @@ export default function Hero() {
         </p>
 
         <div className="relative mt-8 max-w-3xl rounded-2xl border border-white/10 bg-black/30 px-6 py-5 backdrop-blur-sm sm:px-8 sm:py-6">
-          <p className="text-sm leading-[1.6] font-normal text-white/80 sm:text-base lg:text-lg">
+          <p className="text-sm leading-[1.6] font-medium text-white/80 sm:text-base lg:text-lg">
             {t.heroP1Pre}
             <span className="text-gradient font-medium">
               {t.heroP1Strong1}
@@ -47,7 +47,7 @@ export default function Hero() {
             {t.heroP1Post}
           </p>
 
-          <p className="mt-5 text-sm leading-[1.6] font-normal text-white/80 sm:text-base lg:text-lg">
+          <p className="mt-5 text-sm leading-[1.6] font-medium text-white/80 sm:text-base lg:text-lg">
             {t.heroP2Pre}
             <span className="text-gradient font-medium">{t.heroP2Strong}</span>
             {t.heroP2Post}

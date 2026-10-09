@@ -59,7 +59,7 @@ export default function PortfolioGrid() {
                 {project.role}
               </p>
             )}
-            <p className="mt-3 text-left text-sm leading-relaxed text-white/70">
+            <p className="mt-3 text-left text-sm leading-relaxed font-medium text-white/70">
               {project.tagline}
             </p>
 

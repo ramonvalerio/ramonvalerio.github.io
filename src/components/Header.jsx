@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="glass fixed inset-x-0 top-0 z-40 border-b border-white/10 px-4 py-3 sm:px-10 sm:py-4 lg:px-16"
+      className="glass fixed inset-x-0 top-0 z-40 border-b border-white/10 px-3 py-1.5 sm:px-6 sm:py-2 lg:px-10"
     >
       <div className="mx-auto flex max-w-[min(100dvh,100vw)] items-center justify-between gap-3 sm:gap-4">
         <div className="flex items-center gap-3 sm:gap-4">
@@ -39,10 +39,10 @@ export default function Header() {
           </div>
 
           <div className="flex flex-col">
-            <span className="text-xl font-semibold tracking-tight text-white sm:text-2xl lg:text-3xl">
+            <span className="text-xl font-medium tracking-tight text-white sm:text-2xl lg:text-3xl">
               {t.heroName}
             </span>
-            <span className="text-xs font-medium tracking-wide text-white/50 sm:text-sm">
+            <span className="text-xs font-semibold text-white/50 sm:text-sm">
               AI Engineer
             </span>
           </div>

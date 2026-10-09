@@ -29,7 +29,7 @@ export default function MediaCarousel({ media }) {
             <p className="text-xs font-medium tracking-wide text-white/40 uppercase">
               {TYPE_LABEL[current.type]}
             </p>
-            <p className="mt-1 text-sm text-white/70">{current.label}</p>
+            <p className="mt-1 text-sm font-medium text-white/70">{current.label}</p>
           </div>
         </div>
 
