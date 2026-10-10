@@ -27,3 +27,4 @@ dist-ssr
 
 # Superdesign tool scratch files
 .superdesign/
+supabase/.temp/
