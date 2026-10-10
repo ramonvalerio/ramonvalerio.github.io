@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import TechButton from "./TechButton";
 
-const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 const TURNSTILE_SCRIPT_SRC =
   "https://challenges.cloudflare.com/turnstile/v0/api.js";
@@ -102,7 +103,7 @@ export default function Contact() {
     useTurnstile(TURNSTILE_SITE_KEY);
   const { remainingMs: cooldownMs, start: startCooldown } = useSendCooldown();
 
-  const configured = Boolean(WEB3FORMS_ACCESS_KEY);
+  const configured = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
   const needsHuman = Boolean(TURNSTILE_SITE_KEY);
 
   const handleChange = (field) => (event) =>
@@ -116,31 +117,37 @@ export default function Contact() {
 
     setStatus("sending");
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_ACCESS_KEY,
-          subject: `${t.contactFormSubjectDefault} — ${form.name}`,
-          name: form.name,
-          email: form.email,
-          message: form.message,
-        }),
-      });
+      const response = await fetch(
+        `${SUPABASE_URL}/functions/v1/submit-contact`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+            apikey: SUPABASE_PUBLISHABLE_KEY,
+          },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            message: form.message,
+            turnstileToken: token,
+          }),
+        },
+      );
       const result = await response.json();
-      if (result.success) {
+      if (response.ok && result.success) {
         setStatus("sent");
         setForm({ name: "", email: "", message: "" });
         resetTurnstile();
         startCooldown();
       } else {
-        console.error("Web3Forms error:", result);
-        setErrorDetail(result.message || "");
+        console.error("submit-contact error:", result);
+        setErrorDetail(result.error || "");
         setStatus("error");
         resetTurnstile();
       }
     } catch (err) {
-      console.error("Web3Forms request failed:", err);
+      console.error("submit-contact request failed:", err);
       setErrorDetail(err.message || "");
       setStatus("error");
       resetTurnstile();
@@ -239,8 +246,8 @@ export default function Contact() {
 
           {!configured && (
             <p className="text-xs text-amber-400/80">
-              Configure VITE_WEB3FORMS_ACCESS_KEY in .env.local to enable this
-              form.
+              Configure VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY in
+              .env.local to enable this form.
             </p>
           )}
         </form>

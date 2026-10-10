@@ -67,7 +67,7 @@ export const translations = {
     contactFormCooldown: "Aguarde um pouco antes de enviar outra mensagem.",
     contactFormSubjectDefault: "Contato via portfólio",
     contactFormHint: "Sua mensagem será enviada diretamente para mim.",
-    contactFormSuccess: "Mensagem enviada! Responderei em breve.",
+    contactFormSuccess: "Quase lá! Verifique seu e-mail e clique no link para confirmar o envio.",
     contactFormError: "Não foi possível enviar agora. Tente novamente.",
   },
   en: {
@@ -139,7 +139,7 @@ export const translations = {
     contactFormCooldown: "Please wait a bit before sending another message.",
     contactFormSubjectDefault: "Portfolio contact",
     contactFormHint: "Your message will be sent directly to me.",
-    contactFormSuccess: "Message sent! I'll get back to you soon.",
+    contactFormSuccess: "Almost there! Check your email and click the link to confirm.",
     contactFormError: "Couldn't send it right now. Please try again.",
   },
   ja: {
@@ -212,7 +212,7 @@ export const translations = {
     contactFormCooldown: "少し待ってから、もう一度お送りください。",
     contactFormSubjectDefault: "ポートフォリオからのお問い合わせ",
     contactFormHint: "メッセージは私宛に直接送信されます。",
-    contactFormSuccess: "メッセージを送信しました。近日中にご連絡します。",
+    contactFormSuccess: "もう少しです！メールを確認し、リンクをクリックして送信を確定してください。",
     contactFormError: "送信できませんでした。もう一度お試しください。",
   },
 };
