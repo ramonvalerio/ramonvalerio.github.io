@@ -63,6 +63,7 @@ export default function Contact() {
   const { t } = useLanguage();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [errorDetail, setErrorDetail] = useState("");
   const { containerRef: turnstileRef, token, reset: resetTurnstile } =
     useTurnstile(TURNSTILE_SITE_KEY);
 
@@ -88,7 +89,6 @@ export default function Contact() {
           name: form.name,
           email: form.email,
           message: form.message,
-          ...(needsHuman ? { "cf-turnstile-response": token } : {}),
         }),
       });
       const result = await response.json();
@@ -97,10 +97,14 @@ export default function Contact() {
         setForm({ name: "", email: "", message: "" });
         resetTurnstile();
       } else {
+        console.error("Web3Forms error:", result);
+        setErrorDetail(result.message || "");
         setStatus("error");
         resetTurnstile();
       }
-    } catch {
+    } catch (err) {
+      console.error("Web3Forms request failed:", err);
+      setErrorDetail(err.message || "");
       setStatus("error");
       resetTurnstile();
     }
@@ -183,7 +187,7 @@ export default function Contact() {
               {status === "sent"
                 ? t.contactFormSuccess
                 : status === "error"
-                  ? t.contactFormError
+                  ? `${t.contactFormError}${errorDetail ? ` (${errorDetail})` : ""}`
                   : t.contactFormHint}
             </p>
             <TechButton type="submit" className="shrink-0" disabled={!canSubmit}>
