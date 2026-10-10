@@ -30,18 +30,22 @@ export default function Header() {
     );
     if (!root || !elements.length) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      { root, threshold: 0.4 },
-    );
+    const update = () => {
+      const triggerLine = root.scrollTop + root.clientHeight * 0.35;
+      let current = elements[0].id;
+      for (const el of elements) {
+        if (el.offsetTop <= triggerLine) current = el.id;
+      }
+      setActive(current);
+    };
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    update();
+    root.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      root.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   const links = [

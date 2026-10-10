@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import PortfolioGrid from "./components/PortfolioGrid";
 import Expertise from "./components/Expertise";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { LanguageProvider } from "./i18n/LanguageContext";
 
@@ -78,11 +79,8 @@ export default function App() {
         <Hero />
         <PortfolioGrid />
         <Expertise />
-        <div
-          id="contact"
-          aria-hidden
-          style={{ height: "var(--footer-h, 0px)" }}
-        />
+        <Contact />
+        <div aria-hidden style={{ height: "var(--footer-h, 0px)" }} />
         <Footer />
       </div>
     </LanguageProvider>

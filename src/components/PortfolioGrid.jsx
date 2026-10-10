@@ -4,123 +4,81 @@ import { useLanguage } from "../i18n/LanguageContext";
 import ProjectModal from "./ProjectModal";
 import TechButton from "./TechButton";
 
-const AUTO_ROTATE_MS = 5000;
-const DEG_PER_PX = 0.25;
-const MAX_CUBE_SIZE = 560;
+const SWIPE_THRESHOLD_PX = 60;
+const BOUNCE_EASING = "cubic-bezier(0.17, 0.67, 0.55, 1.43)";
+
+function relativeOffset(i, index, length) {
+  let diff = i - index;
+  if (diff > length / 2) diff -= length;
+  if (diff < -length / 2) diff += length;
+  return diff;
+}
 
 export default function PortfolioGrid() {
+  const [index, setIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [pos, setPos] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [cubeSize, setCubeSize] = useState(MAX_CUBE_SIZE);
-  const dragInfo = useRef({ startX: 0, startPos: 0 });
-  const mouseHandlers = useRef({ onMove: null, onUp: null });
-  const wrapperRef = useRef(null);
+  const dragInfo = useRef({ startX: 0, dragging: false });
   const { lang, t } = useLanguage();
   const projects = getProjects(lang);
+  const project = projects[index];
   const hasMultiple = projects.length > 1;
 
-  const faceProjects = [0, 1, 2, 3].map((i) => projects[i % projects.length]);
-  const faceIndex = (((Math.round(-pos / 90) % 4) + 4) % 4);
-  const project = faceProjects[faceIndex];
-  const logicalIndex = faceIndex % projects.length;
-  const isLightProject = project.pageTheme === "light";
+  const go = (dir) =>
+    setIndex((i) => (i + dir + projects.length) % projects.length);
+  const nextStep = () => go(1);
+  const prevStep = () => go(-1);
+
+  const handlePointerDown = (clientX) => {
+    if (!hasMultiple) return;
+    dragInfo.current = { startX: clientX, dragging: true };
+  };
+
+  const handlePointerUp = (clientX) => {
+    if (!dragInfo.current.dragging) return;
+    dragInfo.current.dragging = false;
+    const delta = clientX - dragInfo.current.startX;
+    if (delta <= -SWIPE_THRESHOLD_PX) nextStep();
+    else if (delta >= SWIPE_THRESHOLD_PX) prevStep();
+  };
+
+  const handleMouseDown = (event) => handlePointerDown(event.clientX);
 
   useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el) return;
-    const setSize = () =>
-      setCubeSize(Math.min(MAX_CUBE_SIZE, el.offsetWidth));
-    setSize();
-    const observer = new ResizeObserver(setSize);
-    observer.observe(el);
-    return () => observer.disconnect();
+    const onUp = (event) => handlePointerUp(event.clientX);
+    window.addEventListener("mouseup", onUp);
+    return () => window.removeEventListener("mouseup", onUp);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (!hasMultiple || isPaused || isDragging) return;
-    const id = setInterval(() => {
-      setPos((p) => p - 90);
-    }, AUTO_ROTATE_MS);
-    return () => clearInterval(id);
-  }, [hasMultiple, isPaused, isDragging]);
-
-  const nextStep = () => setPos((p) => p - 90);
-  const prevStep = () => setPos((p) => p + 90);
-
-  const endDrag = (finalPos) => {
-    if (mouseHandlers.current.onMove) {
-      window.removeEventListener("mousemove", mouseHandlers.current.onMove);
-      window.removeEventListener("mouseup", mouseHandlers.current.onUp);
-      mouseHandlers.current = { onMove: null, onUp: null };
-    }
-    const snapped = Math.round(finalPos / 90) * 90;
-    setPos(snapped);
-    setIsDragging(false);
+  const touchStartXRef = useRef(0);
+  const handleTouchStart = (event) => {
+    touchStartXRef.current = event.touches[0].clientX;
+    handlePointerDown(event.touches[0].clientX);
+  };
+  const handleTouchEnd = (event) => {
+    const touch = event.changedTouches[0];
+    handlePointerUp(touch ? touch.clientX : touchStartXRef.current);
   };
 
-  const handleMouseDown = (event) => {
-    if (!hasMultiple || mouseHandlers.current.onMove) return;
-    dragInfo.current = { startX: event.clientX, startPos: pos };
-    setIsDragging(true);
-
-    const onMove = (moveEvent) => {
-      const deltaDeg = (moveEvent.clientX - dragInfo.current.startX) * DEG_PER_PX;
-      setPos(dragInfo.current.startPos + deltaDeg);
-    };
-    const onUp = (upEvent) => {
-      const deltaDeg = (upEvent.clientX - dragInfo.current.startX) * DEG_PER_PX;
-      endDrag(dragInfo.current.startPos + deltaDeg);
-    };
-    mouseHandlers.current = { onMove, onUp };
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
-  };
-
-  useEffect(
-    () => () => {
-      if (mouseHandlers.current.onMove) {
-        window.removeEventListener("mousemove", mouseHandlers.current.onMove);
-        window.removeEventListener("mouseup", mouseHandlers.current.onUp);
-      }
-    },
-    [],
+  const renderCardHeader = (p) => (
+    <div className="flex h-28 w-full shrink-0 items-center justify-center border-b border-white/10 bg-black/30 px-6 sm:h-32">
+      {p.image ? (
+        <img
+          src={p.image}
+          alt={p.title}
+          className="h-full max-h-20 max-w-[70%] object-contain sm:max-h-24"
+          draggable={false}
+        />
+      ) : (
+        <span className="text-sm font-semibold tracking-wide text-white/30 uppercase">
+          {p.title}
+        </span>
+      )}
+    </div>
   );
 
-  const handleTouchStart = (event) => {
-    if (!hasMultiple) return;
-    const touch = event.touches[0];
-    dragInfo.current = { startX: touch.clientX, startPos: pos };
-    setIsDragging(true);
-  };
-
-  const handleTouchMove = (event) => {
-    if (!isDragging) return;
-    const touch = event.touches[0];
-    const deltaDeg = (touch.clientX - dragInfo.current.startX) * DEG_PER_PX;
-    if (Math.abs(deltaDeg) > 3) event.preventDefault();
-    setPos(dragInfo.current.startPos + deltaDeg);
-  };
-
-  const handleTouchEnd = () => {
-    if (!isDragging) return;
-    endDrag(pos);
-  };
-
   const renderCardBody = (p) => (
-    <div className="relative">
-      {p.image && (
-        <div className="mb-6 flex h-24 w-full items-center justify-center px-5 py-3">
-          <img
-            src={p.image}
-            alt={p.title}
-            className="h-full max-w-[70%] object-contain"
-            draggable={false}
-          />
-        </div>
-      )}
-
+    <div className="relative flex h-full flex-col p-6 sm:p-8">
       <h3 className="text-left text-xl font-semibold text-white">{p.title}</h3>
       {p.role && (
         <p className="mt-1 text-left text-xs font-medium tracking-wide text-[var(--color-accent)]">
@@ -160,74 +118,89 @@ export default function PortfolioGrid() {
         ))}
       </div>
 
-      <div className="mt-7 flex justify-end">
-        <TechButton type="button" onClick={() => setShowModal(true)}>
+      <div className="mt-auto flex justify-end pt-6">
+        <TechButton
+          type="button"
+          onClick={() => setShowModal(true)}
+          style={{ padding: "0.4rem 0.9rem", fontSize: "0.7rem" }}
+        >
           {t.viewDetails}
         </TechButton>
       </div>
     </div>
   );
 
-  const faceClass = () =>
-    "absolute inset-0 overflow-y-auto rounded-2xl border border-white/10 bg-[var(--color-surface)]/80 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-md sm:p-8";
-
-  const half = cubeSize / 2;
-
-  const faceTransforms = [
-    `translateZ(${half}px)`, // front
-    `rotateY(-90deg) translateZ(${half}px)`, // right
-    `rotateY(-180deg) translateZ(${half}px)`, // back
-    `rotateY(-270deg) translateZ(${half}px)`, // left
-  ];
+  const cardStyle = (offset) => {
+    const base = {
+      position: "absolute",
+      inset: 0,
+      transition: `transform 500ms ${BOUNCE_EASING}, opacity 450ms ease-in-out`,
+    };
+    if (offset === 0) {
+      return { ...base, transform: "translateX(0%) scale(1)", opacity: 1, zIndex: 3 };
+    }
+    if (offset === -1) {
+      return {
+        ...base,
+        transform: "translateX(-28%) scale(0.82)",
+        opacity: 0.35,
+        zIndex: 2,
+      };
+    }
+    if (offset === 1) {
+      return {
+        ...base,
+        transform: "translateX(28%) scale(0.82)",
+        opacity: 0.35,
+        zIndex: 2,
+      };
+    }
+    return {
+      ...base,
+      transform: `translateX(${offset < 0 ? "-55%" : "55%"}) scale(0)`,
+      opacity: 0,
+      zIndex: 1,
+      pointerEvents: "none",
+    };
+  };
 
   return (
     <section
       id="portfolio"
-      className={`relative z-10 flex min-h-[100dvh] items-center overflow-hidden px-6 pb-24 transition-colors duration-500 sm:px-10 lg:px-16 ${
-        isLightProject ? "bg-[#f4f7fb]" : "bg-[var(--color-ink)]"
-      }`}
+      className="relative z-10 flex min-h-[100dvh] items-center overflow-hidden bg-[var(--color-ink)] px-6 pb-24 sm:px-10 lg:px-16"
       style={{
         paddingTop:
           "calc(var(--header-h, 0px) + var(--subheader-h, 0px) + 1.5rem)",
       }}
     >
-      {project.background && (
-        <div
-          key={project.id}
-          aria-hidden
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${project.background})` }}
-        />
+      {projects.map(
+        (p) =>
+          p.background && (
+            <div
+              key={p.id}
+              aria-hidden
+              className="absolute inset-0 bg-cover bg-center transition-opacity duration-[450ms] ease-in-out"
+              style={{
+                backgroundImage: `url(${p.background})`,
+                opacity: p.id === project.id ? 1 : 0,
+              }}
+            />
+          ),
       )}
       <div
         aria-hidden
-        className={`absolute inset-0 ${
-          isLightProject
-            ? "bg-gradient-to-b from-transparent via-transparent to-[#e9eef7]"
-            : "bg-gradient-to-b from-black/80 via-black/70 to-[var(--color-ink)]"
-        }`}
+        className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-[var(--color-ink)]"
       />
-      <div
-        aria-hidden
-        className={`absolute inset-0 ${
-          isLightProject
-            ? "bg-[radial-gradient(circle_at_18%_20%,rgba(0,170,255,0.10),transparent_32%),radial-gradient(circle_at_82%_15%,rgba(117,62,255,0.09),transparent_34%)]"
-            : "noise-grid"
-        }`}
-      />
+      <div aria-hidden className="noise-grid absolute inset-0" />
 
       <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center text-center">
-        <div
-          className="relative flex w-full max-w-3xl items-center justify-center px-20 sm:px-28"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
+        <div className="relative flex w-full max-w-3xl items-center justify-center px-20 sm:px-28">
           {hasMultiple && (
             <button
               type="button"
               aria-label="Projeto anterior"
               onClick={prevStep}
-              className="group absolute top-1/2 left-0 z-20 h-16 w-16 -translate-y-1/2 -translate-x-1/4"
+              className="group absolute top-1/2 left-0 z-20 h-16 w-16 -translate-x-1/4 -translate-y-1/2"
             >
               <span
                 className="absolute inset-0 border border-[var(--color-accent)]/50 bg-black/50 backdrop-blur-sm transition-all duration-300 group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-accent)]/15 group-hover:shadow-[0_0_30px_-4px_rgba(124,242,214,0.9)]"
@@ -245,53 +218,33 @@ export default function PortfolioGrid() {
             </button>
           )}
 
-          <div ref={wrapperRef} className="relative w-full max-w-xl">
           <div
-            className="relative mx-auto select-none"
-            style={{
-              width: cubeSize,
-              height: cubeSize,
-              perspective: Math.max(900, cubeSize * 2.2),
-              perspectiveOrigin: "50% 50%",
-              touchAction: "pan-y",
-            }}
+            className="relative h-[560px] w-full max-w-xl select-none sm:h-[600px]"
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             aria-live="polite"
-            aria-label={`${project.title}, ${logicalIndex + 1} de ${projects.length}`}
+            aria-label={`${project.title}, ${index + 1} de ${projects.length}`}
           >
-            <div
-              className={isDragging ? "cursor-grabbing" : "cursor-grab"}
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-                transformStyle: "preserve-3d",
-                transform: `rotateY(${pos}deg)`,
-                transition: isDragging
-                  ? "none"
-                  : "transform 0.8s cubic-bezier(0.65, 0, 0.35, 1)",
-              }}
-            >
-              {faceProjects.map((p, i) => (
+            {projects.map((p, i) => {
+              const offset = relativeOffset(i, index, projects.length);
+              if (Math.abs(offset) > 1) return null;
+              return (
                 <div
-                  key={`${p.id}-${i}`}
-                  className={faceClass(p)}
-                  data-scrollable
-                  style={{
-                    width: cubeSize,
-                    height: cubeSize,
-                    transform: faceTransforms[i],
-                    backfaceVisibility: "hidden",
-                  }}
+                  key={p.id}
+                  onClick={() => offset !== 0 && setIndex(i)}
+                  className={`flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[var(--color-surface)]/80 shadow-[0_24px_70px_rgba(0,0,0,0.5)] backdrop-blur-md ${
+                    offset !== 0 ? "cursor-pointer" : ""
+                  }`}
+                  style={cardStyle(offset)}
                 >
-                  {renderCardBody(p)}
+                  {renderCardHeader(p)}
+                  <div data-scrollable className="flex-1 overflow-y-auto">
+                    {renderCardBody(p)}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              );
+            })}
           </div>
 
           {hasMultiple && (
@@ -330,22 +283,18 @@ export default function PortfolioGrid() {
                   key={p.id}
                   type="button"
                   aria-label={p.title}
-                  onClick={() => setPos(-i * 90)}
+                  onClick={() => setIndex(i)}
                   className={`h-1.5 rounded-full transition-all ${
-                    i === logicalIndex
-                      ? isLightProject
-                        ? "w-6 bg-blue-600"
-                        : "w-6 bg-[var(--color-accent)]"
-                      : isLightProject
-                        ? "w-1.5 bg-slate-300 hover:bg-slate-400"
-                        : "w-1.5 bg-white/20 hover:bg-white/40"
+                    i === index
+                      ? "w-6 bg-[var(--color-accent)]"
+                      : "w-1.5 bg-white/20 hover:bg-white/40"
                   }`}
                 />
               ))}
             </div>
 
-            <span className={`min-w-10 text-xs tabular-nums ${isLightProject ? "text-slate-500" : "text-white/40"}`}>
-              {String(logicalIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+            <span className="min-w-10 text-xs tabular-nums text-white/40">
+              {String(index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
             </span>
           </div>
         )}
