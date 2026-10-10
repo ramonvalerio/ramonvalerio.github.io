@@ -1,7 +1,6 @@
 export const translations = {
   pt: {
     navProfile: "Perfil",
-    navProjects: "Portfólio",
     navWork: "Trabalho",
     navExpertise: "Expertise",
     navContact: "Contato",
@@ -17,22 +16,9 @@ export const translations = {
       "Engenheiro de software sênior e fundador com mais de 16 anos de experiência em plataformas web, backends, sistemas distribuídos, modernização e IA aplicada. Alinho estratégia de produto, arquitetura e implementação ponta a ponta.",
     heroVideoLabel: "Vídeo profissional de Ramon Valerio",
     heroMediaExpertise: "Engenharia · Arquitetura · Produto",
-    heroP1Pre: "Sou engenheiro de software com mais de ",
-    heroP1Strong1: "16 anos de experiência",
-    heroP1Mid: " em aplicações web, backends e sistemas distribuídos. Atuo na ",
-    heroP1Strong2: "modernização e integração de sistemas legados",
-    heroP1Post: ".",
-    heroP2Pre: "Combino DDD, ADR e SDD para alinhar negócio, arquitetura e implementação. Integro ",
-    heroP2Strong: "IA ao desenvolvimento de software",
-    heroP2Post:
-      ", escolhendo tecnologias e ferramentas conforme o contexto de cada problema.",
     ctaProjects: "Ver projetos",
     ctaContact: "Entrar em contato",
 
-    portfolioLabel: "Portfólio",
-    portfolioTitle: "Projetos selecionados",
-    portfolioSubtitle:
-      "Uma seleção de produtos que combinam engenharia robusta e experiência de uso cuidadosa.",
     viewDetails: "Ver detalhes →",
 
     technologies: "Tecnologias",
@@ -65,14 +51,12 @@ export const translations = {
     contactFormSubmit: "Enviar mensagem",
     contactFormSending: "Enviando...",
     contactFormCooldown: "Aguarde um pouco antes de enviar outra mensagem.",
-    contactFormSubjectDefault: "Contato via portfólio",
     contactFormHint: "Sua mensagem será enviada diretamente para mim.",
     contactFormSuccess: "Quase lá! Verifique seu e-mail e clique no link para confirmar o envio.",
     contactFormError: "Não foi possível enviar agora. Tente novamente.",
   },
   en: {
     navProfile: "Profile",
-    navProjects: "Portfolio",
     navWork: "Work",
     navExpertise: "Expertise",
     navContact: "Contact",
@@ -88,23 +72,9 @@ export const translations = {
       "Senior software engineer and founder with over 16 years of experience across web platforms, backends, distributed systems, modernization, and applied AI. I align product strategy, architecture, and end-to-end implementation.",
     heroVideoLabel: "Professional video of Ramon Valerio",
     heroMediaExpertise: "Engineering · Architecture · Product",
-    heroP1Pre: "I'm a software engineer with over ",
-    heroP1Strong1: "16 years of experience",
-    heroP1Mid: " in web applications, backends, and distributed systems. I work on ",
-    heroP1Strong2: "modernizing and integrating legacy systems",
-    heroP1Post: ".",
-    heroP2Pre:
-      "I combine DDD, ADR, and SDD to align business, architecture, and implementation. I integrate ",
-    heroP2Strong: "AI into software development",
-    heroP2Post:
-      ", choosing technologies and tools based on the context of each problem.",
     ctaProjects: "View projects",
     ctaContact: "Get in touch",
 
-    portfolioLabel: "Portfolio",
-    portfolioTitle: "Selected projects",
-    portfolioSubtitle:
-      "A selection of products that combine robust engineering with careful user experience.",
     viewDetails: "View details →",
 
     technologies: "Technologies",
@@ -137,14 +107,12 @@ export const translations = {
     contactFormSubmit: "Send message",
     contactFormSending: "Sending...",
     contactFormCooldown: "Please wait a bit before sending another message.",
-    contactFormSubjectDefault: "Portfolio contact",
     contactFormHint: "Your message will be sent directly to me.",
     contactFormSuccess: "Almost there! Check your email and click the link to confirm.",
     contactFormError: "Couldn't send it right now. Please try again.",
   },
   ja: {
     navProfile: "プロフィール",
-    navProjects: "ポートフォリオ",
     navWork: "実績",
     navExpertise: "専門領域",
     navContact: "お問い合わせ",
@@ -160,24 +128,9 @@ export const translations = {
       "Webプラットフォーム、バックエンド、分散システム、モダナイゼーション、応用AIに16年以上携わるシニアソフトウェアエンジニア兼創業者です。プロダクト戦略、アーキテクチャ、実装を一貫して結び付けます。",
     heroVideoLabel: "Ramon Valerioのプロフェッショナル動画",
     heroMediaExpertise: "エンジニアリング · アーキテクチャ · プロダクト",
-    heroP1Pre: "",
-    heroP1Strong1: "16年以上の経験",
-    heroP1Mid:
-      "を持つソフトウェアエンジニアです。Webアプリケーション、バックエンド、分散システムを専門とし、",
-    heroP1Strong2: "レガシーシステムのモダナイズと統合",
-    heroP1Post: "に取り組んでいます。",
-    heroP2Pre:
-      "DDD、ADR、SDDを組み合わせ、ビジネス、アーキテクチャ、実装を一貫させています。",
-    heroP2Strong: "ソフトウェア開発へのAI活用",
-    heroP2Post:
-      "を取り入れ、各課題の文脈に応じて技術やツールを選定しています。",
     ctaProjects: "プロジェクトを見る",
     ctaContact: "お問い合わせ",
 
-    portfolioLabel: "ポートフォリオ",
-    portfolioTitle: "厳選プロジェクト",
-    portfolioSubtitle:
-      "堅牢なエンジニアリングと丁寧なユーザー体験を両立させたプロダクトの一覧です。",
     viewDetails: "詳細を見る →",
 
     technologies: "技術スタック",
@@ -210,7 +163,6 @@ export const translations = {
     contactFormSubmit: "メッセージを送信",
     contactFormSending: "送信中...",
     contactFormCooldown: "少し待ってから、もう一度お送りください。",
-    contactFormSubjectDefault: "ポートフォリオからのお問い合わせ",
     contactFormHint: "メッセージは私宛に直接送信されます。",
     contactFormSuccess: "もう少しです！メールを確認し、リンクをクリックして送信を確定してください。",
     contactFormError: "送信できませんでした。もう一度お試しください。",
