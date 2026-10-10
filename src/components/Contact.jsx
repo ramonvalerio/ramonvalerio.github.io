@@ -6,6 +6,40 @@ const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 const TURNSTILE_SCRIPT_SRC =
   "https://challenges.cloudflare.com/turnstile/v0/api.js";
+const COOLDOWN_MS = 60_000;
+const COOLDOWN_STORAGE_KEY = "contact_last_sent_at";
+
+function readCooldownRemaining() {
+  try {
+    const lastSentAt = Number(localStorage.getItem(COOLDOWN_STORAGE_KEY) || 0);
+    return Math.max(0, COOLDOWN_MS - (Date.now() - lastSentAt));
+  } catch {
+    return 0;
+  }
+}
+
+function useSendCooldown() {
+  const [remainingMs, setRemainingMs] = useState(readCooldownRemaining);
+
+  useEffect(() => {
+    if (remainingMs <= 0) return;
+    const id = setInterval(() => {
+      setRemainingMs(readCooldownRemaining());
+    }, 1000);
+    return () => clearInterval(id);
+  }, [remainingMs]);
+
+  const start = () => {
+    try {
+      localStorage.setItem(COOLDOWN_STORAGE_KEY, String(Date.now()));
+    } catch {
+      // ignore (private browsing / storage disabled)
+    }
+    setRemainingMs(COOLDOWN_MS);
+  };
+
+  return { remainingMs, start };
+}
 
 function useTurnstile(siteKey) {
   const containerRef = useRef(null);
@@ -66,6 +100,7 @@ export default function Contact() {
   const [errorDetail, setErrorDetail] = useState("");
   const { containerRef: turnstileRef, token, reset: resetTurnstile } =
     useTurnstile(TURNSTILE_SITE_KEY);
+  const { remainingMs: cooldownMs, start: startCooldown } = useSendCooldown();
 
   const configured = Boolean(WEB3FORMS_ACCESS_KEY);
   const needsHuman = Boolean(TURNSTILE_SITE_KEY);
@@ -77,6 +112,7 @@ export default function Contact() {
     event.preventDefault();
     if (!configured || status === "sending") return;
     if (needsHuman && !token) return;
+    if (cooldownMs > 0) return;
 
     setStatus("sending");
     try {
@@ -96,6 +132,7 @@ export default function Contact() {
         setStatus("sent");
         setForm({ name: "", email: "", message: "" });
         resetTurnstile();
+        startCooldown();
       } else {
         console.error("Web3Forms error:", result);
         setErrorDetail(result.message || "");
@@ -111,7 +148,10 @@ export default function Contact() {
   };
 
   const canSubmit =
-    configured && status !== "sending" && (!needsHuman || Boolean(token));
+    configured &&
+    status !== "sending" &&
+    cooldownMs <= 0 &&
+    (!needsHuman || Boolean(token));
 
   return (
     <section
@@ -184,11 +224,13 @@ export default function Contact() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-white/35">
-              {status === "sent"
-                ? t.contactFormSuccess
-                : status === "error"
-                  ? `${t.contactFormError}${errorDetail ? ` (${errorDetail})` : ""}`
-                  : t.contactFormHint}
+              {cooldownMs > 0
+                ? `${t.contactFormCooldown} (${Math.ceil(cooldownMs / 1000)}s)`
+                : status === "sent"
+                  ? t.contactFormSuccess
+                  : status === "error"
+                    ? `${t.contactFormError}${errorDetail ? ` (${errorDetail})` : ""}`
+                    : t.contactFormHint}
             </p>
             <TechButton type="submit" className="shrink-0" disabled={!canSubmit}>
               {status === "sending" ? t.contactFormSending : t.contactFormSubmit}
