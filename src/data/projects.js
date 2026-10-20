@@ -148,8 +148,8 @@ const base = [
     image: "/images/projects/ssf2x_rebalance/logo-rebalance-classic.png",
     background: "/images/projects/ssf2x_rebalance/bg_ssf2x.png",
     tech: ["Python", "Capstone", "Unicorn", "Lua", "FBNeo", "IPS Patching", "Git", "ADRs & Specs"],
-    links: { live: "#", repo: "https://github.com/ramonvalerio/ssf2x-the-new-balance" },
-    buttons: { viewProject: false, sourceCode: true },
+    links: { live: "https://ssf2xrebalance.com/", repo: "https://github.com/ramonvalerio/ssf2x-the-new-balance" },
+    buttons: { viewProject: true, sourceCode: true },
     status: "in_progress",
     startDate: "2026-10",
     text: {
