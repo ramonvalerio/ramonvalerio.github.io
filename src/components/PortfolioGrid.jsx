@@ -66,7 +66,7 @@ export default function PortfolioGrid() {
         <img
           src={p.image}
           alt={p.title}
-          className="h-full max-h-20 max-w-[70%] object-contain sm:max-h-24"
+          className="h-20 w-64 max-w-full object-contain sm:h-24 sm:w-80"
           draggable={false}
         />
       ) : (

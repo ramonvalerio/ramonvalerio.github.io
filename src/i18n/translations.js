@@ -31,10 +31,10 @@ export const translations = {
     expertiseTitle:
       "Decisões técnicas conectadas ao contexto e aos objetivos do produto.",
     expertiseItems: [
-      { title: "Sistemas distribuídos", description: "Backends, integrações e plataformas preparadas para evolução." },
-      { title: "Modernização", description: "Migração de legados com decisões graduais e riscos controlados." },
-      { title: "IA aplicada", description: "Visão computacional, RAG e desenvolvimento assistido com avaliação." },
-      { title: "DDD · ADR · SDD", description: "Negócio, arquitetura e implementação alinhados por decisões rastreáveis." },
+      { category: "Linguagens", title: "C# · TypeScript · Python · Rust", description: "Backends, aplicações web e desktop, integrações e ferramentas, do código de negócio ao desempenho de baixo nível." },
+      { category: "Banco de Dados", title: "SQL Server · Oracle · PostgreSQL · DynamoDB", description: "Modelagem relacional e NoSQL, consultas, desempenho e consistência transacional." },
+      { category: "Cloud", title: "Azure · AWS · GCP", description: "Aplicações e serviços distribuídos em nuvem, com escalabilidade, resiliência e operação em produção." },
+      { category: "IA", title: "LLM · RAG · Agents · Bots", description: "Assistentes com LLMs, recuperação com fontes citadas, agentes especialistas e bots integrados a canais como o Slack." },
     ],
 
     footerTitlePre: "Vamos construir algo ",
@@ -87,10 +87,10 @@ export const translations = {
     expertiseTitle:
       "Technical decisions connected to product context and outcomes.",
     expertiseItems: [
-      { title: "Distributed systems", description: "Backends, integrations, and platforms designed to evolve." },
-      { title: "Modernization", description: "Legacy migration through incremental decisions and controlled risk." },
-      { title: "Applied AI", description: "Computer vision, RAG, and evaluated AI-assisted development." },
-      { title: "DDD · ADR · SDD", description: "Business, architecture, and implementation aligned by traceable decisions." },
+      { category: "Languages", title: "C# · TypeScript · Python · Rust", description: "Backends, web and desktop apps, integrations, and tooling, from business logic to low-level performance." },
+      { category: "Databases", title: "SQL Server · Oracle · PostgreSQL · DynamoDB", description: "Relational and NoSQL modeling, queries, performance, and transactional consistency." },
+      { category: "Cloud", title: "Azure · AWS · GCP", description: "Cloud applications and distributed services built for scalability, resilience, and production operation." },
+      { category: "AI", title: "LLM · RAG · Agents · Bots", description: "LLM-powered assistants, retrieval with cited sources, specialist agents, and bots integrated with channels like Slack." },
     ],
 
     footerTitlePre: "Let's build something ",
@@ -143,10 +143,10 @@ export const translations = {
     expertiseTitle:
       "プロダクトの文脈と成果につながる技術的意思決定。",
     expertiseItems: [
-      { title: "分散システム", description: "進化を前提としたバックエンド、統合、プラットフォーム。" },
-      { title: "モダナイゼーション", description: "段階的な意思決定とリスク管理によるレガシー移行。" },
-      { title: "応用AI", description: "コンピュータービジョン、RAG、評価を伴うAI支援開発。" },
-      { title: "DDD · ADR · SDD", description: "追跡可能な意思決定でビジネス、設計、実装を整合。" },
+      { category: "言語", title: "C# · TypeScript · Python · Rust", description: "バックエンド、Webおよびデスクトップアプリからシステム連携、ツール開発まで、ビジネスロジックから低レベルの性能まで対応。" },
+      { category: "データベース", title: "SQL Server · Oracle · PostgreSQL · DynamoDB", description: "リレーショナルとNoSQLのモデリング、クエリ、パフォーマンス、トランザクション整合性。" },
+      { category: "クラウド", title: "Azure · AWS · GCP", description: "スケーラビリティ、耐障害性、本番運用を重視したクラウドアプリケーションと分散サービス。" },
+      { category: "AI", title: "LLM · RAG · エージェント · ボット", description: "LLMアシスタント、出典付きの検索、専門エージェント、Slackなどのチャネルと連携するボット。" },
     ],
 
     footerTitlePre: "一緒に ",

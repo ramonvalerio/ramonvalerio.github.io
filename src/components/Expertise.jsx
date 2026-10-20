@@ -13,7 +13,7 @@ export default function Expertise() {
         <div className="grid border-t border-white/10 sm:grid-cols-2 lg:col-span-8">
           {t.expertiseItems.map((item, index) => (
             <article key={item.title} className={`border-b border-white/10 py-7 sm:px-8 ${index % 2 === 0 ? "sm:border-r" : ""}`}>
-              <span className="text-xs font-semibold text-[var(--color-accent)]">0{index + 1}</span>
+              <span className="text-xs font-semibold tracking-[0.14em] text-[var(--color-accent)] uppercase">{item.category}</span>
               <h3 className="mt-4 text-lg font-semibold text-white">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/50">{item.description}</p>
             </article>

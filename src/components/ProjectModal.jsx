@@ -65,9 +65,7 @@ export default function ProjectModal({ project, onClose }) {
               <img
                 src={project.image}
                 alt={project.title}
-                className={`h-full object-contain ${
-                  project.logoSurface === "light" ? "max-w-[85%]" : "max-w-[70%]"
-                }`}
+                className="h-full w-80 max-w-full object-contain"
               />
             </div>
           ) : (
@@ -127,12 +125,23 @@ export default function ProjectModal({ project, onClose }) {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <TechButton as="a" href={project.links.live}>
-              {t.viewProject}
-            </TechButton>
-            <TechButton as="a" href={project.links.repo}>
-              {t.sourceCode}
-            </TechButton>
+            {project.buttons.viewProject && (
+              <TechButton as="a" href={project.links.live}>
+                {t.viewProject}
+              </TechButton>
+            )}
+            {project.buttons.sourceCode && (
+              <TechButton
+                as="a"
+                href={project.links.repo}
+                {...(project.links.repo !== "#" && {
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                })}
+              >
+                {t.sourceCode}
+              </TechButton>
+            )}
           </div>
           </div>
         </div>
