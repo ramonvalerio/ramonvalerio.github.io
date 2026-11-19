@@ -15,39 +15,71 @@ function fill(template, vars) {
   );
 }
 
-const EXTRA_SHOTS = {
-  shmupx: ["/images/projects/shmupx/modal-background.jpg"],
-  slackragbot: ["/images/projects/slackragbot/logo_slack_rag_bot.png"],
-  ssf2x: ["/images/projects/ssf2x_rebalance/logo_ssf2x.png"],
-  dreambullet: [
-    "/images/projects/dreambullet/logo_dreambullet.png",
-    "/images/projects/dreambullet/logo_dreambullet_1.png",
-    "/images/projects/dreambullet/logo_dreambullet_2.png",
-  ],
-};
-
-function gridShots(project) {
-  const shots = [];
-  const push = (src, fit, surface, position) => {
-    if (!src) return;
-    const key = `${src}|${fit}|${position}`;
-    if (shots.some((shot) => shot.key === key)) return;
-    shots.push({ src, fit, surface, position, key });
-  };
-
-  if (project.background) push(project.background, "cover", "dark", "center");
-  if (project.image) {
-    push(project.image, "contain", project.logoSurface === "light" ? "light" : "dark", "center");
-  }
-  if (project.logoBackground) push(project.logoBackground, "cover", "dark", "center");
-  for (const src of EXTRA_SHOTS[project.id] || []) {
-    push(src, src.includes("logo") ? "contain" : "cover", "dark", "center");
-  }
-  for (const position of ["left", "right", "top", "bottom"]) {
-    if (shots.length >= 4) break;
-    if (project.background) push(project.background, "cover", "dark", position);
-  }
-  return shots.slice(0, 4);
+function ProjectCard({ item, t, onDetails }) {
+  return (
+    <div className="portfolio-card">
+      <div className="portfolio-visual bg-black">
+        <div className="relative aspect-[616/353]">
+          <img
+            src={item.background}
+            alt=""
+            draggable={false}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          {item.image && (
+            <div className="portfolio-mark">
+              <img
+                src={item.image}
+                alt=""
+                draggable={false}
+                className={`max-h-14 max-w-[240px] object-contain object-left ${
+                  item.logoSurface === "light" ? "rounded bg-white px-2 py-1" : ""
+                }`}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="portfolio-info relative border-t border-white/10 min-[911px]:border-t-0 min-[911px]:border-l min-[911px]:border-white/10">
+        <div className="portfolio-info-body">
+          <div className="portfolio-info-scroll" data-scrollable={onDetails ? "" : undefined}>
+            <h3 className="text-left text-lg leading-tight font-semibold text-white">{item.title}</h3>
+            <p className="mt-1 text-left text-xs text-white/60">
+              {item.statusLabel && (
+                <span className="inline-flex items-center gap-1.5 text-[var(--color-accent)]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+                  {item.statusLabel}
+                </span>
+              )}
+              {item.statusLabel && item.startDateLabel && <span className="text-white/30"> · </span>}
+              {item.startDateLabel && <span>{item.startDateLabel}</span>}
+            </p>
+            <p className="mt-3 line-clamp-4 text-left text-sm leading-relaxed text-white/75">{item.tagline}</p>
+            <div className="portfolio-tech mt-3 flex flex-wrap gap-1.5">
+              {item.tech.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-white/60"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="portfolio-info-action">
+            <TechButton
+              type="button"
+              tabIndex={onDetails ? 0 : -1}
+              onClick={onDetails}
+              style={{ padding: "0.4rem 0.9rem", fontSize: "0.7rem" }}
+            >
+              {t.viewDetails}
+            </TechButton>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function carouselInView(element) {
@@ -60,7 +92,6 @@ export default function PortfolioGrid() {
   const { lang, t } = useLanguage();
   const projects = useMemo(() => getProjects(lang), [lang]);
   const [index, setIndex] = useState(0);
-  const [preview, setPreview] = useState(null);
   const [paused, setPaused] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -95,7 +126,6 @@ export default function PortfolioGrid() {
     const normalized = (next + count) % count;
     if (normalized === safeIndex) return;
     indexSource.current = source;
-    setPreview(null);
     setIndex(normalized);
   };
 
@@ -120,7 +150,6 @@ export default function PortfolioGrid() {
     const timer = window.setInterval(() => {
       if (!carouselInView(rootRef.current)) return;
       indexSource.current = "auto";
-      setPreview(null);
       setIndex((current) => (current + 1) % count);
     }, AUTOPLAY_MS);
     return () => window.clearInterval(timer);
@@ -175,7 +204,6 @@ export default function PortfolioGrid() {
           indexSource.current = "scroll";
           return best;
         });
-        setPreview(null);
       });
     };
     scroller.addEventListener("scroll", onScroll, { passive: true });
@@ -238,7 +266,6 @@ export default function PortfolioGrid() {
         onMouseLeave={() => {
           setPauseReason("pointer", false);
           setArrowHover(null);
-          setPreview(null);
         }}
         onFocus={() => setPauseReason("focus", true)}
         onBlur={(event) => {
@@ -257,12 +284,21 @@ export default function PortfolioGrid() {
         </h2>
 
         <div className="portfolio-band">
+          <div className="portfolio-row">
           {hasMultiple && (
             <div
+              role="button"
+              tabIndex={0}
               className={`portfolio-peek portfolio-peek-prev ${arrowHover === "prev" ? "is-hot" : ""}`}
-              aria-hidden
+              aria-label={fill(t.carouselGoTo, { title: prevProject.title })}
+              onClick={() => goTo(safeIndex - 1, "peek")}
+              onKeyDown={(event) => {
+                if (event.key !== "Enter" && event.key !== " ") return;
+                event.preventDefault();
+                goTo(safeIndex - 1, "peek");
+              }}
             >
-              <img src={prevProject.background} alt="" draggable={false} />
+              <ProjectCard item={prevProject} t={t} />
             </div>
           )}
 
@@ -277,129 +313,16 @@ export default function PortfolioGrid() {
             <div ref={scrollerRef} className="portfolio-scroller">
               {projects.map((item, i) => {
                 const active = i === safeIndex;
-                const shots = gridShots(item);
-                const itemPreview = preview?.slideId === item.id ? preview : null;
                 return (
                   <article
                     key={item.id}
                     data-slide={i}
                     className={`portfolio-slide ${active ? "is-active" : ""}`}
+                    aria-label={item.title}
                     aria-hidden={!isCompact && !active ? true : undefined}
                     inert={!isCompact && !active ? true : undefined}
                   >
-                    <div className="portfolio-card">
-                      <div className="portfolio-visual bg-black">
-                        <div className="relative aspect-[616/353]">
-                          <img
-                            src={item.background}
-                            alt=""
-                            draggable={false}
-                            className={`portfolio-shot absolute inset-0 h-full w-full object-cover ${
-                              itemPreview ? "opacity-0" : "opacity-100"
-                            }`}
-                          />
-                          <img
-                            src={itemPreview?.src || item.background}
-                            alt=""
-                            draggable={false}
-                            style={{ objectPosition: itemPreview?.position || "center" }}
-                            className={`portfolio-shot absolute inset-0 h-full w-full ${
-                              itemPreview?.fit === "contain" ? "object-contain p-[8%]" : "object-cover"
-                            } ${itemPreview?.surface === "light" ? "bg-white" : "bg-black"} ${
-                              itemPreview ? "opacity-100" : "opacity-0"
-                            }`}
-                          />
-                          <div className={`portfolio-mark ${itemPreview ? "is-hidden" : ""}`}>
-                            {item.image && (
-                              <img
-                                src={item.image}
-                                alt=""
-                                draggable={false}
-                                className={`max-h-14 max-w-[240px] object-contain object-left ${
-                                  item.logoSurface === "light" ? "rounded bg-white px-2 py-1" : ""
-                                }`}
-                              />
-                            )}
-                            <p className="portfolio-mark-title">{item.title}</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="portfolio-info relative border-t border-white/10 min-[911px]:border-t-0 min-[911px]:border-l min-[911px]:border-white/10">
-                        <div className="portfolio-info-body">
-                        <div className="portfolio-info-scroll" data-scrollable>
-                          <h3 className="portfolio-panel-title text-left text-lg leading-tight font-semibold text-white">
-                            {item.title}
-                          </h3>
-                          <p className="portfolio-subtitle mt-1 text-left text-xs text-white/60">
-                            {item.statusLabel && (
-                              <span className="inline-flex items-center gap-1.5 text-[var(--color-accent)]">
-                                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-                                {item.statusLabel}
-                              </span>
-                            )}
-                            {item.statusLabel && item.startDateLabel && (
-                              <span className="text-white/30"> · </span>
-                            )}
-                            {item.startDateLabel && <span>{item.startDateLabel}</span>}
-                          </p>
-
-                          <div className="portfolio-shots">
-                            {shots.map((shot) => {
-                              const hot = itemPreview?.key === shot.key;
-                              return (
-                                <button
-                                  key={shot.key}
-                                  type="button"
-                                  className={`portfolio-thumb ${hot ? "is-hot" : ""}`}
-                                  aria-label={fill(t.carouselPreview, { title: item.title })}
-                                  onMouseEnter={() => setPreview({ ...shot, slideId: item.id })}
-                                  onMouseLeave={() => setPreview(null)}
-                                  onFocus={() => setPreview({ ...shot, slideId: item.id })}
-                                  onBlur={() => setPreview(null)}
-                                >
-                                  <span
-                                    aria-hidden
-                                    className="block h-full w-full bg-no-repeat"
-                                    style={{
-                                      backgroundImage: `url(${shot.src})`,
-                                      backgroundSize: shot.fit === "contain" ? "contain" : "cover",
-                                      backgroundPosition: shot.position,
-                                      backgroundColor: shot.surface === "light" ? "#ffffff" : "#050507",
-                                    }}
-                                  />
-                                </button>
-                              );
-                            })}
-                          </div>
-
-                          <p className="portfolio-highlight mt-1 line-clamp-2 text-left text-sm leading-snug text-white/80">
-                            {item.tagline}
-                          </p>
-
-                          <div className="portfolio-tech mt-2 flex gap-1.5 overflow-x-auto">
-                            {item.tech.map((tech) => (
-                              <span
-                                key={tech}
-                                className="shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] whitespace-nowrap text-white/60"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="portfolio-info-action">
-                          <TechButton
-                            type="button"
-                            onClick={() => setModalId(item.id)}
-                            style={{ padding: "0.4rem 0.9rem", fontSize: "0.7rem" }}
-                          >
-                            {t.viewDetails}
-                          </TechButton>
-                        </div>
-                        </div>
-                      </div>
-                    </div>
+                    <ProjectCard item={item} t={t} onDetails={() => setModalId(item.id)} />
                   </article>
                 );
               })}
@@ -408,10 +331,18 @@ export default function PortfolioGrid() {
 
           {hasMultiple && (
             <div
+              role="button"
+              tabIndex={0}
               className={`portfolio-peek portfolio-peek-next ${arrowHover === "next" ? "is-hot" : ""}`}
-              aria-hidden
+              aria-label={fill(t.carouselGoTo, { title: nextProject.title })}
+              onClick={() => goTo(safeIndex + 1, "peek")}
+              onKeyDown={(event) => {
+                if (event.key !== "Enter" && event.key !== " ") return;
+                event.preventDefault();
+                goTo(safeIndex + 1, "peek");
+              }}
             >
-              <img src={nextProject.background} alt="" draggable={false} />
+              <ProjectCard item={nextProject} t={t} />
             </div>
           )}
 
@@ -443,6 +374,7 @@ export default function PortfolioGrid() {
               <span aria-hidden className="portfolio-chevron portfolio-chevron-next" />
             </button>
           )}
+          </div>
 
           {hasMultiple && (
               <div

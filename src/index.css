@@ -93,20 +93,25 @@ body {
 }
 
 .portfolio-band {
-  display: grid;
-  grid-template-columns: minmax(72px, 1fr) minmax(0, 1040px) minmax(72px, 1fr);
-  grid-template-rows: auto auto;
-  column-gap: 14px;
-  align-items: stretch;
   margin-inline: -1rem;
 }
 
-.portfolio-peek-prev { grid-column: 1; grid-row: 1; }
-.portfolio-center { grid-column: 2; grid-row: 1; min-width: 0; position: relative; }
-.portfolio-peek-next { grid-column: 3; grid-row: 1; }
-.portfolio-arrow-prev { grid-column: 1; grid-row: 1; justify-self: end; margin-right: 10px; }
-.portfolio-arrow-next { grid-column: 3; grid-row: 1; justify-self: start; margin-left: 10px; }
-.portfolio-dots { grid-column: 2; grid-row: 2; }
+.portfolio-row {
+  position: relative;
+  width: min(1040px, 100%);
+  margin-inline: auto;
+}
+
+.portfolio-center {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.portfolio-dots {
+  width: min(1040px, 100%);
+  margin-inline: auto;
+}
 
 .portfolio-scroller {
   position: relative;
@@ -188,20 +193,10 @@ body {
   opacity: 0;
 }
 
-.portfolio-mark-title {
-  margin: 0;
-  max-width: 100%;
-  color: white;
-  font-size: clamp(1.05rem, 1.6vw, 1.45rem);
-  font-weight: 650;
-  line-height: 1.1;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
-}
-
 .portfolio-arrow {
-  position: relative;
-  z-index: 5;
-  align-self: center;
+  position: absolute;
+  top: 50%;
+  z-index: 6;
   display: flex;
   height: 64px;
   width: 48px;
@@ -211,7 +206,16 @@ body {
   background: transparent;
   color: var(--color-accent);
   cursor: pointer;
+  transform: translateY(-50%);
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.85));
+}
+
+.portfolio-arrow-prev {
+  left: -68px;
+}
+
+.portfolio-arrow-next {
+  right: -68px;
 }
 
 .portfolio-arrow:hover,
@@ -235,42 +239,37 @@ body {
 }
 
 .portfolio-peek {
-  position: relative;
-  min-width: 0;
-  overflow: hidden;
-  pointer-events: none;
-  filter: saturate(0.35) brightness(0.78);
-  transition: filter 150ms ease;
-}
-
-.portfolio-peek img {
   position: absolute;
-  inset: 0;
+  top: 0;
+  z-index: 1;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.portfolio-peek-prev img {
-  object-position: right center;
-}
-
-.portfolio-peek-next img {
-  object-position: left center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 200ms ease;
 }
 
 .portfolio-peek-prev {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
+  right: calc(100% + 16px);
 }
 
 .portfolio-peek-next {
-  -webkit-mask-image: linear-gradient(270deg, transparent 0%, #000 18%, #000 100%);
-  mask-image: linear-gradient(270deg, transparent 0%, #000 18%, #000 100%);
+  left: calc(100% + 16px);
 }
 
-.portfolio-peek.is-hot {
-  filter: saturate(0.7) brightness(0.95);
+.portfolio-peek .portfolio-card {
+  pointer-events: none;
+}
+
+.portfolio-peek.is-hot,
+.portfolio-peek:hover,
+.portfolio-peek:focus-visible {
+  opacity: 0.72;
 }
 
 .portfolio-dot {
@@ -304,8 +303,9 @@ body {
 }
 
 @media (max-width: 910px) {
-  .portfolio-band {
-    grid-template-columns: 1fr;
+  .portfolio-band,
+  .portfolio-dots {
+    width: 100%;
     margin-inline: 0;
   }
 
@@ -313,27 +313,17 @@ body {
     display: none;
   }
 
-  .portfolio-center,
-  .portfolio-arrow-prev,
-  .portfolio-arrow-next,
-  .portfolio-dots {
-    grid-column: 1;
-  }
-
   .portfolio-arrow {
-    grid-row: 1;
-    align-self: start;
-    margin-top: 72px;
+    top: 78px;
+    transform: none;
   }
 
   .portfolio-arrow-prev {
-    justify-self: start;
-    margin-left: 8px;
+    left: 10px;
   }
 
   .portfolio-arrow-next {
-    justify-self: end;
-    margin-right: 8px;
+    right: 10px;
   }
 
   .portfolio-scroller {
@@ -377,13 +367,6 @@ body {
     min-height: 0;
     flex: 1;
     overflow-y: auto;
-  }
-
-  .portfolio-shots {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    padding: 10px 0 6px;
   }
 
   .portfolio-slide {
