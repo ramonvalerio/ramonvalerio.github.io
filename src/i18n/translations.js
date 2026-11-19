@@ -20,6 +20,13 @@ export const translations = {
     ctaContact: "Entrar em contato",
 
     viewDetails: "Ver detalhes →",
+    carouselLabel: "Carrossel de projetos",
+    carouselPrev: "Projeto anterior",
+    carouselNext: "Próximo projeto",
+    carouselGoTo: "Mostrar {title}",
+    carouselPreview: "Pré-visualizar imagem de {title}",
+    carouselPosition: "{title}, {current} de {total}",
+    carouselPagination: "Páginas dos projetos",
 
     technologies: "Tecnologias",
     viewProject: "Ver projeto",
@@ -76,6 +83,13 @@ export const translations = {
     ctaContact: "Get in touch",
 
     viewDetails: "View details →",
+    carouselLabel: "Project carousel",
+    carouselPrev: "Previous project",
+    carouselNext: "Next project",
+    carouselGoTo: "Show {title}",
+    carouselPreview: "Preview image of {title}",
+    carouselPosition: "{title}, {current} of {total}",
+    carouselPagination: "Project pages",
 
     technologies: "Technologies",
     viewProject: "View project",
@@ -132,6 +146,13 @@ export const translations = {
     ctaContact: "お問い合わせ",
 
     viewDetails: "詳細を見る →",
+    carouselLabel: "プロジェクトのカルーセル",
+    carouselPrev: "前のプロジェクト",
+    carouselNext: "次のプロジェクト",
+    carouselGoTo: "{title}を表示",
+    carouselPreview: "{title}の画像をプレビュー",
+    carouselPosition: "{title}、{current} / {total}",
+    carouselPagination: "プロジェクトのページ",
 
     technologies: "技術スタック",
     viewProject: "プロジェクトを見る",
