@@ -82,3 +82,296 @@ body {
     radial-gradient(circle at 82% 48%, rgba(180, 140, 255, 0.06), transparent 34%);
   background-size: 80px 80px, 80px 80px, auto, auto;
 }
+
+/* Portfolio carousel — interaction modeled on the Steam store main capsule. */
+.portfolio-bg {
+  transition: opacity 400ms ease;
+}
+
+.portfolio-scroller {
+  position: relative;
+}
+
+.portfolio-card {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+}
+
+.portfolio-shot {
+  transition: opacity 300ms ease;
+}
+
+.portfolio-info-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-info-scroll {
+  padding: 1rem 1.05rem 0.4rem;
+}
+
+.portfolio-info-action {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.35rem 1.05rem 0.95rem;
+}
+
+.portfolio-shots {
+  display: none;
+}
+
+.portfolio-thumb {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  background: #050507;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 300ms ease;
+}
+
+.portfolio-thumb::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}
+
+.portfolio-thumb:hover,
+.portfolio-thumb:focus-visible,
+.portfolio-thumb.is-hot {
+  opacity: 1;
+}
+
+.portfolio-arrow {
+  position: absolute;
+  top: calc(50% - 28px);
+  z-index: 20;
+  display: flex;
+  height: 56px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--color-accent);
+  opacity: 0.75;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: opacity 200ms ease, background-color 200ms ease, border-color 200ms ease;
+}
+
+.portfolio-arrow:hover,
+.portfolio-arrow:focus-visible {
+  opacity: 1;
+  background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+  border-color: var(--color-accent);
+}
+
+.portfolio-arrow-prev {
+  left: 0.35rem;
+  clip-path: polygon(100% 0, 28% 0, 0 50%, 28% 100%, 100% 100%, 72% 50%);
+}
+
+.portfolio-arrow-next {
+  right: 0.35rem;
+  clip-path: polygon(0 0, 72% 0, 100% 50%, 72% 100%, 0 100%, 28% 50%);
+}
+
+.portfolio-chevron {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+}
+
+.portfolio-chevron-prev {
+  transform: rotate(-45deg);
+  margin-left: 0.35rem;
+}
+
+.portfolio-chevron-next {
+  transform: rotate(135deg);
+  margin-right: 0.35rem;
+}
+
+.portfolio-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2px;
+  padding: 10px 2px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.portfolio-dot:focus-visible,
+.portfolio-arrow:focus-visible,
+.portfolio-thumb:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.portfolio-peek {
+  display: none;
+}
+
+@media (max-width: 910px) {
+  .portfolio-scroller {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 6%;
+    padding-inline: 6%;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .portfolio-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portfolio-slide {
+    flex: 0 0 88%;
+    scroll-snap-align: center;
+  }
+
+  .portfolio-role,
+  .portfolio-tech {
+    display: none;
+  }
+
+  .portfolio-arrow {
+    top: 72px;
+    transform: none;
+  }
+
+  .portfolio-arrow-prev {
+    left: 12%;
+    right: auto;
+  }
+
+  .portfolio-arrow-next {
+    right: 12%;
+    left: auto;
+  }
+}
+
+@media (min-width: 911px) {
+  .portfolio-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 32%);
+  }
+
+  .portfolio-info-body {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .portfolio-info-scroll {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .portfolio-shots {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .portfolio-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 400ms ease;
+  }
+
+  .portfolio-slide.is-active {
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .portfolio-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .portfolio-arrow-prev {
+    left: 12px;
+    right: auto;
+  }
+
+  .portfolio-arrow-next {
+    right: calc(32% + 10px);
+    left: auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .portfolio-peek {
+    display: block;
+    position: absolute;
+    top: 7%;
+    bottom: 16%;
+    width: min(16vw, 200px);
+    overflow: hidden;
+    opacity: 0.45;
+    filter: saturate(0.15);
+    pointer-events: none;
+    transition: opacity 150ms ease, filter 150ms ease;
+  }
+
+  .portfolio-peek img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .portfolio-peek-prev {
+    left: 0;
+    -webkit-mask-image: linear-gradient(270deg, #000 0%, rgba(0, 0, 0, 0.45) 42%, transparent 82%);
+    mask-image: linear-gradient(270deg, #000 0%, rgba(0, 0, 0, 0.45) 42%, transparent 82%);
+  }
+
+  .portfolio-peek-next {
+    right: 0;
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.45) 42%, transparent 82%);
+    mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.45) 42%, transparent 82%);
+  }
+
+  .portfolio-peek.is-hot {
+    opacity: 0.75;
+    filter: saturate(0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-bg,
+  .portfolio-slide,
+  .portfolio-shot,
+  .portfolio-thumb,
+  .portfolio-peek,
+  .portfolio-arrow {
+    transition: none !important;
+  }
+
+  .portfolio-scroller {
+    scroll-behavior: auto !important;
+  }
+}
