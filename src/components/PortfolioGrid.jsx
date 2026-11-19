@@ -32,9 +32,7 @@ function ProjectCard({ item, t, onDetails }) {
                 src={item.image}
                 alt=""
                 draggable={false}
-                className={`max-h-14 max-w-[240px] object-contain object-left ${
-                  item.logoSurface === "light" ? "rounded bg-white px-2 py-1" : ""
-                }`}
+                className="h-auto max-h-[4.5rem] w-auto max-w-[min(78%,19.5rem)] object-contain object-left"
               />
             </div>
           )}
