@@ -1,6 +1,9 @@
 import { useLanguage } from "../i18n/LanguageContext";
 import TechButton from "./TechButton";
 
+// Put the PDF at public/resume/Ramon_Valerio_Resume.pdf
+const RESUME_URL = "/resume/Ramon_Valerio_Resume.pdf";
+
 export default function Hero() {
   const { t } = useLanguage();
 
@@ -31,6 +34,15 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex flex-col gap-3 xs:flex-row">
+            <TechButton
+              as="a"
+              href={RESUME_URL}
+              download
+              tone="blue"
+              className="inline-flex min-h-12 items-center gap-3"
+            >
+              {t.ctaResume} <span aria-hidden>↓</span>
+            </TechButton>
             <TechButton as="a" href="#portfolio" className="inline-flex min-h-12 items-center gap-3">
               {t.ctaProjects} <span aria-hidden>↘</span>
             </TechButton>

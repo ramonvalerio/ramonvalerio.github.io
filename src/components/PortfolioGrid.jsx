@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getProjects } from "../data/projects";
+import { getProjects, projectEndLabel } from "../data/projects";
 import { useLanguage } from "../i18n/LanguageContext";
 import ProjectModal from "./ProjectModal";
 import TechButton from "./TechButton";
@@ -24,6 +24,7 @@ function projectLiveUrl(item) {
 
 function ProjectCard({ item, t, onDetails }) {
   const liveUrl = projectLiveUrl(item);
+  const endLabel = projectEndLabel(item, t);
   return (
     <div className="portfolio-card">
       <div className="portfolio-visual bg-black">
@@ -50,16 +51,32 @@ function ProjectCard({ item, t, onDetails }) {
         <div className="portfolio-info-body">
           <div className="portfolio-info-scroll" data-scrollable={onDetails ? "" : undefined}>
             <h3 className="text-left text-lg leading-tight font-semibold text-white">{item.title}</h3>
-            <p className="mt-1 text-left text-xs text-white/60">
-              {item.statusLabel && (
+            {item.statusLabel && (
+              <p className="mt-1 text-left text-xs">
                 <span className="inline-flex items-center gap-1.5 text-[var(--color-accent)]">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
                   {item.statusLabel}
                 </span>
-              )}
-              {item.statusLabel && item.startDateLabel && <span className="text-white/30"> · </span>}
-              {item.startDateLabel && <span>{item.startDateLabel}</span>}
-            </p>
+              </p>
+            )}
+            {(item.startDateLabel || endLabel) && (
+              <p className="mt-1 text-left text-xs text-white/60">
+                {item.startDateLabel && (
+                  <span>
+                    <span className="text-white/35">{t.projectStart}:</span> {item.startDateLabel}
+                  </span>
+                )}
+                {item.startDateLabel && endLabel && <span className="text-white/30"> · </span>}
+                {endLabel && (
+                  <span>
+                    <span className="text-white/35">{t.projectEnd}:</span> {endLabel}
+                  </span>
+                )}
+              </p>
+            )}
+            {item.position && (
+              <p className="mt-1 text-left text-xs font-medium text-white/80">{item.position}</p>
+            )}
             <p className="mt-3 line-clamp-4 text-left text-sm leading-relaxed text-white/75">{item.tagline}</p>
             <div className="portfolio-tech mt-3">
               <p className="mb-1.5 text-left text-[11px] font-medium tracking-wide text-white/40 uppercase">

@@ -13,6 +13,7 @@ const base = [
       pt: {
         title: "ShmupX",
         role: "Engenheiro de Software Sênior & Fundador na ShmupX | C#/.NET, Sistemas Distribuídos e IA Aplicada",
+        position: "Fundador & Engenheiro de Software Sênior",
         startDateLabel: "Dezembro de 2024",
         statusLabel: "Em andamento",
         tagline:
@@ -23,6 +24,7 @@ const base = [
       en: {
         title: "ShmupX",
         role: "Senior Software Engineer & Founder at ShmupX | C#/.NET, Distributed Systems & Applied AI",
+        position: "Founder & Senior Software Engineer",
         startDateLabel: "December 2024",
         statusLabel: "In progress",
         tagline:
@@ -33,6 +35,7 @@ const base = [
       ja: {
         title: "ShmupX",
         role: "シニアソフトウェアエンジニア 兼 ShmupX創業者 | C#/.NET、分散システム、応用AI",
+        position: "創業者 兼 シニアソフトウェアエンジニア",
         startDateLabel: "2024年12月",
         statusLabel: "進行中",
         tagline:
@@ -72,6 +75,7 @@ const base = [
       pt: {
         title: "Veeceo",
         role: "Fundador & Software Engineer | Full Stack, TypeScript, Next.js e Integrações com GitHub",
+        position: "Fundador & Engenheiro de Software",
         startDateLabel: "Setembro de 2026",
         statusLabel: "Pausado",
         tagline:
@@ -82,6 +86,7 @@ const base = [
       en: {
         title: "Veeceo",
         role: "Founder & Software Engineer | Full Stack, TypeScript, Next.js & GitHub Integrations",
+        position: "Founder & Software Engineer",
         startDateLabel: "September 2026",
         statusLabel: "Paused",
         tagline:
@@ -92,6 +97,7 @@ const base = [
       ja: {
         title: "Veeceo",
         role: "創業者 兼 ソフトウェアエンジニア | フルスタック、TypeScript、Next.js、GitHub連携",
+        position: "創業者 兼 ソフトウェアエンジニア",
         startDateLabel: "2026年9月",
         statusLabel: "休止中",
         tagline:
@@ -114,6 +120,7 @@ const base = [
       pt: {
         title: "Slack RAG Bot",
         role: "Engenheiro de Software | Python, FastAPI, LLMs Locais e Sistemas Multiagente",
+        position: "Engenheiro de Software (Colaborador)",
         startDateLabel: "Setembro de 2026",
         statusLabel: "Colaborando",
         tagline:
@@ -124,6 +131,7 @@ const base = [
       en: {
         title: "Slack RAG Bot",
         role: "Software Engineer | Python, FastAPI, Local LLMs & Multi-Agent Systems",
+        position: "Software Engineer (Contributor)",
         startDateLabel: "September 2026",
         statusLabel: "Contributing",
         tagline:
@@ -134,6 +142,7 @@ const base = [
       ja: {
         title: "Slack RAG Bot",
         role: "ソフトウェアエンジニア | Python、FastAPI、ローカルLLM、マルチエージェントシステム",
+        position: "ソフトウェアエンジニア（コントリビューター）",
         startDateLabel: "2026年9月",
         statusLabel: "協力中",
         tagline:
@@ -156,6 +165,7 @@ const base = [
       pt: {
         title: "Super Street Fighter 2 X: Rebalance",
         role: "Criador e Desenvolvedor Único | Engenharia Reversa e Balanceamento de Jogos",
+        position: "Criador & Desenvolvedor Único",
         startDateLabel: "14 de outubro de 2026",
         statusLabel: "Concluído",
         tagline:
@@ -166,6 +176,7 @@ const base = [
       en: {
         title: "Super Street Fighter 2 X: Rebalance",
         role: "Creator & Sole Developer | Reverse Engineering & Game Balance",
+        position: "Creator & Sole Developer",
         startDateLabel: "October 14, 2026",
         statusLabel: "Completed",
         tagline:
@@ -176,6 +187,7 @@ const base = [
       ja: {
         title: "Super Street Fighter 2 X: Rebalance",
         role: "創作者 兼 単独開発者 | リバースエンジニアリング、ゲームバランス調整",
+        position: "創作者 兼 単独開発者",
         startDateLabel: "2026年10月14日",
         statusLabel: "完了",
         tagline:
@@ -198,6 +210,7 @@ const base = [
       pt: {
         title: "Dream Bullet: Resonance",
         role: "Criador e Desenvolvedor | C++20, SDL3 e Arquitetura de Simulação Determinística",
+        position: "Criador & Desenvolvedor",
         startDateLabel: "14 de outubro de 2026",
         statusLabel: "Em andamento",
         tagline:
@@ -208,6 +221,7 @@ const base = [
       en: {
         title: "Dream Bullet: Resonance",
         role: "Creator & Developer | C++20, SDL3 & Deterministic Simulation Architecture",
+        position: "Creator & Developer",
         startDateLabel: "October 14, 2026",
         statusLabel: "In progress",
         tagline:
@@ -218,6 +232,7 @@ const base = [
       ja: {
         title: "Dream Bullet: Resonance",
         role: "クリエイター 兼 開発者 | C++20、SDL3、決定論的シミュレーションアーキテクチャ",
+        position: "クリエイター 兼 開発者",
         startDateLabel: "2026年10月14日",
         statusLabel: "進行中",
         tagline:
@@ -231,7 +246,7 @@ const base = [
 
 export function getProjects(lang = "pt") {
   return base.map(
-    ({ id, image, background, logoBackground, logoSurface, pageTheme, tech, links, buttons, text }) => ({
+    ({ id, image, background, logoBackground, logoSurface, pageTheme, tech, links, buttons, status, text }) => ({
       id,
       image,
       background,
@@ -241,7 +256,18 @@ export function getProjects(lang = "pt") {
       tech,
       links,
       buttons: { viewProject: true, sourceCode: true, ...buttons },
+      status,
       ...(text[lang] ?? text.pt),
     }),
   );
+}
+
+const ONGOING_STATUSES = new Set(["in_progress", "contributing"]);
+
+// End date shown on cards and in the modal: ongoing projects end "Present";
+// finished or paused ones show their endDateLabel, or nothing when it is unset.
+export function projectEndLabel(project, t) {
+  if (project.endDateLabel) return project.endDateLabel;
+  if (ONGOING_STATUSES.has(project.status)) return t.projectPresent;
+  return null;
 }

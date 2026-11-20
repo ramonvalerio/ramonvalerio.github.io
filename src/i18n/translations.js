@@ -8,13 +8,14 @@ export const translations = {
 
     badge: "Disponível para novos projetos",
     heroName: "Ramon Valerio",
-    headerRole: "Engenheiro de Software Sênior & Fundador",
+    headerRole: "Engenheiro de Software Sênior orientado a IA",
     heroTitle: "AI-DRIVEN SOFTWARE ENGINEER",
-    heroSubtitle: "AI-Driven Software Engineer | Building LLM & RAG Solutions",
+    heroSubtitle: "16+ anos com C#/.NET · Criando soluções com LLMs, RAG e agentes de IA",
     heroIntro:
       "Engenheiro de software sênior e fundador com mais de 16 anos de experiência em plataformas web, backends, sistemas distribuídos, modernização e IA aplicada — uma trajetória que evoluiu para a engenharia de software orientada por IA. Alinho estratégia de produto, arquitetura e implementação de ponta a ponta, construindo soluções com LLM e RAG sobre sistemas sólidos e escaláveis.",
     heroVideoLabel: "Vídeo profissional de Ramon Valerio",
     heroMediaExpertise: "Engenharia · Arquitetura · Produto",
+    ctaResume: "Baixar currículo",
     ctaProjects: "Ver projetos",
     ctaContact: "Entrar em contato",
 
@@ -32,6 +33,8 @@ export const translations = {
     sourceCode: "Código-fonte",
     close: "Fechar",
     projectStart: "Início",
+    projectEnd: "Fim",
+    projectPresent: "Atual",
     projectStatus: "Status",
 
     expertiseTitle:
@@ -70,13 +73,14 @@ export const translations = {
 
     badge: "Available for new projects",
     heroName: "Ramon Valerio",
-    headerRole: "Senior Software Engineer & Founder",
+    headerRole: "AI-Driven Senior Software Engineer",
     heroTitle: "AI-DRIVEN SOFTWARE ENGINEER",
-    heroSubtitle: "AI-Driven Software Engineer | Building LLM & RAG Solutions",
+    heroSubtitle: "16+ years of C#/.NET · Building LLM, RAG & AI agent solutions",
     heroIntro:
       "Senior software engineer and founder with over 16 years of experience across web platforms, backends, distributed systems, modernization, and applied AI — a path that evolved into AI-driven software engineering. I align product strategy, architecture, and end-to-end implementation, building LLM and RAG solutions on solid, scalable systems.",
     heroVideoLabel: "Professional video of Ramon Valerio",
     heroMediaExpertise: "Engineering · Architecture · Product",
+    ctaResume: "Download resume",
     ctaProjects: "View projects",
     ctaContact: "Get in touch",
 
@@ -94,6 +98,8 @@ export const translations = {
     sourceCode: "Source code",
     close: "Close",
     projectStart: "Start",
+    projectEnd: "End",
+    projectPresent: "Present",
     projectStatus: "Status",
 
     expertiseTitle:
@@ -132,13 +138,14 @@ export const translations = {
 
     badge: "新規プロジェクト受付中",
     heroName: "Ramon Valerio",
-    headerRole: "シニアソフトウェアエンジニア & 創業者",
+    headerRole: "AI駆動のシニアソフトウェアエンジニア",
     heroTitle: "AI-DRIVEN SOFTWARE ENGINEER",
-    heroSubtitle: "AI-Driven Software Engineer | Building LLM & RAG Solutions",
+    heroSubtitle: "C#/.NET歴16年以上 · LLM、RAG、AIエージェントのソリューションを構築",
     heroIntro:
       "Webプラットフォーム、バックエンド、分散システム、モダナイゼーション、応用AIに16年以上携わるシニアソフトウェアエンジニア兼創業者です。その歩みは、AI駆動のソフトウェアエンジニアリングへと進化しました。プロダクト戦略、アーキテクチャ、実装を一貫して結び付け、堅牢でスケーラブルなシステムの上にLLMとRAGのソリューションを構築しています。",
     heroVideoLabel: "Ramon Valerioのプロフェッショナル動画",
     heroMediaExpertise: "エンジニアリング · アーキテクチャ · プロダクト",
+    ctaResume: "履歴書をダウンロード",
     ctaProjects: "プロジェクトを見る",
     ctaContact: "お問い合わせ",
 
@@ -156,6 +163,8 @@ export const translations = {
     sourceCode: "ソースコード",
     close: "閉じる",
     projectStart: "開始",
+    projectEnd: "終了",
+    projectPresent: "現在",
     projectStatus: "ステータス",
 
     expertiseTitle:

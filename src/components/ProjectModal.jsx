@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import TechButton from "./TechButton";
 import { useLanguage } from "../i18n/LanguageContext";
+import { projectEndLabel } from "../data/projects";
 
 export default function ProjectModal({ project, onClose }) {
   const { t } = useLanguage();
@@ -72,6 +73,12 @@ export default function ProjectModal({ project, onClose }) {
               <span>
                 <span className="text-white/30">{t.projectStart}:</span>{" "}
                 {project.startDateLabel}
+              </span>
+            )}
+            {projectEndLabel(project, t) && (
+              <span>
+                <span className="text-white/30">{t.projectEnd}:</span>{" "}
+                {projectEndLabel(project, t)}
               </span>
             )}
             {project.statusLabel && (
