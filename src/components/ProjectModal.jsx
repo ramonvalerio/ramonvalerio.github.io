@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import MediaCarousel from "./MediaCarousel";
 import TechButton from "./TechButton";
 import { useLanguage } from "../i18n/LanguageContext";
 
@@ -54,25 +53,7 @@ export default function ProjectModal({ project, onClose }) {
         </button>
 
         <div className="relative p-6 sm:p-8">
-          {project.image ? (
-            <div
-              className={`flex h-24 w-full items-center justify-center rounded-xl px-5 py-3 ${
-                project.logoSurface === "light"
-                  ? "border border-white/80 bg-white shadow-[0_12px_35px_rgba(0,0,0,0.28)]"
-                  : ""
-              }`}
-            >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="h-full w-80 max-w-full object-contain"
-              />
-            </div>
-          ) : (
-            project.media && <MediaCarousel media={project.media} />
-          )}
-
-          <div className="mt-7">
+          <div className="pr-10">
           <h2
             id="project-modal-title"
             className="text-[1.75rem] font-semibold text-white sm:text-3xl"
