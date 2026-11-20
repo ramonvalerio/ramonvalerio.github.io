@@ -1,0 +1,39 @@
+# Ramon Valerio
+
+> Ramon Valerio da Silva is an AI-Driven Senior Software Engineer based in Rio de Janeiro, Brazil, working remotely. He has 16+ years of experience building C#/.NET systems (up to .NET 10), plus full-stack work with React and Node.js, and now builds LLM applications with AI agents, reusable skills, MCP servers and retrieval-augmented generation (RAG). He is available for new projects.
+
+He works spec-driven: requirements become specs, key decisions are recorded in Architecture Decision Records (ADRs), and domains are modeled with Domain-Driven Design (DDD) before AI coding tools (Claude Code, Cursor, GitHub Copilot) help implement them. He designs scalable backends with clean architecture and microservices, integrating services through APIs, messaging (Kafka, RabbitMQ) and data pipelines, on AWS and Azure.
+
+Languages: Portuguese (native), English (fluent, daily work with US and international clients), Japanese (basic conversation).
+
+## Profile
+
+- [Portfolio website](https://ramonvalerio.com/): projects, expertise and contact
+- [Resume (PDF)](https://ramonvalerio.com/resume/Ramon_Valerio_Resume.pdf): full work history, skills and education
+- [LinkedIn](https://www.linkedin.com/in/ramonvalerio)
+- [GitHub](https://github.com/ramonvalerio)
+
+## Experience
+
+- Senior Software Engineer, GFT (Dec 2024 – Apr 2026): financial services payroll loan API; Redis caching strategy, Kafka producers and consumers, JWT authentication and role/claim-based authorization. C#, .NET, PostgreSQL.
+- Lead Senior Software Engineer, SouthWorks (Sep 2022 – Mar 2023): 7-Eleven device management (Node.js, AWS Lambda, SQS, DynamoDB) and TechRadar (TypeScript, React, Azure DevOps, AKS, Terraform).
+- Software Engineer, Globant (Oct 2020 – Sep 2022): Autodesk Insight, migration to microservices on AWS, .NET 6 modernization, test coverage raised to about 70%.
+- Senior Software Engineer, Atento (Oct 2019 – Oct 2020): call center activity system with RabbitMQ and SQL Server.
+- Software Engineer, Tecgraf PUC-Rio (Jun 2014 – Feb 2019): Petrobras projects; microservices with DDD on .NET Core, Onion Architecture.
+- Software Engineer, Montreal Informática (Feb 2012 – Apr 2014): reporting, data import and nuclear plant equipment systems.
+
+## AI projects
+
+- ShmupX (Founder & Senior Software Engineer, Dec 2024 – present): international eSports platform and desktop ecosystem for shoot 'em up games. AI score verification with a local ONNX Runtime computer-vision pipeline in Rust, game-specific RAG with pgvector for AI voice tutors, desktop rewrite from WinUI 3 to Rust and Tauri v2 (70% less idle memory, under 25 MB). https://shmupx.com/
+- Slack RAG Bot (Senior Software Engineer, contributor, Sep 2026 – present): local-first multi-agent RAG platform for Slack and web chat with source-cited answers; domain namespaces, specialist agents, agent router, Tools/Skills contract. Python, FastAPI, React, Ollama.
+
+## Other projects
+
+- Veeceo (Founder & Senior Software Engineer, paused): Domain Map that turns GitHub repositories into a living view of domain architecture. TypeScript, Next.js, React Flow, GitHub App.
+- Super Street Fighter 2 X: Rebalance (Creator & Sole Developer, completed): reverse engineering and competitive rebalancing of a CPS2 arcade game. Python, Lua, IPS patching. https://ssf2xrebalance.com/
+- Dream Bullet: Resonance (Creator & Developer, in progress): original 2D vertical shmup for Steam with a deterministic 60 Hz simulation. C++20, SDL3.
+
+## Education
+
+- Postgraduate Degree in Cloud Computing, The University of Texas at Austin, McCombs School (2021 – 2022)
+- Bachelor's Degree in Information Technology, Universidade Estácio de Sá (2008 – 2017)

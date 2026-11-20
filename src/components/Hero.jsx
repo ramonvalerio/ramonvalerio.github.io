@@ -22,6 +22,7 @@ export default function Hero() {
           </p>
 
           <h1 className="max-w-4xl text-[clamp(2.35rem,5.1vw,4.35rem)] leading-[0.96] font-semibold tracking-[-0.04em] text-white">
+            <span className="sr-only">{t.heroName} — </span>
             <span className="text-gradient">{t.heroTitle}</span>
           </h1>
 
