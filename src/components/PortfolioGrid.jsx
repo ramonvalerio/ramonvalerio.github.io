@@ -138,6 +138,7 @@ export default function PortfolioGrid() {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [arrowHover, setArrowHover] = useState(null);
   const [modalId, setModalId] = useState(null);
+  const [direction, setDirection] = useState("next");
 
   const rootRef = useRef(null);
   const scrollerRef = useRef(null);
@@ -166,6 +167,8 @@ export default function PortfolioGrid() {
     if (!count) return;
     const normalized = (next + count) % count;
     if (normalized === safeIndex) return;
+    const forward = (normalized - safeIndex + count) % count;
+    setDirection(forward <= count / 2 ? "next" : "prev");
     indexSource.current = source;
     setIndex(normalized);
   };
@@ -191,6 +194,7 @@ export default function PortfolioGrid() {
     const timer = window.setInterval(() => {
       if (!carouselInView(rootRef.current)) return;
       indexSource.current = "auto";
+      setDirection("next");
       setIndex((current) => (current + 1) % count);
     }, AUTOPLAY_MS);
     return () => window.clearInterval(timer);
@@ -352,7 +356,7 @@ export default function PortfolioGrid() {
                 title: project.title,
               })}
             </p>
-            <div ref={scrollerRef} className="portfolio-scroller">
+            <div ref={scrollerRef} className="portfolio-scroller" data-dir={direction}>
               {projects.map((item, i) => {
                 const active = i === safeIndex;
                 return (

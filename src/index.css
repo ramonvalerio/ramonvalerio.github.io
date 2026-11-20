@@ -390,7 +390,9 @@ button,
     width: 100%;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 400ms ease;
+    transition:
+      opacity 450ms ease,
+      transform 550ms cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   .portfolio-slide.is-active {
@@ -398,6 +400,25 @@ button,
     z-index: 1;
     opacity: 1;
     pointer-events: auto;
+    transform: none;
+  }
+
+  /* carousel rotation: the leaving card swings out to one side while the new
+     card swings in from the other, following the arrow that was used */
+  .portfolio-scroller[data-dir="next"] .portfolio-slide:not(.is-active) {
+    transform: perspective(1600px) translateX(-22%) rotateY(-32deg) scale(0.88);
+  }
+
+  .portfolio-scroller[data-dir="prev"] .portfolio-slide:not(.is-active) {
+    transform: perspective(1600px) translateX(22%) rotateY(32deg) scale(0.88);
+  }
+
+  .portfolio-scroller[data-dir="next"] .portfolio-slide.is-active {
+    animation: portfolio-rotate-in-next 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .portfolio-scroller[data-dir="prev"] .portfolio-slide.is-active {
+    animation: portfolio-rotate-in-prev 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   /* side preview cards show only the logo visual: the details panel keeps its
@@ -478,6 +499,20 @@ button,
   }
 }
 
+@keyframes portfolio-rotate-in-next {
+  from {
+    opacity: 0;
+    transform: perspective(1600px) translateX(22%) rotateY(32deg) scale(0.88);
+  }
+}
+
+@keyframes portfolio-rotate-in-prev {
+  from {
+    opacity: 0;
+    transform: perspective(1600px) translateX(-22%) rotateY(-32deg) scale(0.88);
+  }
+}
+
 @keyframes portfolio-peek-in-prev {
   from {
     opacity: 0;
@@ -493,8 +528,10 @@ button,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .portfolio-peek {
+  .portfolio-peek,
+  .portfolio-slide {
     animation: none !important;
+    transform: none !important;
   }
 
   .portfolio-bg,

@@ -74,8 +74,8 @@ const base = [
     text: {
       pt: {
         title: "Veeceo",
-        role: "Fundador & Software Engineer | Full Stack, TypeScript, Next.js e Integrações com GitHub",
-        position: "Fundador & Engenheiro de Software",
+        role: "Fundador & Engenheiro de Software Sênior | Full Stack, TypeScript, Next.js e Integrações com GitHub",
+        position: "Fundador & Engenheiro de Software Sênior",
         startDateLabel: "Setembro de 2026",
         statusLabel: "Pausado",
         tagline:
@@ -85,8 +85,8 @@ const base = [
       },
       en: {
         title: "Veeceo",
-        role: "Founder & Software Engineer | Full Stack, TypeScript, Next.js & GitHub Integrations",
-        position: "Founder & Software Engineer",
+        role: "Founder & Senior Software Engineer | Full Stack, TypeScript, Next.js & GitHub Integrations",
+        position: "Founder & Senior Software Engineer",
         startDateLabel: "September 2026",
         statusLabel: "Paused",
         tagline:
@@ -96,8 +96,8 @@ const base = [
       },
       ja: {
         title: "Veeceo",
-        role: "創業者 兼 ソフトウェアエンジニア | フルスタック、TypeScript、Next.js、GitHub連携",
-        position: "創業者 兼 ソフトウェアエンジニア",
+        role: "創業者 兼 シニアソフトウェアエンジニア | フルスタック、TypeScript、Next.js、GitHub連携",
+        position: "創業者 兼 シニアソフトウェアエンジニア",
         startDateLabel: "2026年9月",
         statusLabel: "休止中",
         tagline:
@@ -119,36 +119,36 @@ const base = [
     text: {
       pt: {
         title: "Slack RAG Bot",
-        role: "Engenheiro de Software | Python, FastAPI, LLMs Locais e Sistemas Multiagente",
-        position: "Engenheiro de Software (Colaborador)",
+        role: "Engenheiro de Software Sênior | Python, FastAPI, LLMs Locais e Sistemas Multiagente",
+        position: "Engenheiro de Software Sênior (Colaborador)",
         startDateLabel: "Setembro de 2026",
         statusLabel: "Colaborando",
         tagline:
           "Plataforma RAG multiagente local-first para Slack e chat web, com respostas citando as fontes",
         description:
-          "Engenheiro de software em uma equipe que constrói uma plataforma RAG com privacidade em primeiro lugar, que indexa Slack, e-mail, ClickUp, WhatsApp, Teams e documentos locais por meio de conectores somente leitura e responde perguntas com citações usando LLMs e embeddings locais via Ollama. Contribuí para a evolução de um bot único para uma arquitetura multiagente, guiada por Architecture Decision Records (ADRs) e specs. Construí namespaces de domínio (operações, jurídico, geral) no índice de recuperação para que cada consulta pesquise apenas os dados do seu próprio domínio. Implementei os agentes especialistas Analista Operacional e Advogado, cada um com um namespace fixado na construção para garantir o isolamento dos dados, além de um registro local de agentes. Desenvolvi um roteador de agentes que classifica cada pergunta por domínio e a despacha ao agente certo. Implementei o contrato padrão de Tools/Skills com envelope, códigos de erro, validação de entrada por schema e permissões por agente. Integrei o gateway de orquestração OpenClaw com fallback automático para orquestração local em qualquer falha. Alinhei o endpoint POST /api/chat ao contrato de mensagens multiagente e construí um painel em React que mostra os detalhes de orquestração de cada resposta.",
+          "Engenheiro de software sênior em uma equipe que constrói uma plataforma RAG com privacidade em primeiro lugar, que indexa Slack, e-mail, ClickUp, WhatsApp, Teams e documentos locais por meio de conectores somente leitura e responde perguntas com citações usando LLMs e embeddings locais via Ollama. Contribuí para a evolução de um bot único para uma arquitetura multiagente, guiada por Architecture Decision Records (ADRs) e specs. Construí namespaces de domínio (operações, jurídico, geral) no índice de recuperação para que cada consulta pesquise apenas os dados do seu próprio domínio. Implementei os agentes especialistas Analista Operacional e Advogado, cada um com um namespace fixado na construção para garantir o isolamento dos dados, além de um registro local de agentes. Desenvolvi um roteador de agentes que classifica cada pergunta por domínio e a despacha ao agente certo. Implementei o contrato padrão de Tools/Skills com envelope, códigos de erro, validação de entrada por schema e permissões por agente. Integrei o gateway de orquestração OpenClaw com fallback automático para orquestração local em qualquer falha. Alinhei o endpoint POST /api/chat ao contrato de mensagens multiagente e construí um painel em React que mostra os detalhes de orquestração de cada resposta.",
       },
       en: {
         title: "Slack RAG Bot",
-        role: "Software Engineer | Python, FastAPI, Local LLMs & Multi-Agent Systems",
-        position: "Software Engineer (Contributor)",
+        role: "Senior Software Engineer | Python, FastAPI, Local LLMs & Multi-Agent Systems",
+        position: "Senior Software Engineer (Contributor)",
         startDateLabel: "September 2026",
         statusLabel: "Contributing",
         tagline:
           "Local-first multi-agent RAG platform for Slack and web chat, with source-cited answers",
         description:
-          "Software engineer on a team building a privacy-first RAG platform that indexes Slack, email, ClickUp, WhatsApp, Teams, and local documents through read-only connectors, and answers questions with citations using local LLMs and embeddings via Ollama. Contributed to the evolution from a single bot to a multi-agent architecture, guided by Architecture Decision Records (ADRs) and specs. Built domain namespaces (operations, legal, general) into the retrieval index so each query searches only the data of its own domain. Implemented the specialist agents Analista Operacional and Advogado, each with a namespace fixed at construction to guarantee data isolation, plus a local agent registry. Developed an agent router that classifies each question by domain and dispatches it to the right agent. Implemented the standard Tools/Skills contract with envelope, error codes, schema-based input validation, and per-agent permissions. Integrated the OpenClaw orchestration gateway with automatic fallback to local orchestration on any failure. Aligned the POST /api/chat endpoint to the multi-agent message contract and built a React panel that shows each response's orchestration details.",
+          "Senior software engineer on a team building a privacy-first RAG platform that indexes Slack, email, ClickUp, WhatsApp, Teams, and local documents through read-only connectors, and answers questions with citations using local LLMs and embeddings via Ollama. Contributed to the evolution from a single bot to a multi-agent architecture, guided by Architecture Decision Records (ADRs) and specs. Built domain namespaces (operations, legal, general) into the retrieval index so each query searches only the data of its own domain. Implemented the specialist agents Analista Operacional and Advogado, each with a namespace fixed at construction to guarantee data isolation, plus a local agent registry. Developed an agent router that classifies each question by domain and dispatches it to the right agent. Implemented the standard Tools/Skills contract with envelope, error codes, schema-based input validation, and per-agent permissions. Integrated the OpenClaw orchestration gateway with automatic fallback to local orchestration on any failure. Aligned the POST /api/chat endpoint to the multi-agent message contract and built a React panel that shows each response's orchestration details.",
       },
       ja: {
         title: "Slack RAG Bot",
-        role: "ソフトウェアエンジニア | Python、FastAPI、ローカルLLM、マルチエージェントシステム",
-        position: "ソフトウェアエンジニア（コントリビューター）",
+        role: "シニアソフトウェアエンジニア | Python、FastAPI、ローカルLLM、マルチエージェントシステム",
+        position: "シニアソフトウェアエンジニア（コントリビューター）",
         startDateLabel: "2026年9月",
         statusLabel: "協力中",
         tagline:
           "SlackとWebチャット向けの、出典付きで回答するローカルファーストのマルチエージェントRAGプラットフォーム",
         description:
-          "プライバシーを最優先するRAGプラットフォームを構築するチームのソフトウェアエンジニアとして参加。Slack、メール、ClickUp、WhatsApp、Teams、ローカル文書を読み取り専用コネクターでインデックス化し、OllamaによるローカルLLMと埋め込みで、引用付きの回答を提供。Architecture Decision Records（ADR）とスペックに基づき、単一ボットからマルチエージェントアーキテクチャへの進化に貢献。検索インデックスにドメイン名前空間（運用、法務、一般）を構築し、各クエリが自身のドメインのデータのみを検索するように実装。専門エージェントのAnalista OperacionalとAdvogadoを実装し、それぞれ構築時に固定した名前空間でデータ分離を保証、ローカルのエージェントレジストリも整備。質問をドメインごとに分類して適切なエージェントへ振り分けるエージェントルーターを開発。エンベロープ、エラーコード、スキーマに基づく入力検証、エージェント単位の権限を備えた標準のTools/Skillsコントラクトを実装。OpenClawオーケストレーションゲートウェイを統合し、障害時にはローカルのオーケストレーションへ自動フォールバック。POST /api/chatエンドポイントをマルチエージェントのメッセージコントラクトに整合させ、各回答のオーケストレーション詳細を表示するReactパネルを構築。",
+          "プライバシーを最優先するRAGプラットフォームを構築するチームのシニアソフトウェアエンジニアとして参加。Slack、メール、ClickUp、WhatsApp、Teams、ローカル文書を読み取り専用コネクターでインデックス化し、OllamaによるローカルLLMと埋め込みで、引用付きの回答を提供。Architecture Decision Records（ADR）とスペックに基づき、単一ボットからマルチエージェントアーキテクチャへの進化に貢献。検索インデックスにドメイン名前空間（運用、法務、一般）を構築し、各クエリが自身のドメインのデータのみを検索するように実装。専門エージェントのAnalista OperacionalとAdvogadoを実装し、それぞれ構築時に固定した名前空間でデータ分離を保証、ローカルのエージェントレジストリも整備。質問をドメインごとに分類して適切なエージェントへ振り分けるエージェントルーターを開発。エンベロープ、エラーコード、スキーマに基づく入力検証、エージェント単位の権限を備えた標準のTools/Skillsコントラクトを実装。OpenClawオーケストレーションゲートウェイを統合し、障害時にはローカルのオーケストレーションへ自動フォールバック。POST /api/chatエンドポイントをマルチエージェントのメッセージコントラクトに整合させ、各回答のオーケストレーション詳細を表示するReactパネルを構築。",
       },
     },
   },
