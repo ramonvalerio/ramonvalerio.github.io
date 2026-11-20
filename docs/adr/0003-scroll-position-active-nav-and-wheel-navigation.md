@@ -33,6 +33,19 @@ Two related navigation problems surfaced during development:
   carousel card's own overflow body) are excluded via `event.target.closest(...)`
   so nested scrolling isn't hijacked.
 
+### Amendment (2026-11): wheel behaves like the menu links
+The wheel must feel exactly like clicking Profile / Work / Expertise / Contact in the
+header. The handler now:
+- picks the current section with the same `triggerLine` rule the header uses for the
+  active item, so the wheel always moves to the neighbor of the highlighted menu item;
+- jumps with `scrollIntoView({ behavior: "smooth", block: "start" })`, the same
+  native smooth anchor scroll the menu links get from the root's `scroll-smooth`,
+  and mirrors the menu by updating the URL hash;
+- replaces the fixed ~900ms lock with the `scrollend` event (1s timeout fallback);
+- treats wheel events separated by less than 180ms as one gesture, so one gesture
+  (trackpad or free-spin inertia included) moves exactly one section;
+- ignores ctrl+wheel (pinch-zoom).
+
 ## Consequences
 - Both the nav highlight and the wheel-jump logic depend on every "section" having a
   real `id` in normal document flow (not on a `position: fixed`/`sticky` element) —

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import PortfolioGrid from "./components/PortfolioGrid";
@@ -8,64 +8,76 @@ import Footer from "./components/Footer";
 import { LanguageProvider } from "./i18n/LanguageContext";
 
 const SECTION_IDS = ["perfil", "portfolio", "expertise", "contact"];
-const WHEEL_LOCK_MS = 900;
-const WHEEL_IDLE_RESET_MS = 150;
+const GESTURE_GAP_MS = 180; // wheel silence that marks the end of one gesture
+const WHEEL_THRESHOLD = 12; // accumulated deltaY needed to trigger a jump
+const SCROLL_END_FALLBACK_MS = 1000; // for browsers without the scrollend event
 
 export default function App() {
-  const lockRef = useRef(false);
-  const accumRef = useRef(0);
-  const idleTimerRef = useRef(null);
-
   useEffect(() => {
     const root = document.getElementById("scroll-root");
     if (!root) return;
 
+    let navigating = false;
+    let gestureConsumed = false; // a jump already happened in the current gesture
+    let accum = 0;
+    let lastWheelAt = 0;
+    let fallbackTimer = 0;
+
+    const finishNavigation = () => {
+      navigating = false;
+      clearTimeout(fallbackTimer);
+    };
+
+    // same rule the header uses to highlight the active menu item
+    const activeIndex = (sections) => {
+      const triggerLine = root.scrollTop + root.clientHeight * 0.35;
+      let current = 0;
+      sections.forEach((el, i) => {
+        if (el.offsetTop <= triggerLine) current = i;
+      });
+      return current;
+    };
+
+    // exactly what clicking the menu link does: a smooth anchor jump
+    const goToSection = (el) => {
+      navigating = true;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.replaceState(null, "", `#${el.id}`);
+      clearTimeout(fallbackTimer);
+      fallbackTimer = setTimeout(finishNavigation, SCROLL_END_FALLBACK_MS);
+    };
+
     const onWheel = (event) => {
+      if (event.ctrlKey) return; // pinch-zoom on trackpads
       if (event.target.closest("[data-scrollable]")) return;
       if (Math.abs(event.deltaY) < 2) return;
       event.preventDefault();
 
-      accumRef.current += event.deltaY;
-      clearTimeout(idleTimerRef.current);
-      idleTimerRef.current = setTimeout(() => {
-        accumRef.current = 0;
-      }, WHEEL_IDLE_RESET_MS);
+      const now = performance.now();
+      if (now - lastWheelAt > GESTURE_GAP_MS) {
+        gestureConsumed = false;
+        accum = 0;
+      }
+      lastWheelAt = now;
 
-      if (lockRef.current) return;
-      if (Math.abs(accumRef.current) < 12) return;
+      // one gesture (including trackpad inertia) moves exactly one section
+      if (navigating || gestureConsumed) return;
+      accum += event.deltaY;
+      if (Math.abs(accum) < WHEEL_THRESHOLD) return;
 
-      const dir = accumRef.current > 0 ? 1 : -1;
-      accumRef.current = 0;
-
-      const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
-        Boolean,
-      );
-      const scrollTop = root.scrollTop;
-      const currentIndex = sections.reduce((closest, el, i) => {
-        return Math.abs(el.offsetTop - scrollTop) <
-          Math.abs(sections[closest].offsetTop - scrollTop)
-          ? i
-          : closest;
-      }, 0);
-
-      const targetIndex = Math.min(
-        Math.max(currentIndex + dir, 0),
-        sections.length - 1,
-      );
-      const target = sections[targetIndex];
-      if (!target) return;
-
-      lockRef.current = true;
-      root.scrollTo({ top: target.offsetTop, behavior: "smooth" });
-      setTimeout(() => {
-        lockRef.current = false;
-      }, WHEEL_LOCK_MS);
+      const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean);
+      const target = sections[activeIndex(sections) + (accum > 0 ? 1 : -1)];
+      accum = 0;
+      gestureConsumed = true;
+      if (target) goToSection(target);
     };
 
     root.addEventListener("wheel", onWheel, { passive: false });
+    root.addEventListener("scrollend", finishNavigation);
     return () => {
       root.removeEventListener("wheel", onWheel);
-      clearTimeout(idleTimerRef.current);
+      root.removeEventListener("scrollend", finishNavigation);
+      clearTimeout(fallbackTimer);
     };
   }, []);
 

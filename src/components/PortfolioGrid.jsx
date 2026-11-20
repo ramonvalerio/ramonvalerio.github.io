@@ -28,7 +28,7 @@ function ProjectCard({ item, t, onDetails }) {
   return (
     <div className="portfolio-card">
       <div className="portfolio-visual bg-black">
-        <div className="relative aspect-[616/353]">
+        <div className="relative aspect-[616/380]">
           <img
             src={item.background}
             alt=""
@@ -425,7 +425,7 @@ export default function PortfolioGrid() {
 
           {hasMultiple && (
               <div
-                className="portfolio-dots mt-3 flex items-center justify-center gap-4"
+                className="portfolio-dots mt-4 flex items-center justify-center gap-5"
                 role="group"
                 aria-label={t.carouselPagination}
               >
@@ -442,7 +442,7 @@ export default function PortfolioGrid() {
                     >
                       <span
                         aria-hidden
-                        className={`block h-[9px] w-[15px] rounded-[2px] transition-colors ${
+                        className={`block h-[11px] w-[22px] rounded-[2px] transition-colors ${
                           i === safeIndex
                             ? "bg-[var(--color-accent)]"
                             : "bg-white/25 group-hover:bg-white/50"
@@ -451,7 +451,7 @@ export default function PortfolioGrid() {
                     </button>
                   ))}
                 </div>
-                <span className="min-w-12 text-xs tabular-nums text-white/40">
+                <span className="min-w-14 text-sm tabular-nums text-white/45">
                   {String(safeIndex + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
                 </span>
               </div>

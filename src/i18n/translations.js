@@ -41,9 +41,11 @@ export const translations = {
       "Decisões técnicas conectadas ao contexto e aos objetivos do produto.",
     expertiseItems: [
       { category: "Linguagens", title: "C# · TypeScript · Python · Rust", description: "Backends, aplicações web e desktop, integrações e ferramentas, do código de negócio ao desempenho de baixo nível." },
+      { category: "Front-end", title: "React · Next.js · TypeScript · Tailwind CSS", description: "Interfaces web modernas e responsivas, com componentes reutilizáveis, gerenciamento de estado e integração com APIs." },
       { category: "Banco de Dados", title: "SQL Server · Oracle · PostgreSQL · DynamoDB", description: "Modelagem relacional e NoSQL, consultas, desempenho e consistência transacional." },
       { category: "Cloud", title: "Azure · AWS · GCP", description: "Aplicações e serviços distribuídos em nuvem, com escalabilidade, resiliência e operação em produção." },
       { category: "IA", title: "LLM · RAG · Agents · Bots", description: "Assistentes com LLMs, recuperação com fontes citadas, agentes especialistas e bots integrados a canais como o Slack." },
+      { category: "Arquitetura", title: "DDD · Clean Architecture · CQRS · Microsserviços", description: "Domínios modelados com Domain-Driven Design, arquitetura limpa e orientada a eventos, com specs e ADRs guiando as decisões e o desenvolvimento assistido por IA." },
     ],
 
     footerTitlePre: "Vamos construir algo ",
@@ -106,9 +108,11 @@ export const translations = {
       "Technical decisions connected to product context and outcomes.",
     expertiseItems: [
       { category: "Languages", title: "C# · TypeScript · Python · Rust", description: "Backends, web and desktop apps, integrations, and tooling, from business logic to low-level performance." },
+      { category: "Front-end", title: "React · Next.js · TypeScript · Tailwind CSS", description: "Modern, responsive web interfaces with reusable components, state management, and API integration." },
       { category: "Databases", title: "SQL Server · Oracle · PostgreSQL · DynamoDB", description: "Relational and NoSQL modeling, queries, performance, and transactional consistency." },
       { category: "Cloud", title: "Azure · AWS · GCP", description: "Cloud applications and distributed services built for scalability, resilience, and production operation." },
       { category: "AI", title: "LLM · RAG · Agents · Bots", description: "LLM-powered assistants, retrieval with cited sources, specialist agents, and bots integrated with channels like Slack." },
+      { category: "Architecture", title: "DDD · Clean Architecture · CQRS · Microservices", description: "Domains modeled with Domain-Driven Design, clean and event-driven architecture, with specs and ADRs guiding decisions and AI-assisted development." },
     ],
 
     footerTitlePre: "Let's build something ",
@@ -171,9 +175,11 @@ export const translations = {
       "プロダクトの文脈と成果につながる技術的意思決定。",
     expertiseItems: [
       { category: "言語", title: "C# · TypeScript · Python · Rust", description: "バックエンド、Webおよびデスクトップアプリからシステム連携、ツール開発まで、ビジネスロジックから低レベルの性能まで対応。" },
+      { category: "フロントエンド", title: "React · Next.js · TypeScript · Tailwind CSS", description: "再利用可能なコンポーネント、状態管理、API連携を備えたモダンでレスポンシブなWebインターフェース。" },
       { category: "データベース", title: "SQL Server · Oracle · PostgreSQL · DynamoDB", description: "リレーショナルとNoSQLのモデリング、クエリ、パフォーマンス、トランザクション整合性。" },
       { category: "クラウド", title: "Azure · AWS · GCP", description: "スケーラビリティ、耐障害性、本番運用を重視したクラウドアプリケーションと分散サービス。" },
       { category: "AI", title: "LLM · RAG · エージェント · ボット", description: "LLMアシスタント、出典付きの検索、専門エージェント、Slackなどのチャネルと連携するボット。" },
+      { category: "アーキテクチャ", title: "DDD · クリーンアーキテクチャ · CQRS · マイクロサービス", description: "ドメイン駆動設計によるドメインモデリング、クリーンかつイベント駆動のアーキテクチャ。スペックとADRで設計判断とAI支援開発を導きます。" },
     ],
 
     footerTitlePre: "一緒に ",

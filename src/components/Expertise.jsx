@@ -11,13 +11,22 @@ export default function Expertise() {
           <h2 className="mt-5 text-3xl leading-tight font-semibold tracking-tight text-white sm:text-4xl">{t.expertiseTitle}</h2>
         </div>
         <div className="grid border-t border-white/10 sm:grid-cols-2 lg:col-span-8">
-          {t.expertiseItems.map((item, index) => (
-            <article key={item.title} className={`border-b border-white/10 py-7 sm:px-8 ${index % 2 === 0 ? "sm:border-r" : ""}`}>
+          {t.expertiseItems.map((item, index, items) => {
+            // an odd last item spans both columns instead of sitting alone in one
+            const spansRow = index === items.length - 1 && index % 2 === 0;
+            return (
+            <article
+              key={item.title}
+              className={`border-b border-white/10 py-7 sm:px-8 ${
+                spansRow ? "sm:col-span-2" : index % 2 === 0 ? "sm:border-r" : ""
+              }`}
+            >
               <span className="text-xs font-semibold tracking-[0.14em] text-[var(--color-accent)] uppercase">{item.category}</span>
               <h3 className="mt-4 text-lg font-semibold text-white">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/50">{item.description}</p>
             </article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
