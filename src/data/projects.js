@@ -5,8 +5,8 @@ const base = [
     background: "/images/projects/shmupx/background.jpg",
     logoBackground: "/images/projects/shmupx/modal-background.jpg",
     tech: ["Rust", "Tauri v2", "ONNX Runtime", "PostgreSQL", "pgvector", "Claude Code"],
-    links: { live: "#", repo: "#" },
-    buttons: { viewProject: false, sourceCode: false },
+    links: { live: "https://shmupx.com/", repo: "#" },
+    buttons: { viewProject: true, sourceCode: false },
     status: "in_progress",
     startDate: "2024-12",
     text: {
@@ -66,14 +66,14 @@ const base = [
     ],
     links: { live: "#", repo: "https://github.com/ramonvalerio/veeceo-front" },
     buttons: { viewProject: false, sourceCode: true },
-    status: "in_progress",
+    status: "paused",
     startDate: "2026-09",
     text: {
       pt: {
         title: "Veeceo",
         role: "Fundador & Software Engineer | Full Stack, TypeScript, Next.js e Integrações com GitHub",
         startDateLabel: "Setembro de 2026",
-        statusLabel: "Em andamento",
+        statusLabel: "Pausado",
         tagline:
           "Domain Map que transforma repositórios do GitHub em uma visão viva da arquitetura de domínio",
         description:
@@ -83,7 +83,7 @@ const base = [
         title: "Veeceo",
         role: "Founder & Software Engineer | Full Stack, TypeScript, Next.js & GitHub Integrations",
         startDateLabel: "September 2026",
-        statusLabel: "In progress",
+        statusLabel: "Paused",
         tagline:
           "A Domain Map that turns GitHub repositories into a living view of domain architecture",
         description:
@@ -93,7 +93,7 @@ const base = [
         title: "Veeceo",
         role: "創業者 兼 ソフトウェアエンジニア | フルスタック、TypeScript、Next.js、GitHub連携",
         startDateLabel: "2026年9月",
-        statusLabel: "進行中",
+        statusLabel: "休止中",
         tagline:
           "GitHubリポジトリをドメインアーキテクチャの生きたマップへ変換するDomain Map",
         description:
@@ -108,14 +108,14 @@ const base = [
     tech: ["Python", "FastAPI", "React", "TypeScript", "Ollama", "SQLite", "Docker", "Claude Code"],
     links: { live: "#", repo: "#" },
     buttons: { viewProject: false, sourceCode: false },
-    status: "in_progress",
+    status: "contributing",
     startDate: "2026-09",
     text: {
       pt: {
         title: "Slack RAG Bot",
         role: "Engenheiro de Software | Python, FastAPI, LLMs Locais e Sistemas Multiagente",
         startDateLabel: "Setembro de 2026",
-        statusLabel: "Em andamento",
+        statusLabel: "Colaborando",
         tagline:
           "Plataforma RAG multiagente local-first para Slack e chat web, com respostas citando as fontes",
         description:
@@ -125,7 +125,7 @@ const base = [
         title: "Slack RAG Bot",
         role: "Software Engineer | Python, FastAPI, Local LLMs & Multi-Agent Systems",
         startDateLabel: "September 2026",
-        statusLabel: "In progress",
+        statusLabel: "Contributing",
         tagline:
           "Local-first multi-agent RAG platform for Slack and web chat, with source-cited answers",
         description:
@@ -135,7 +135,7 @@ const base = [
         title: "Slack RAG Bot",
         role: "ソフトウェアエンジニア | Python、FastAPI、ローカルLLM、マルチエージェントシステム",
         startDateLabel: "2026年9月",
-        statusLabel: "進行中",
+        statusLabel: "協力中",
         tagline:
           "SlackとWebチャット向けの、出典付きで回答するローカルファーストのマルチエージェントRAGプラットフォーム",
         description:
@@ -150,14 +150,14 @@ const base = [
     tech: ["Python", "Capstone", "Unicorn", "Lua", "FBNeo", "IPS Patching", "Git", "ADRs & Specs"],
     links: { live: "https://ssf2xrebalance.com/", repo: "https://github.com/ramonvalerio/ssf2x-the-new-balance" },
     buttons: { viewProject: true, sourceCode: true },
-    status: "in_progress",
+    status: "completed",
     startDate: "2026-10",
     text: {
       pt: {
         title: "Super Street Fighter 2 X: Rebalance",
         role: "Criador e Desenvolvedor Único | Engenharia Reversa e Balanceamento de Jogos",
         startDateLabel: "14 de outubro de 2026",
-        statusLabel: "Em andamento",
+        statusLabel: "Concluído",
         tagline:
           "Projeto independente de engenharia reversa e rebalanceamento competitivo de Super Street Fighter II X (CPS2)",
         description:
@@ -167,7 +167,7 @@ const base = [
         title: "Super Street Fighter 2 X: Rebalance",
         role: "Creator & Sole Developer | Reverse Engineering & Game Balance",
         startDateLabel: "October 14, 2026",
-        statusLabel: "In progress",
+        statusLabel: "Completed",
         tagline:
           "An independent reverse-engineering and competitive rebalancing project for Super Street Fighter II X (CPS2)",
         description:
@@ -177,7 +177,7 @@ const base = [
         title: "Super Street Fighter 2 X: Rebalance",
         role: "創作者 兼 単独開発者 | リバースエンジニアリング、ゲームバランス調整",
         startDateLabel: "2026年10月14日",
-        statusLabel: "進行中",
+        statusLabel: "完了",
         tagline:
           "Super Street Fighter II X（CPS2）の独立系リバースエンジニアリング兼競技バランス調整プロジェクト",
         description:

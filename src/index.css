@@ -38,6 +38,17 @@ body {
   color: #050507;
 }
 
+/* images, videos and buttons must not be selectable by dragging the mouse */
+img,
+video,
+svg,
+button,
+[role="button"] {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 /* subtle scrollbar for a premium feel */
 ::-webkit-scrollbar {
   width: 10px;
@@ -388,9 +399,104 @@ body {
     opacity: 1;
     pointer-events: auto;
   }
+
+  /* side preview cards show only the logo visual: the details panel keeps its
+     space (so card size is unchanged) but is invisible, and the card chrome
+     moves onto the visual */
+  .portfolio-peek .portfolio-card {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .portfolio-peek .portfolio-info {
+    visibility: hidden;
+  }
+
+  .portfolio-peek .portfolio-visual {
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  }
+
+  /* the previous card shows its right edge, so put the visual on that side */
+  .portfolio-peek-prev .portfolio-card {
+    grid-template-columns: minmax(220px, 32%) minmax(0, 1fr);
+  }
+
+  .portfolio-peek-prev .portfolio-visual {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .portfolio-peek-prev .portfolio-info {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* depth: side cards swing away from the viewer around the edge next to the
+     center card, like a rotating carousel; they ease forward on hover and
+     swing in from further back whenever the carousel moves */
+  .portfolio-peek {
+    transition:
+      opacity 200ms ease,
+      transform 300ms ease;
+  }
+
+  .portfolio-peek-prev {
+    transform-origin: right center;
+    transform: perspective(1400px) rotateY(-24deg) scale(0.9);
+    animation: portfolio-peek-in-prev 500ms ease-out;
+  }
+
+  .portfolio-peek-next {
+    transform-origin: left center;
+    transform: perspective(1400px) rotateY(24deg) scale(0.9);
+    animation: portfolio-peek-in-next 500ms ease-out;
+  }
+
+  .portfolio-peek-prev.is-hot,
+  .portfolio-peek-prev:hover,
+  .portfolio-peek-prev:focus-visible {
+    transform: perspective(1400px) rotateY(-14deg) scale(0.94);
+  }
+
+  .portfolio-peek-next.is-hot,
+  .portfolio-peek-next:hover,
+  .portfolio-peek-next:focus-visible {
+    transform: perspective(1400px) rotateY(14deg) scale(0.94);
+  }
+
+  /* only its right edge is on screen, so right-align the logo there */
+  .portfolio-peek-prev .portfolio-mark {
+    align-items: flex-end;
+  }
+
+  .portfolio-peek-prev .portfolio-mark img {
+    object-position: right;
+  }
+}
+
+@keyframes portfolio-peek-in-prev {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(-55deg) scale(0.8);
+  }
+}
+
+@keyframes portfolio-peek-in-next {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(55deg) scale(0.8);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .portfolio-peek {
+    animation: none !important;
+  }
+
   .portfolio-bg,
   .portfolio-slide,
   .portfolio-shot,

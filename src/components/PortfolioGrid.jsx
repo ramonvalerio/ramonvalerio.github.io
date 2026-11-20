@@ -61,15 +61,20 @@ function ProjectCard({ item, t, onDetails }) {
               {item.startDateLabel && <span>{item.startDateLabel}</span>}
             </p>
             <p className="mt-3 line-clamp-4 text-left text-sm leading-relaxed text-white/75">{item.tagline}</p>
-            <div className="portfolio-tech mt-3 flex flex-wrap gap-1.5">
-              {item.tech.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-white/60"
-                >
-                  {tech}
-                </span>
-              ))}
+            <div className="portfolio-tech mt-3">
+              <p className="mb-1.5 text-left text-[11px] font-medium tracking-wide text-white/40 uppercase">
+                {t.technologies}
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {item.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-white/60"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
           <div className="portfolio-info-action">
@@ -306,6 +311,7 @@ export default function PortfolioGrid() {
           <div className="portfolio-row">
           {hasMultiple && (
             <div
+              key={`prev-${prevProject.id}`}
               role="button"
               tabIndex={0}
               className={`portfolio-peek portfolio-peek-prev ${arrowHover === "prev" ? "is-hot" : ""}`}
@@ -350,6 +356,7 @@ export default function PortfolioGrid() {
 
           {hasMultiple && (
             <div
+              key={`next-${nextProject.id}`}
               role="button"
               tabIndex={0}
               className={`portfolio-peek portfolio-peek-next ${arrowHover === "next" ? "is-hot" : ""}`}

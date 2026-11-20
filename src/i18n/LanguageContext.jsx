@@ -5,38 +5,7 @@ const LanguageContext = createContext(null);
 
 const HTML_LANG = { pt: "pt-BR", en: "en", ja: "ja" };
 
-const BRAZIL_TIMEZONES = new Set([
-  "America/Sao_Paulo",
-  "America/Fortaleza",
-  "America/Recife",
-  "America/Araguaina",
-  "America/Maceio",
-  "America/Bahia",
-  "America/Belem",
-  "America/Manaus",
-  "America/Cuiaba",
-  "America/Campo_Grande",
-  "America/Porto_Velho",
-  "America/Boa_Vista",
-  "America/Rio_Branco",
-  "America/Noronha",
-]);
-
-function detectCountryLanguage() {
-  let timeZone = "";
-  try {
-    timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-  } catch {
-    // ignore (unsupported environment)
-  }
-
-  const locale = navigator.language || "";
-  const country = locale.split("-")[1]?.toUpperCase();
-
-  if (country === "BR" || BRAZIL_TIMEZONES.has(timeZone)) return "pt";
-  if (country === "JP" || timeZone === "Asia/Tokyo") return "ja";
-  return "en";
-}
+const DEFAULT_LANGUAGE = "en";
 
 function detectInitialLanguage() {
   try {
@@ -45,7 +14,7 @@ function detectInitialLanguage() {
   } catch {
     // ignore (private browsing, etc.)
   }
-  return detectCountryLanguage();
+  return DEFAULT_LANGUAGE;
 }
 
 export function LanguageProvider({ children }) {
