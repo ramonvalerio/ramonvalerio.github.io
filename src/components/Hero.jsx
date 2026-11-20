@@ -18,13 +18,15 @@ export default function Hero() {
             {t.badge}
           </p>
 
-          <h1 className="max-w-4xl text-[clamp(3rem,6vw,5.6rem)] leading-[0.96] font-semibold tracking-[-0.055em] text-white">
-            {t.heroTitleLead}{" "}
-            <span className="text-gradient">{t.heroTitleAccent}</span>{" "}
-            {t.heroTitleTail}
+          <h1 className="max-w-4xl text-[clamp(2.35rem,5.1vw,4.35rem)] leading-[0.96] font-semibold tracking-[-0.04em] text-white">
+            <span className="text-gradient">{t.heroTitle}</span>
           </h1>
 
-          <p className="mt-8 max-w-2xl text-base leading-[1.65] font-medium text-white/68 sm:text-lg">
+          <p className="mt-5 max-w-2xl text-sm leading-snug font-medium tracking-[0.01em] text-white/82 sm:text-lg">
+            {t.heroSubtitle}
+          </p>
+
+          <p className="mt-6 max-w-2xl text-base leading-[1.65] font-medium text-white/68 sm:text-lg">
             {t.heroIntro}
           </p>
 
