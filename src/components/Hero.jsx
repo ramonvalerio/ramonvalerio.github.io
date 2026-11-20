@@ -1,8 +1,6 @@
 import { useLanguage } from "../i18n/LanguageContext";
 import TechButton from "./TechButton";
-
-// Put the PDF at public/resume/Ramon_Valerio_Resume.pdf
-const RESUME_URL = "/resume/Ramon_Valerio_Resume.pdf";
+import { RESUME_URL } from "../data/profile";
 
 export default function Hero() {
   const { t } = useLanguage();

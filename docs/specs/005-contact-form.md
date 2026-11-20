@@ -1,7 +1,7 @@
 # Spec 005 — Contact Form (Double Opt-In)
 
 ## Status
-Implemented
+Retired (2026-11): the form was replaced by direct contact options; see ADR 0005.
 
 ## Summary
 `src/components/Contact.jsx` (`id="contact"`) lets visitors send Ramon a message

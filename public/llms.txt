@@ -1,6 +1,6 @@
 # Ramon Valerio
 
-> Ramon Valerio da Silva is an AI-Driven Senior Software Engineer based in Rio de Janeiro, Brazil, working remotely. He has 16+ years of experience building C#/.NET systems (up to .NET 10), plus full-stack work with React and Node.js, and now builds LLM applications with AI agents, reusable skills, MCP servers and retrieval-augmented generation (RAG). He is available for new projects.
+> Ramon Valerio da Silva is an AI-Driven Senior Software Engineer based in Rio de Janeiro, Brazil. He has 16+ years of experience building C#/.NET systems (up to .NET 10), plus full-stack work with React and Node.js, and now builds LLM applications with AI agents, reusable skills, MCP servers and retrieval-augmented generation (RAG). He is open to senior and AI engineering roles.
 
 He works spec-driven: requirements become specs, key decisions are recorded in Architecture Decision Records (ADRs), and domains are modeled with Domain-Driven Design (DDD) before AI coding tools (Claude Code, Cursor, GitHub Copilot) help implement them. He designs scalable backends with clean architecture and microservices, integrating services through APIs, messaging (Kafka, RabbitMQ) and data pipelines, on AWS and Azure.
 

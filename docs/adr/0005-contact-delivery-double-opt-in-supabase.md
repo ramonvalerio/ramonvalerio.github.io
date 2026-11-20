@@ -1,7 +1,8 @@
 # ADR 0005 — Contact Delivery: mailto → Web3Forms → Supabase Double Opt-In
 
 ## Status
-Accepted (supersedes two earlier iterations)
+Superseded (2026-11): the contact form was removed; see "Amendment (2026-11): form removed" below.
+Previously: Accepted (supersedes two earlier iterations)
 
 ## Context
 With no backend (ADR-0001), sending the contact form's content required an external
@@ -60,6 +61,17 @@ confirmation emails, with no server-side limit (the 60s cooldown lived only in
   only, and adds `public.keepalive()` for the scheduled keep-alive workflow, since
   free projects pause after about a week without activity.
 - Unconfirmed rows older than 7 days are deleted opportunistically on submit.
+
+### Amendment (2026-11): form removed
+The form was replaced by direct contact options in the Contact section (LinkedIn,
+email with copy-to-clipboard, resume download; `src/components/Contact.jsx`, links in
+`src/data/profile.js`). Reasons: the audience (recruiters, hiring managers) contacts
+people on LinkedIn or by email rather than through forms; the form silently delivered
+no message from October to November 2026 without anyone noticing; it depended on four
+services (Supabase, Resend, Turnstile, a keep-alive job); and it was the only part of
+the site that could be abused to send mail to third parties. The email shown is the
+one already public in the resume PDF. The `supabase/` folder documents the retired
+backend.
 
 ## Consequences
 - A message only ever reaches Ramon's inbox after the sender demonstrates control of
