@@ -3,6 +3,39 @@ import { createClient } from "jsr:@supabase/supabase-js@2";
 const FROM_EMAIL = "Ramon Valerio <contato@ramonvalerio.com>";
 const OWNER_EMAIL = "ramonvalerios@gmail.com";
 const SITE_URL = "https://ramonvalerio.com";
+const LINK_TTL_MS = 1000 * 60 * 60 * 24; // 24h
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const ALLOWED_ORIGINS = new Set([
+  "https://ramonvalerio.com",
+  "https://www.ramonvalerio.com",
+  "http://localhost:5173",
+  "http://localhost:4173",
+]);
+
+// Supabase serves Edge Function HTML as sandboxed text/plain on its domain, so
+// the confirmation page lives on the site (ramonvalerio.com/?confirm=<token>).
+// This function only:
+//   GET  ?token=… → redirects to that page (links opened directly / old emails)
+//   POST {token}  → confirms, called by the site's "Confirmar envio" button.
+// Requiring the POST keeps email security scanners, which open links
+// automatically, from confirming messages on the sender's behalf.
+
+function corsHeaders(origin: string | null) {
+  return {
+    "Access-Control-Allow-Origin": origin && ALLOWED_ORIGINS.has(origin) ? origin : SITE_URL,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    Vary: "Origin",
+  };
+}
+
+function json(origin: string | null, status: number, body: Record<string, unknown>) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders(origin), "Content-Type": "application/json", "Cache-Control": "no-store" },
+  });
+}
 
 async function sendEmail(to: string, subject: string, html: string, replyTo?: string) {
   const apiKey = Deno.env.get("RESEND_API_KEY");
@@ -10,22 +43,12 @@ async function sendEmail(to: string, subject: string, html: string, replyTo?: st
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: FROM_EMAIL,
-      to,
-      subject,
-      html,
-      ...(replyTo ? { reply_to: replyTo } : {}),
-    }),
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ from: FROM_EMAIL, to, subject, html, ...(replyTo ? { reply_to: replyTo } : {}) }),
   });
 
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Resend error: ${res.status} ${text}`);
+    throw new Error(`Resend error: ${res.status} ${await res.text()}`);
   }
 }
 
@@ -34,36 +57,29 @@ function escapeHtml(value: string) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-function htmlPage(title: string, body: string) {
-  return `<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <title>${title}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body { font-family: system-ui, sans-serif; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 24px; text-align: center; }
-    main { max-width: 420px; }
-    a { color: #7cf2d6; }
-  </style>
-</head>
-<body><main>${body}</main></body>
-</html>`;
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 Deno.serve(async (req) => {
-  const url = new URL(req.url);
-  const token = url.searchParams.get("token");
+  const origin = req.headers.get("origin");
 
-  if (!token) {
-    return new Response(htmlPage("Link inválido", "<h1>Link inválido</h1>"), {
-      status: 400,
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-    });
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders(origin) });
   }
+
+  if (req.method === "GET") {
+    const token = new URL(req.url).searchParams.get("token") ?? "";
+    const target = UUID_PATTERN.test(token) ? `${SITE_URL}/?confirm=${token}` : SITE_URL;
+    return new Response(null, { status: 302, headers: { Location: target, "Cache-Control": "no-store" } });
+  }
+
+  if (req.method !== "POST") return json(origin, 405, { status: "error" });
+  if (!origin || !ALLOWED_ORIGINS.has(origin)) return json(origin, 403, { status: "error" });
+
+  const body = await req.json().catch(() => null);
+  const token = typeof body?.token === "string" ? body.token : "";
+  if (!UUID_PATTERN.test(token)) return json(origin, 404, { status: "invalid" });
 
   try {
     const supabase = createClient(
@@ -73,48 +89,47 @@ Deno.serve(async (req) => {
 
     const { data: pending, error: fetchError } = await supabase
       .from("pending_messages")
-      .select("*")
+      .select("id, name, email, message, status, created_at")
       .eq("token", token)
       .maybeSingle();
-
     if (fetchError) throw fetchError;
 
-    if (!pending) {
-      return new Response(
-        htmlPage(
-          "Link inválido",
-          "<h1>Link inválido ou já utilizado</h1><p>Esse link de confirmação não existe mais.</p>",
-        ),
-        { status: 404, headers: { "Content-Type": "text/html; charset=utf-8" } },
-      );
+    if (!pending || pending.status === "expired") return json(origin, 404, { status: "invalid" });
+    if (pending.status === "confirmed" || pending.status === "confirming") {
+      return json(origin, 200, { status: "already" });
     }
 
-    if (pending.status === "confirmed") {
-      return new Response(
-        htmlPage(
-          "Já confirmado",
-          `<h1>Mensagem já confirmada</h1><p>Essa mensagem já havia sido confirmada anteriormente. Obrigado!</p><p><a href="${SITE_URL}">Voltar ao site</a></p>`,
-        ),
-        { headers: { "Content-Type": "text/html; charset=utf-8" } },
-      );
+    if (Date.now() - new Date(pending.created_at).getTime() > LINK_TTL_MS) {
+      await supabase.from("pending_messages").update({ status: "expired" }).eq("id", pending.id);
+      return json(origin, 410, { status: "expired" });
     }
 
-    const createdAt = new Date(pending.created_at).getTime();
-    const expired = Date.now() - createdAt > 1000 * 60 * 60 * 24; // 24h
+    // atomic claim: only one request can move the row out of "pending"
+    const { data: claimed, error: claimError } = await supabase
+      .from("pending_messages")
+      .update({ status: "confirming" })
+      .eq("id", pending.id)
+      .eq("status", "pending")
+      .select("id");
+    if (claimError) throw claimError;
+    if (!claimed?.length) return json(origin, 200, { status: "already" });
 
-    if (expired) {
-      await supabase
-        .from("pending_messages")
-        .update({ status: "expired" })
-        .eq("id", pending.id);
-
-      return new Response(
-        htmlPage(
-          "Link expirado",
-          "<h1>Link expirado</h1><p>Esse link de confirmação expirou. Envie a mensagem novamente pelo site.</p>",
-        ),
-        { status: 410, headers: { "Content-Type": "text/html; charset=utf-8" } },
+    try {
+      await sendEmail(
+        OWNER_EMAIL,
+        `Nova mensagem confirmada — ${pending.name}`,
+        `<div style="font-family: sans-serif;">
+          <p><strong>Nome:</strong> ${escapeHtml(pending.name)}</p>
+          <p><strong>E-mail:</strong> ${escapeHtml(pending.email)}</p>
+          <p><strong>Mensagem:</strong></p>
+          <p>${escapeHtml(pending.message).replace(/\n/g, "<br/>")}</p>
+        </div>`,
+        pending.email,
       );
+    } catch (sendError) {
+      // give the sender a chance to retry with the same link
+      await supabase.from("pending_messages").update({ status: "pending" }).eq("id", pending.id);
+      throw sendError;
     }
 
     await supabase
@@ -122,33 +137,9 @@ Deno.serve(async (req) => {
       .update({ status: "confirmed", confirmed_at: new Date().toISOString() })
       .eq("id", pending.id);
 
-    await sendEmail(
-      OWNER_EMAIL,
-      `Nova mensagem confirmada — ${pending.name}`,
-      `<div style="font-family: sans-serif;">
-        <p><strong>Nome:</strong> ${escapeHtml(pending.name)}</p>
-        <p><strong>E-mail:</strong> ${escapeHtml(pending.email)}</p>
-        <p><strong>Mensagem:</strong></p>
-        <p>${escapeHtml(pending.message).replace(/\n/g, "<br/>")}</p>
-      </div>`,
-      pending.email,
-    );
-
-    return new Response(
-      htmlPage(
-        "Mensagem confirmada",
-        `<h1>Mensagem confirmada ✅</h1><p>Obrigado! Sua mensagem foi enviada para o Ramon.</p><p><a href="${SITE_URL}">Voltar ao site</a></p>`,
-      ),
-      { headers: { "Content-Type": "text/html; charset=utf-8" } },
-    );
+    return json(origin, 200, { status: "confirmed" });
   } catch (err) {
     console.error(err);
-    return new Response(
-      htmlPage(
-        "Erro",
-        "<h1>Algo deu errado</h1><p>Não foi possível confirmar sua mensagem agora. Tente novamente mais tarde.</p>",
-      ),
-      { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } },
-    );
+    return json(origin, 500, { status: "error" });
   }
 });

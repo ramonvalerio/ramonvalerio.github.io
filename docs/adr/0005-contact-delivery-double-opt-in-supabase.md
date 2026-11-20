@@ -32,6 +32,35 @@ flow requires **persisted state between two separate HTTP calls** (submit, then
 confirm, potentially hours apart) — Supabase bundles a free Postgres database with
 its Edge Functions, avoiding the need to wire up a separate KV/D1 store.
 
+### Amendment (2026-11): abuse limits
+A review found that double opt-in protects the owner's inbox but not third parties:
+anyone could type another person's address repeatedly and make this domain send them
+confirmation emails, with no server-side limit (the 60s cooldown lived only in
+`localStorage`), hurting domain reputation and exhausting the Resend quota. Changes:
+- Turnstile now **fails closed**: a missing `TURNSTILE_SECRET_KEY` rejects submissions
+  instead of silently skipping verification; the verified hostname is also checked.
+- Server-side rate limits in `submit-contact`: 2/hour per sender email, 5/hour per
+  client IP (new `ip` column), 50/day globally — kept below the Resend free quota.
+- Server-side validation: trimmed, single-line name ≤100, email ≤254 with format
+  check, message ≤5000 (also enforced by a table check constraint).
+- CORS limited to the site origin (and local dev); errors return generic codes
+  (`invalid_input`, `verification_failed`, `rate_limited`, `server_error`) instead of
+  internal messages.
+- Confirmation requires a click: the email links to `ramonvalerio.com/?confirm=<token>`,
+  where the site shows a "Confirm and send" modal (`ConfirmMessage.jsx`) that POSTs to
+  `confirm-contact`; a direct GET on the function only redirects there. Email security
+  scanners that prefetch links therefore cannot confirm messages. The page lives on
+  the site because Supabase serves Edge Function HTML as sandboxed `text/plain` on
+  its own domain, so the earlier HTML confirmation page never rendered as a page.
+  The claim is atomic (`pending` → `confirming` → `confirmed`), so concurrent clicks
+  send one owner email; a failed send returns the row to `pending` for retry.
+- The table had no privileges granted to `service_role` (this project does not grant
+  them by default), so every insert failed with `42501 permission denied`: the form
+  had never delivered a message. Migration `20261121` grants them to `service_role`
+  only, and adds `public.keepalive()` for the scheduled keep-alive workflow, since
+  free projects pause after about a week without activity.
+- Unconfirmed rows older than 7 days are deleted opportunistically on submit.
+
 ## Consequences
 - A message only ever reaches Ramon's inbox after the sender demonstrates control of
   the email address they typed, which meaningfully reduces (but does not eliminate)

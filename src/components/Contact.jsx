@@ -8,6 +8,12 @@ const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 const TURNSTILE_SCRIPT_SRC =
   "https://challenges.cloudflare.com/turnstile/v0/api.js";
 const COOLDOWN_MS = 60_000;
+// must match the limits enforced by supabase/functions/submit-contact
+const MAX_LENGTH = { name: 100, email: 254, message: 5000 };
+const ERROR_MESSAGE_KEYS = {
+  rate_limited: "contactFormRateLimited",
+  invalid_input: "contactFormInvalid",
+};
 const COOLDOWN_STORAGE_KEY = "contact_last_sent_at";
 
 function readCooldownRemaining() {
@@ -142,13 +148,15 @@ export default function Contact() {
         startCooldown();
       } else {
         console.error("submit-contact error:", result);
-        setErrorDetail(result.error || "");
+        // the server returns error codes; show a readable message for the
+        // ones the visitor can act on, and the generic error otherwise
+        setErrorDetail(ERROR_MESSAGE_KEYS[result.error] ?? "");
         setStatus("error");
         resetTurnstile();
       }
     } catch (err) {
       console.error("submit-contact request failed:", err);
-      setErrorDetail(err.message || "");
+      setErrorDetail("");
       setStatus("error");
       resetTurnstile();
     }
@@ -191,6 +199,7 @@ export default function Contact() {
               <input
                 type="text"
                 required
+                maxLength={MAX_LENGTH.name}
                 value={form.name}
                 onChange={handleChange("name")}
                 placeholder={t.contactFormNamePlaceholder}
@@ -205,6 +214,7 @@ export default function Contact() {
               <input
                 type="email"
                 required
+                maxLength={MAX_LENGTH.email}
                 value={form.email}
                 onChange={handleChange("email")}
                 placeholder={t.contactFormEmailPlaceholder}
@@ -220,6 +230,7 @@ export default function Contact() {
             <textarea
               required
               rows={5}
+              maxLength={MAX_LENGTH.message}
               value={form.message}
               onChange={handleChange("message")}
               placeholder={t.contactFormMessagePlaceholder}
@@ -236,7 +247,7 @@ export default function Contact() {
                 : status === "sent"
                   ? t.contactFormSuccess
                   : status === "error"
-                    ? `${t.contactFormError}${errorDetail ? ` (${errorDetail})` : ""}`
+                    ? t[errorDetail] ?? t.contactFormError
                     : t.contactFormHint}
             </p>
             <TechButton type="submit" className="shrink-0" disabled={!canSubmit}>

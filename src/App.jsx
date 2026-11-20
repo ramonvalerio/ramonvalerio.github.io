@@ -5,6 +5,7 @@ import PortfolioGrid from "./components/PortfolioGrid";
 import Expertise from "./components/Expertise";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import ConfirmMessage from "./components/ConfirmMessage";
 import { LanguageProvider } from "./i18n/LanguageContext";
 
 const SECTION_IDS = ["perfil", "portfolio", "expertise", "contact"];
@@ -94,6 +95,7 @@ export default function App() {
         <Contact />
         <div aria-hidden style={{ height: "var(--footer-h, 0px)" }} />
         <Footer />
+        <ConfirmMessage />
       </div>
     </LanguageProvider>
   );
