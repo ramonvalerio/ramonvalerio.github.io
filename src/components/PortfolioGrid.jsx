@@ -15,7 +15,15 @@ function fill(template, vars) {
   );
 }
 
+function projectLiveUrl(item) {
+  const url = item.links?.live;
+  if (item.id !== "shmupx" && item.id !== "ssf2x") return null;
+  if (typeof url !== "string" || !/^https?:\/\//.test(url)) return null;
+  return url;
+}
+
 function ProjectCard({ item, t, onDetails }) {
+  const liveUrl = projectLiveUrl(item);
   return (
     <div className="portfolio-card">
       <div className="portfolio-visual bg-black">
@@ -65,11 +73,24 @@ function ProjectCard({ item, t, onDetails }) {
             </div>
           </div>
           <div className="portfolio-info-action">
+            {liveUrl && (
+              <TechButton
+                as="a"
+                href={liveUrl}
+                tone="blue"
+                target="_blank"
+                rel="noopener noreferrer"
+                tabIndex={onDetails ? 0 : -1}
+                style={{ padding: "0.4rem 0.65rem", fontSize: "0.68rem" }}
+              >
+                {t.viewProject}
+              </TechButton>
+            )}
             <TechButton
               type="button"
               tabIndex={onDetails ? 0 : -1}
               onClick={onDetails}
-              style={{ padding: "0.4rem 0.9rem", fontSize: "0.7rem" }}
+              style={{ padding: "0.4rem 0.65rem", fontSize: "0.68rem" }}
             >
               {t.viewDetails}
             </TechButton>
